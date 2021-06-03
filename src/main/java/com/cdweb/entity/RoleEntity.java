@@ -9,24 +9,11 @@ import java.util.List;
 public class RoleEntity extends BaseEntity {
     //column
     @Column
-    private String code;
-    @Column
     private String name;
     //map
-    @ManyToMany
-    @JoinTable(name = "role_user",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @ManyToMany(mappedBy = "roleList")
     private List<UserEntity> userList = new ArrayList<>();
-
     //getter,setter
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 
     public String getName() {
         return name;

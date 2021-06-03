@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta charset="UTF-8" />
+    <title>Đ&#224; Lạt Flower</title>
+    <meta name="description" />
+    <meta name="keywords" />
+    <link th:href="@{/web/shop292/files/icon.png}" rel="shortcut icon" type="image/x-icon" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="fb:app_id" content="227481454296289" />
+
+    <meta content="vi_VN" property="og:locale" />
+    <meta content="website" property="og:type" />
+    <meta content="Đ&#224; Lạt Flower" property="og:title" />
+    <meta property="og:description" />
+    <meta content="http://runecom50.runtime.vn" property="og:image" />
+    <meta content="http://runecom50.runtime.vn/trang-chu.html" property="og:url" />
+    <meta property="og:site_name" />
+
+    <link th:href="@{/web/Scripts/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{web/App_Themes/Home/font-awesome.min.css}" rel="stylesheet" />
+    <link th:href="@{/web/App_Themes/Home/common.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/web/App_Themes/Home/animate.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/web/Scripts/jQuery-ui/jquery-ui.min.css}" rel="stylesheet" type="text/css" />
+
+    <script th:src="@{/web/Scripts/jQuery/jquery-2.1.4.min.js}" type="text/javascript"></script>
+    <script th:src="@{/web/Scripts/jQuery/jquery-migrate-1.2.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{/web/Scripts/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/web/Scripts/jQuery-ui/jquery-ui.min.js}" type="text/javascript"></script>
+
+    <script th:src="@{/web/Scripts/common/fix-height.js}" data-img-box=".image-resize" type="text/javascript"></script>
+    <script th:src="@{/web/Scripts/common/common.js}" type="text/javascript"></script>
+    <script th:src="@{/web/Scripts/common/jquery.cookie.js}" type="text/javascript"></script>
+    <script th:src="@{/web/Scripts/common/mycard.js}" type="text/javascript"></script>
+    <script th:src="@{/web/Scripts/lazyLoad/jquery.lazyload.min.js}" type="text/javascript"></script>
+
+    <script th:src="@{/web/Scripts/angularJS/angular.min.js}"></script>
+    <script th:src="@{/web/Scripts/angularJS/angular-sanitize.min.js}"></script>
+    <script type="text/javascript" th:src="@{/web/Scripts/angular-loading-spinner/spin.min.js}"></script>
+    <script type="text/javascript" th:src="@{/web/Scripts/angular-loading-spinner/angular-spinner.min.js}"></script>
+    <script type="text/javascript" th:src="@{/web/Scripts/angular-loading-spinner/angular-loading-spinner.js}"></script>
+    <script th:src="@{/web/app/appMain.js}"></script>
+    <script th:src="@{/web/app/directives/directive.js}"></script>
+    <script th:src="@{/web/app/directives/angular-summernote.js}"></script>
+    <script th:src="@{/web/app/directives/paging.js}"></script>
+    <script th:src="@{/web/app/services/ajaxServices.js}"></script>
+    <script th:src="@{/web/app/services/alertsServices.js}"></script>
+    <link th:href="@{/web/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/web/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css" />
+
+
+
+
+</head>
+<body ng-app="appMain" style="">
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "../connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=227481454296289";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+<div class="wrapper page-home">
+
+
+    <th:block th:include="/_header"></th:block>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+
+                <script th:src="@{/web/app/services/moduleServices.js}"></script>
+                <script th:src="@{/web/app/controllers/moduleController.js}"></script>
+                <!--Begin-->
+                <link th:href="@{/web/Scripts/flexSlider/flexslider.css}" rel="stylesheet" type="text/css" />
+                <script th:src="@{/web/Scripts/flexSlider/jquery.flexslider-min.js}" type="text/javascript"></script>
+                <div class="flexslider slideshow-content" id="bannerheaderhome" ng-controller="moduleController" ng-init="initSlideshowController('Slideshows')">
+                    <ul class="slides">
+                        <li ng-repeat="item in Slideshows">
+                            <a title="{{item.Name}}" href="notfoundfba4.html">
+                                <img alt="{{item.Name}}" ng-src="{{item.Image}}" data-original="{{item.Image}}" class="lazy" />
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#bannerheaderhome').flexslider({
+                            directionNav: true,
+                            controlNav: false,
+                            animation: "slide",
+                            itemHeigh: 270,
+                            itemMargin: 0,
+                            animationSpeed: 700,
+                            slideshowSpeed: 3000
+                        });
+                    });
+                </script>
+                <!--End-->
+                <script type="text/javascript">
+                    window.Slideshows = [{"Id":1335,"ShopId":292,"Name":"a1","Image":"/Uploads/shop292/images/A1.jpg","Link":"","Index":1,"Inactive":false,"Timestamp":"AAAAAAAW+34="},{"Id":1336,"ShopId":292,"Name":"a2","Image":"/Uploads/shop292/images/A2.jpg","Link":"","Index":2,"Inactive":false,"Timestamp":"AAAAAAAW+38="},{"Id":1337,"ShopId":292,"Name":"a3","Image":"/Uploads/shop292/images/A3.jpg","Link":"","Index":3,"Inactive":false,"Timestamp":"AAAAAAAW+4A="},{"Id":1339,"ShopId":292,"Name":"A5","Image":"/Uploads/shop292/images/A7.jpg","Link":"","Index":4,"Inactive":false,"Timestamp":"AAAAAAAXCsM="}];
+                </script>                    </div>
+            <div class="col-md-3">
+                <div class="box-html">
+                    <p><img th:src="@{/web/shop292/images/article/a6-18316261.jpg}" class="img-responsive"></p>
+
+                    <p><img th:src="@{/web/shop292/images/article/a5-18316186.jpg}" class="img-responsive"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <link th:href="@{/web/Scripts/owl-carousel/owl.carousel.css}" rel="stylesheet" />
+                    <link th:href="@{/web/Scripts/owl-carousel/owl.theme.css}" rel="stylesheet" />
+                    <script th:src="@{/web/Scripts/owl-carousel/owl.carousel.min.js}"></script>
+                    <script th:src="@{/web/app/services/productServices.js}"></script>
+                    <script th:src="@{/web/app/controllers/productController.js}"></script>
+                    <!--Begin-->
+                    <div class="product-content owl-carousel" ng-controller="productController" ng-init="initProductNewSlideController('ProductNewSlides')">
+                        <div class="product-slide">
+                            <div class="product-block product-grid clearfix" id="product-slide">
+                                <div class="product-item-box fixheight" ng-repeat="item in ProductNewSlides">
+                                    <div class="product-item">
+                                        <div class="image image-resize">
+                                            <a href="san-pham/%7b%7bitem.Code%7d%7d.html" title="{{item.Name}}">
+                                                <img class="img-responsive" ng-src="{{item.Image}}" alt="{{item.Name}}" title="{{item.Name}}"/>
+                                            </a>
+                                        </div>
+                                        <div class="right-block">
+                                            <h2 class="name">
+                                                <a href="san-pham/%7b%7bitem.Code%7d%7d.html" title="{{item.Name}}">{{item.Name}}</a>
+                                            </h2>
+                                            <div class="rating">
+                                                <div class="rating-1">
+                                    <span class="rating-img">
+                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <span ng-if="item.IsPromotion==true" class="price-new">{{item.PriceDiscount|number:0}} ₫</span>
+                                                <span ng-if="item.IsPromotion==true" class="price-old">{{item.Price|number:0}} ₫</span>
+                                                <span ng-if="item.IsPromotion==false" class="price-new">{{item.Price|number:0}} ₫</span>
+                                            </div>
+                                            <div class="button">
+                                                <a class="btn btn-default btn-add-cart" href="javascript:void(0)" ng-click="AddToCard(item)">Mua</a>
+                                                <a class="btn-add-wishlist" href="#"><span></span></a><a class="btn-add-compare" href="#"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="controls boxprevnext">
+                                <a class="prev prevlogo"><i class="fa fa-angle-left"></i></a>
+                                <a class="next nextlogo"><i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            var owlproductslide2 = $("#product-slide");
+                            owlproductslide2.owlCarousel({
+                                autoPlay: true,
+                                autoPlay: 5000,
+                                items: 6,
+                                slideSpeed: 1000,
+                                pagination: false,
+                                itemsDesktop: [1200, 6],
+                                itemsDesktopSmall: [980, 3],
+                                itemsTablet: [767, 2],
+                                itemsMobile: [480, 1]
+                            });
+                            $(".product-slide .nextlogo").click(function () {
+                                owlproductslide2.trigger('owl.next');
+                            })
+                            $(".product-slide .prevlogo").click(function () {
+                                owlproductslide2.trigger('owl.prev');
+                            })
+                        });
+                    </script>
+                    <!--End--><script type="text/javascript">
+                    window.ProductNewSlides = [{"Id":9521,"ShopId":292,"ProductGroupId":7910,"ProductGroupCode":null,"ProductGroupName":null,"ProductTypeId":null,"ProductTypeName":null,"UnitId":null,"UnitName":null,"Code":"b001","Serial":"","Name":"B001","CreatedDate":"2016-03-18T16:27:00","UpdatedDate":"2016-03-20T18:47:00","DealDate":"0001-01-01T00:00:00","SKU":"","Barcode":"","Image":"/Uploads/shop292/images/1436463663_nhung-lang-hoa-dep-tang-sinh-nha%20(Copy).jpg","ImageThumbnai":"/Uploads/shop292/_thumbs/images/1436463663_nhung-lang-hoa-dep-tang-sinh-nha%20(Copy).jpg","Summary":"","Content":null,"MetaTitle":"","MetaKeyword":"","MetaDescription":"","Price":2300000.0000,"StrPrice":"2.300.000","PriceOld":0.0000,"StrPriceOld":"0","PriceDiscount":0.0000,"StrDiscountPrice":"0","PricePriority":0.0000,"StrPricePriority":"0","PriceHasVAT":false,"Percent":0.0,"StrPercent":"0","IsTrackingInventory":false,"Quantity":0,"VariantQuantity":0,"VariantCount":0,"TrackingInventoryText":"---","Weight":0,"IsShipping":true,"AllowPurchaseWhenSoldOut":false,"IsVariant":false,"IsBest":false,"IsHot":true,"IsNew":true,"IsPromotion":false,"PromotionContent":null,"Warranty":null,"AllowOrder":false,"ShowHome":false,"CountView":0,"Index":0,"Inactive":false,"Timestamp":"AAAAAAAXDAM=","ModelShared_ProductImage":null,"ModelShared_ProductTab":null,"ModelShared_ProductTag":null,"ModelShared_ProductOption":null,"ModelShared_ProductVariant":null,"ModelShared_ProductOtherGroup":null},{"Id":10356,"ShopId":292,"ProductGroupId":7954,"ProductGroupCode":null,"ProductGroupName":null,"ProductTypeId":null,"ProductTypeName":null,"UnitId":null,"UnitName":null,"Code":"hoa-tien-sanh-ks-002","Serial":"","Name":"Hoa tiền sảnh KS 002","CreatedDate":"2016-03-26T18:37:00","UpdatedDate":"2016-03-26T18:37:00","DealDate":"0001-01-01T00:00:00","SKU":"","Barcode":"","Image":"/Uploads/shop292/images/1433389310_4%20(Copy).jpg","ImageThumbnai":"/Uploads/shop292/_thumbs/images/1433389310_4%20(Copy).jpg","Summary":"","Content":null,"MetaTitle":"","MetaKeyword":"","MetaDescription":"","Price":0.0000,"StrPrice":"0","PriceOld":0.0000,"StrPriceOld":"0","PriceDiscount":0.0000,"StrDiscountPrice":"0","PricePriority":0.0000,"StrPricePriority":"0","PriceHasVAT":false,"Percent":0.0,"StrPercent":"0","IsTrackingInventory":false,"Quantity":0,"VariantQuantity":0,"VariantCount":0,"TrackingInventoryText":"---","Weight":0,"IsShipping":true,"AllowPurchaseWhenSoldOut":false,"IsVariant":false,"IsBest":false,"IsHot":true,"IsNew":true,"IsPromotion":false,"PromotionContent":null,"Warranty":null,"AllowOrder":false,"ShowHome":false,"CountView":0,"Index":0,"Inactive":false,"Timestamp":"AAAAAAAXRRo=","ModelShared_ProductImage":null,"ModelShared_ProductTab":null,"ModelShared_ProductTag":null,"ModelShared_ProductOption":null,"ModelShared_ProductVariant":null,"ModelShared_ProductOtherGroup":null},{"Id":9518,"ShopId":292,"ProductGroupId":7901,"ProductGroupCode":null,"ProductGroupName":null,"ProductTypeId":null,"ProductTypeName":null,"UnitId":null,"UnitName":null,"Code":"a14","Serial":"","Name":"A14","CreatedDate":"2016-03-18T16:23:00","UpdatedDate":"2016-03-20T18:52:00","DealDate":"0001-01-01T00:00:00","SKU":"","Barcode":"","Image":"/Uploads/shop292/images/1416hinh-nen-lang-hoa-doc-dao-voi-nhieu-chung-loai-khac-nhau%20(Copy).jpg","ImageThumbnai":"/Uploads/shop292/_thumbs/images/1416hinh-nen-lang-hoa-doc-dao-voi-nhieu-chung-loai-khac-nhau%20(Copy).jpg","Summary":"tbwetetnet ư etwetwe weatwe wetwe weet we ưt we ư ư ư tưt t wtet wet wet ưetwe","Content":null,"MetaTitle":"","MetaKeyword":"","MetaDescription":"","Price":830000.0000,"StrPrice":"830.000","PriceOld":0.0000,"StrPriceOld":"0","PriceDiscount":0.0000,"StrDiscountPrice":"0","PricePriority":0.0000,"StrPricePriority":"0","PriceHasVAT":false,"Percent":0.0,"StrPercent":"0","IsTrackingInventory":false,"Quantity":0,"VariantQuantity":0,"VariantCount":0,"TrackingInventoryText":"---","Weight":0,"IsShipping":true,"AllowPurchaseWhenSoldOut":false,"IsVariant":false,"IsBest":false,"IsHot":false,"IsNew":true,"IsPromotion":false,"PromotionContent":null,"Warranty":null,"AllowOrder":false,"ShowHome":false,"CountView":0,"Index":0,"Inactive":false,"Timestamp":"AAAAAAAXDA8=","ModelShared_ProductImage":null,"ModelShared_ProductTab":null,"ModelShared_ProductTag":null,"ModelShared_ProductOption":null,"ModelShared_ProductVariant":null,"ModelShared_ProductOtherGroup":null},{"Id":9530,"ShopId":292,"ProductGroupId":7901,"ProductGroupCode":null,"ProductGroupName":null,"ProductTypeId":null,"ProductTypeName":null,"UnitId":null,"UnitName":null,"Code":"a11","Serial":"","Name":"A11","CreatedDate":"2016-03-18T16:36:00","UpdatedDate":"2016-03-20T18:40:00","DealDate":"0001-01-01T00:00:00","SKU":"","Barcode":"","Image":"/Uploads/shop292/images/hoa-sinh-nhat_6%20(Copy).jpg","ImageThumbnai":"/Uploads/shop292/_thumbs/images/hoa-sinh-nhat_6%20(Copy).jpg","Summary":"","Content":null,"MetaTitle":"","MetaKeyword":"","MetaDescription":"","Price":1250000.0000,"StrPrice":"1.250.000","PriceOld":0.0000,"StrPriceOld":"0","PriceDiscount":0.0000,"StrDiscountPrice":"0","PricePriority":0.0000,"StrPricePriority":"0","PriceHasVAT":false,"Percent":0.0,"StrPercent":"0","IsTrackingInventory":false,"Quantity":0,"VariantQuantity":0,"VariantCount":0,"TrackingInventoryText":"---","Weight":0,"IsShipping":true,"AllowPurchaseWhenSoldOut":false,"IsVariant":false,"IsBest":false,"IsHot":true,"IsNew":true,"IsPromotion":false,"PromotionContent":null,"Warranty":null,"AllowOrder":false,"ShowHome":false,"CountView":0,"Index":0,"Inactive":false,"Timestamp":"AAAAAAAXC/s=","ModelShared_ProductImage":null,"ModelShared_ProductTab":null,"ModelShared_ProductTag":null,"ModelShared_ProductOption":null,"ModelShared_ProductVariant":null,"ModelShared_ProductOtherGroup":null},{"Id":9738,"ShopId":292,"ProductGroupId":7952,"ProductGroupCode":null,"ProductGroupName":null,"ProductTypeId":null,"ProductTypeName":null,"UnitId":null,"UnitName":null,"Code":"lan-hac-dinh-nau","Serial":"","Name":"Lan Hạc đỉnh nâu","CreatedDate":"2016-03-21T21:48:00","UpdatedDate":"2016-03-21T21:48:00","DealDate":"0001-01-01T00:00:00","SKU":"","Barcode":"","Image":"/Uploads/shop292/images/Lan%20H%E1%BA%A1c%20%C4%90%E1%BB%89nh%20n%C3%A2u%20(Copy).jpg","ImageThumbnai":"/Uploads/shop292/_thumbs/images/Lan%20H%E1%BA%A1c%20%C4%90%E1%BB%89nh%20n%C3%A2u%20(Copy).jpg","Summary":"","Content":null,"MetaTitle":"","MetaKeyword":"","MetaDescription":"","Price":0.0000,"StrPrice":"0","PriceOld":0.0000,"StrPriceOld":"0","PriceDiscount":0.0000,"StrDiscountPrice":"0","PricePriority":0.0000,"StrPricePriority":"0","PriceHasVAT":false,"Percent":0.0,"StrPercent":"0","IsTrackingInventory":false,"Quantity":0,"VariantQuantity":0,"VariantCount":0,"TrackingInventoryText":"---","Weight":0,"IsShipping":true,"AllowPurchaseWhenSoldOut":false,"IsVariant":false,"IsBest":false,"IsHot":false,"IsNew":true,"IsPromotion":false,"PromotionContent":null,"Warranty":null,"AllowOrder":false,"ShowHome":false,"CountView":0,"Index":0,"Inactive":false,"Timestamp":"AAAAAAAXGTU=","ModelShared_ProductImage":null,"ModelShared_ProductTab":null,"ModelShared_ProductTag":null,"ModelShared_ProductOption":null,"ModelShared_ProductVariant":null,"ModelShared_ProductOtherGroup":null},{"Id":9757,"ShopId":292,"ProductGroupId":7947,"ProductGroupCode":null,"ProductGroupName":null,"ProductTypeId":null,"ProductTypeName":null,"UnitId":null,"UnitName":null,"Code":"hoa-anh-thao-tim","Serial":"","Name":"Hoa anh thảo tím","CreatedDate":"2016-03-21T22:51:00","UpdatedDate":"2016-03-21T22:51:00","DealDate":"0001-01-01T00:00:00","SKU":"","Barcode":"","Image":"/Uploads/shop292/images/hoa%20anh%20th%E1%BA%A3o%20t%C3%ADm%20(Copy).jpg","ImageThumbnai":"/Uploads/shop292/_thumbs/images/hoa%20anh%20th%E1%BA%A3o%20t%C3%ADm%20(Copy).jpg","Summary":"","Content":null,"MetaTitle":"","MetaKeyword":"","MetaDescription":"","Price":0.0000,"StrPrice":"0","PriceOld":0.0000,"StrPriceOld":"0","PriceDiscount":0.0000,"StrDiscountPrice":"0","PricePriority":0.0000,"StrPricePriority":"0","PriceHasVAT":false,"Percent":0.0,"StrPercent":"0","IsTrackingInventory":false,"Quantity":0,"VariantQuantity":0,"VariantCount":0,"TrackingInventoryText":"---","Weight":0,"IsShipping":true,"AllowPurchaseWhenSoldOut":false,"IsVariant":false,"IsBest":false,"IsHot":false,"IsNew":true,"IsPromotion":false,"PromotionContent":null,"Warranty":null,"AllowOrder":false,"ShowHome":false,"CountView":0,"Index":0,"Inactive":false,"Timestamp":"AAAAAAAXGYY=","ModelShared_ProductImage":null,"ModelShared_ProductTab":null,"ModelShared_ProductTag":null,"ModelShared_ProductOption":null,"ModelShared_ProductVariant":null,"ModelShared_ProductOtherGroup":null},{"Id":9741,"ShopId":292,"ProductGroupId":7952,"ProductGroupCode":null,"ProductGroupName":null,"ProductTypeId":null,"ProductTypeName":null,"UnitId":null,"UnitName":null,"Code":"lan-vang-mit","Serial":"","Name":"Lan vàng mít","CreatedDate":"2016-03-21T21:50:00","UpdatedDate":"2016-03-21T21:50:00","DealDate":"0001-01-01T00:00:00","SKU":"","Barcode":"","Image":"/Uploads/shop292/images/lan%20v%C3%A0ng%20m%C3%ADt%20(Copy).jpg","ImageThumbnai":"/Uploads/shop292/_thumbs/images/lan%20v%C3%A0ng%20m%C3%ADt%20(Copy).jpg","Summary":"","Content":null,"MetaTitle":"","MetaKeyword":"","MetaDescription":"","Price":0.0000,"StrPrice":"0","PriceOld":0.0000,"StrPriceOld":"0","PriceDiscount":0.0000,"StrDiscountPrice":"0","PricePriority":0.0000,"StrPricePriority":"0","PriceHasVAT":false,"Percent":0.0,"StrPercent":"0","IsTrackingInventory":false,"Quantity":0,"VariantQuantity":0,"VariantCount":0,"TrackingInventoryText":"---","Weight":0,"IsShipping":true,"AllowPurchaseWhenSoldOut":false,"IsVariant":false,"IsBest":false,"IsHot":false,"IsNew":true,"IsPromotion":false,"PromotionContent":null,"Warranty":null,"AllowOrder":false,"ShowHome":false,"CountView":0,"Index":0,"Inactive":false,"Timestamp":"AAAAAAAXGUE=","ModelShared_ProductImage":null,"ModelShared_ProductTab":null,"ModelShared_ProductTag":null,"ModelShared_ProductOption":null,"ModelShared_ProductVariant":null,"ModelShared_ProductOtherGroup":null},{"Id":9742,"ShopId":292,"ProductGroupId":7952,"ProductGroupCode":null,"ProductGroupName":null,"ProductTypeId":null,"ProductTypeName":null,"UnitId":null,"UnitName":null,"Code":"lan-xanh-hoang-hau","Serial":"","Name":"Lan xanh Hoàng hậu","CreatedDate":"2016-03-21T21:50:00","UpdatedDate":"2016-03-21T21:50:00","DealDate":"0001-01-01T00:00:00","SKU":"","Barcode":"","Image":"/Uploads/shop292/images/lan%20xanh%20Ho%C3%A0ng%20h%E1%BA%ADu%20(Copy).jpg","ImageThumbnai":"/Uploads/shop292/_thumbs/images/lan%20xanh%20Ho%C3%A0ng%20h%E1%BA%ADu%20(Copy).jpg","Summary":"","Content":null,"MetaTitle":"","MetaKeyword":"","MetaDescription":"","Price":0.0000,"StrPrice":"0","PriceOld":0.0000,"StrPriceOld":"0","PriceDiscount":0.0000,"StrDiscountPrice":"0","PricePriority":0.0000,"StrPricePriority":"0","PriceHasVAT":false,"Percent":0.0,"StrPercent":"0","IsTrackingInventory":false,"Quantity":0,"VariantQuantity":0,"VariantCount":0,"TrackingInventoryText":"---","Weight":0,"IsShipping":true,"AllowPurchaseWhenSoldOut":false,"IsVariant":false,"IsBest":false,"IsHot":true,"IsNew":true,"IsPromotion":false,"PromotionContent":null,"Warranty":null,"AllowOrder":false,"ShowHome":false,"CountView":0,"Index":0,"Inactive":false,"Timestamp":"AAAAAAAXGUU=","ModelShared_ProductImage":null,"ModelShared_ProductTab":null,"ModelShared_ProductTag":null,"ModelShared_ProductOption":null,"ModelShared_ProductVariant":null,"ModelShared_ProductOtherGroup":null},{"Id":9766,"ShopId":292,"ProductGroupId":7947,"ProductGroupCode":null,"ProductGroupName":null,"ProductTypeId":null,"ProductTypeName":null,"UnitId":null,"UnitName":null,"Code":"hoa-phang-xe","Serial":"","Name":"Hoa Phăng-xê","CreatedDate":"2016-03-21T22:57:00","UpdatedDate":"2016-03-21T22:57:00","DealDate":"0001-01-01T00:00:00","SKU":"","Barcode":"","Image":"/Uploads/shop292/images/Hoa%20Ph%C4%83ng-x%C3%AA%201%20(Copy).jpg","ImageThumbnai":"/Uploads/shop292/_thumbs/images/Hoa%20Ph%C4%83ng-x%C3%AA%201%20(Copy).jpg","Summary":"","Content":null,"MetaTitle":"","MetaKeyword":"","MetaDescription":"","Price":0.0000,"StrPrice":"0","PriceOld":0.0000,"StrPriceOld":"0","PriceDiscount":0.0000,"StrDiscountPrice":"0","PricePriority":0.0000,"StrPricePriority":"0","PriceHasVAT":false,"Percent":0.0,"StrPercent":"0","IsTrackingInventory":false,"Quantity":0,"VariantQuantity":0,"VariantCount":0,"TrackingInventoryText":"---","Weight":0,"IsShipping":true,"AllowPurchaseWhenSoldOut":false,"IsVariant":false,"IsBest":false,"IsHot":true,"IsNew":true,"IsPromotion":false,"PromotionContent":null,"Warranty":null,"AllowOrder":false,"ShowHome":false,"CountView":0,"Index":0,"Inactive":false,"Timestamp":"AAAAAAAXGa4=","ModelShared_ProductImage":null,"ModelShared_ProductTab":null,"ModelShared_ProductTag":null,"ModelShared_ProductOption":null,"ModelShared_ProductVariant":null,"ModelShared_ProductOtherGroup":null},{"Id":9775,"ShopId":292,"ProductGroupId":7907,"ProductGroupCode":null,"ProductGroupName":null,"ProductTypeId":null,"ProductTypeName":null,"UnitId":null,"UnitName":null,"Code":"mai-dia-thao-canh-don","Serial":"","Name":"Mai địa thảo cánh đơn","CreatedDate":"2016-03-21T23:02:00","UpdatedDate":"2016-03-21T23:02:00","DealDate":"0001-01-01T00:00:00","SKU":"","Barcode":"","Image":"/Uploads/shop292/images/mai%20%C4%91%E1%BB%8Ba%20th%E1%BA%A3o%20c%C3%A1nh%20%C4%91%C6%A1n%20(Copy).jpg","ImageThumbnai":"/Uploads/shop292/_thumbs/images/mai%20%C4%91%E1%BB%8Ba%20th%E1%BA%A3o%20c%C3%A1nh%20%C4%91%C6%A1n%20(Copy).jpg","Summary":"","Content":null,"MetaTitle":"","MetaKeyword":"","MetaDescription":"","Price":0.0000,"StrPrice":"0","PriceOld":0.0000,"StrPriceOld":"0","PriceDiscount":0.0000,"StrDiscountPrice":"0","PricePriority":0.0000,"StrPricePriority":"0","PriceHasVAT":false,"Percent":0.0,"StrPercent":"0","IsTrackingInventory":false,"Quantity":0,"VariantQuantity":0,"VariantCount":0,"TrackingInventoryText":"---","Weight":0,"IsShipping":true,"AllowPurchaseWhenSoldOut":false,"IsVariant":false,"IsBest":false,"IsHot":false,"IsNew":true,"IsPromotion":false,"PromotionContent":null,"Warranty":null,"AllowOrder":false,"ShowHome":false,"CountView":0,"Index":0,"Inactive":false,"Timestamp":"AAAAAAAXGdI=","ModelShared_ProductImage":null,"ModelShared_ProductTab":null,"ModelShared_ProductTag":null,"ModelShared_ProductOption":null,"ModelShared_ProductVariant":null,"ModelShared_ProductOtherGroup":null},{"Id":9525,"ShopId":292,"ProductGroupId":7954,"ProductGroupCode":null,"ProductGroupName":null,"ProductTypeId":null,"ProductTypeName":null,"UnitId":null,"UnitName":null,"Code":"b003","Serial":"","Name":"B003","CreatedDate":"2016-03-18T16:31:00","UpdatedDate":"2016-03-20T18:58:00","DealDate":"0001-01-01T00:00:00","SKU":"","Barcode":"","Image":"/Uploads/shop292/images/anh-dep-hoa-tulip-22-1024x843%20(Copy).jpg","ImageThumbnai":"/Uploads/shop292/_thumbs/images/anh-dep-hoa-tulip-22-1024x843%20(Copy).jpg","Summary":"","Content":null,"MetaTitle":"","MetaKeyword":"","MetaDescription":"","Price":1300000.0000,"StrPrice":"1.300.000","PriceOld":0.0000,"StrPriceOld":"0","PriceDiscount":0.0000,"StrDiscountPrice":"0","PricePriority":0.0000,"StrPricePriority":"0","PriceHasVAT":false,"Percent":0.0,"StrPercent":"0","IsTrackingInventory":false,"Quantity":0,"VariantQuantity":0,"VariantCount":0,"TrackingInventoryText":"---","Weight":0,"IsShipping":true,"AllowPurchaseWhenSoldOut":false,"IsVariant":false,"IsBest":false,"IsHot":false,"IsNew":true,"IsPromotion":false,"PromotionContent":null,"Warranty":null,"AllowOrder":false,"ShowHome":false,"CountView":0,"Index":0,"Inactive":false,"Timestamp":"AAAAAAAXDCU=","ModelShared_ProductImage":null,"ModelShared_ProductTab":null,"ModelShared_ProductTag":null,"ModelShared_ProductOption":null,"ModelShared_ProductVariant":null,"ModelShared_ProductOtherGroup":null},{"Id":9531,"ShopId":292,"ProductGroupId":7910,"ProductGroupCode":null,"ProductGroupName":null,"ProductTypeId":null,"ProductTypeName":null,"UnitId":null,"UnitName":null,"Code":"b004","Serial":"","Name":"B004","CreatedDate":"2016-03-18T16:42:00","UpdatedDate":"2016-03-21T21:29:00","DealDate":"0001-01-01T00:00:00","SKU":"","Barcode":"","Image":"/Uploads/shop292/images/hoa-sinh-nhat-ty21%20(Copy).jpg","ImageThumbnai":"/Uploads/shop292/_thumbs/images/hoa-sinh-nhat-ty21%20(Copy).jpg","Summary":"ghfghfhjf jhghghj j hjghjgjgjh hjghjg","Content":null,"MetaTitle":"","MetaKeyword":"","MetaDescription":"","Price":360000.0000,"StrPrice":"360.000","PriceOld":0.0000,"StrPriceOld":"0","PriceDiscount":0.0000,"StrDiscountPrice":"0","PricePriority":0.0000,"StrPricePriority":"0","PriceHasVAT":false,"Percent":0.0,"StrPercent":"0","IsTrackingInventory":false,"Quantity":0,"VariantQuantity":0,"VariantCount":0,"TrackingInventoryText":"---","Weight":0,"IsShipping":true,"AllowPurchaseWhenSoldOut":false,"IsVariant":false,"IsBest":false,"IsHot":false,"IsNew":true,"IsPromotion":false,"PromotionContent":null,"Warranty":null,"AllowOrder":false,"ShowHome":false,"CountView":0,"Index":0,"Inactive":false,"Timestamp":"AAAAAAAXGRU=","ModelShared_ProductImage":null,"ModelShared_ProductTab":null,"ModelShared_ProductTag":null,"ModelShared_ProductOption":null,"ModelShared_ProductVariant":null,"ModelShared_ProductOtherGroup":null}];
+                    window.ConfigProduct = {"Id":292,"PageSize":24,"Sort":"index","Order":"asc","ColumnProduct":4,"ColumnProductGroup":4,"ColumnProductHome":4,"QuantitySlide":12,"QuantityHot":5,"QuantityNew":5,"QuantityPromotion":5,"QuantityBest":5,"AutoQuantityOrder":true,"AllowOrder":true,"ShowControlSortBy":true,"ShowPrice":true,"TextNotPrice":"Liên hệ","TextPriceZero":"Liên hệ","AllowComment":false,"ApproveCommentPost":true,"ReceiveEmailComment":true,"AllowCommentFacebook":false,"ShowSerial":false,"ShowWarranty":false,"ShowLikeShareFacebook":true,"ShowRate":true,"WidthRatio":1,"HeightRatio":1,"IsInventory":false,"Sys_Shop":null};
+                </script>
+                    <section class="product-content clearfix">
+                        <h1 class="title clearfix"><span>Sản phẩm</span></h1>
+                        <nav class="navbar navbar-default product-filter">
+                            <ul class="display">
+                                <li id="grid" class="active grid"><a href="#" title="Grid"><i class="fa fa-th-large"></i></a></li>
+                                <li id="list" class="list"><a href="#" title="List"><i class="fa fa-th-list"></i></a></li>
+                            </ul>
+                            <div class="limit">
+                                <span>Sản phẩm/trang</span>
+                                <select id="lblimit" name="lblimit" class="nb_item" onchange="window.location.href = this.options[this.selectedIndex].value">
+                                    <option value="?limit=10">10</option>
+                                    <option value="?limit=12">12</option>
+                                    <option value="?limit=20">20</option>
+                                    <option value="?limit=50">50</option>
+                                    <option value="?limit=100">100</option>
+                                    <option value="?limit=250">250</option>
+                                    <option value="?limit=500">500</option>
+                                </select>
+                            </div>
+                            <div class="sort">
+                                <span>Sắp xếp</span>
+                                <select class="selectProductSort" id="lbsort" onchange="window.location.href = this.options[this.selectedIndex].value">
+                                    <option selected="selected" value="?sort=index&amp;order=asc">Mặc định</option>
+                                    <option value="?sort=price&amp;order=asc">Gi&#225; tăng dần</option>
+                                    <option value="?sort=price&amp;order=desc">Gi&#225; giảm dần</option>
+                                    <option value="?sort=name&amp;order=asc">T&#234;n sản phẩm: A to Z</option>
+                                    <option value="?sort=name&amp;order=desc">T&#234;n sản phẩm: Z to A</option>
+                                </select>
+                            </div>
+                        </nav>
+                        <div class="product-block product-grid clearfix">
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/thuy-tien-trang.html" title="Thủy ti&#234;n trắng">
+                                            <img th:src="@{/web/shop292/images/Thủy%20Tiên%20Trắng%20(Copy).jpg}" data-original="/Uploads/shop292/images/Th%E1%BB%A7y%20Ti%C3%AAn%20Tr%E1%BA%AFng%20(Copy).jpg" alt="Thủy ti&#234;n trắng" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/thuy-tien-trang.html" title="Thủy ti&#234;n trắng">Thủy ti&#234;n trắng</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9744,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/a13.html" title="A13">
+                                            <img th:src="@{/web/shop292/images/hoahng%20(Copy).jpg}" data-original="/Uploads/shop292/images/hoahng%20(Copy).jpg" alt="A13" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/a13.html" title="A13">A13</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">530.000&nbsp;₫</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9528,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/a002.html" title="A002">
+                                            <img th:src="@{/web/shop292/images/32925%20(Copy).jpg}" data-original="/Uploads/shop292/images/32925%20(Copy).jpg" alt="A002" class="img-responsive lazy-img" />
+                                        </a>
+                                        <span class="new">Mới</span>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/a002.html" title="A002">A002</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">370.000&nbsp;₫</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9535,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/hong-bb.html" title="Hồng BB">
+                                            <img th:src="@{/web/shop292/images/hong%20bb.jpg}" data-original="/Uploads/shop292/images/hong%20bb.jpg" alt="Hồng BB" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/hong-bb.html" title="Hồng BB">Hồng BB</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">10.000&nbsp;₫</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9546,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/lan-cam-lua.html" title="Lan cam lửa">
+                                            <img th:src="@{/web/shop292/images/lan%20Cam%20lửa%20(Copy).jpg}" data-original="/Uploads/shop292/images/lan%20Cam%20l%E1%BB%ADa%20(Copy).jpg" alt="Lan cam lửa" class="img-responsive lazy-img" />
+                                        </a>
+                                        <span class="hot">Hot</span>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/lan-cam-lua.html" title="Lan cam lửa">Lan cam lửa</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9736,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/a019.html" title="A019">
+                                            <img th:src="@{/web/shop292/images/1852_1%20(Copy).jpg}" data-original="/Uploads/shop292/images/1852_1%20(Copy).jpg" alt="A019" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/a019.html" title="A019">A019</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">420.000&nbsp;₫</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9519,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/hong-mon.html" title="Hồng m&#244;n">
+                                            <img th:src="@{/web/shop292/images/hồng%20môn%20(Copy).jpg}" data-original="/Uploads/shop292/images/h%E1%BB%93ng%20m%C3%B4n%20(Copy).jpg" alt="Hồng m&#244;n" class="img-responsive lazy-img" />
+                                        </a>
+                                        <span class="new">Mới</span>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/hong-mon.html" title="Hồng m&#244;n">Hồng m&#244;n</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9772,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/thach-thao-xanh.html" title="Thạch thảo xanh">
+                                            <img src="@{/web/shop292/images/cc3bac-tc3adm-the1baa1ch-the1baa3o-2013-95%20(Copy).jpg" data-original="/Uploads/shop292/images/cc3bac-tc3adm-the1baa1ch-the1baa3o-2013-95%20(Copy).jpg" alt="Thạch thảo xanh" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/thach-thao-xanh.html" title="Thạch thảo xanh">Thạch thảo xanh</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9563,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/lan-hac-dinh-tim.html" title="Lan hạc đỉnh t&#237;m">
+                                            <img src="@{/web/shop292/images/Lan%20Hạc%20Đỉnh%20tím%20(Copy).jpg" data-original="/Uploads/shop292/images/Lan%20H%E1%BA%A1c%20%C4%90%E1%BB%89nh%20t%C3%ADm%20(Copy).jpg" alt="Lan hạc đỉnh t&#237;m" class="img-responsive lazy-img" />
+                                        </a>
+                                        <span class="new">Mới</span>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/lan-hac-dinh-tim.html" title="Lan hạc đỉnh t&#237;m">Lan hạc đỉnh t&#237;m</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9739,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/cam-tu-cau.html" title="Cẩm t&#250; cầu">
+                                            <img src="@{/web/shop292/images/Cam%20tu%20cau%20(Copy).jpg" data-original="/Uploads/shop292/images/Cam%20tu%20cau%20(Copy).jpg" alt="Cẩm t&#250; cầu" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/cam-tu-cau.html" title="Cẩm t&#250; cầu">Cẩm t&#250; cầu</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9745,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/a11.html" title="A11">
+                                            <img src="@{/web/shop292/images/hoa-sinh-nhat_6%20(Copy).jpg" data-original="/Uploads/shop292/images/hoa-sinh-nhat_6%20(Copy).jpg" alt="A11" class="img-responsive lazy-img" />
+                                        </a>
+                                        <span class="hot">Hot</span>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/a11.html" title="A11">A11</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">1.250.000&nbsp;₫</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9530,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/thuy-tien-vang.html" title="Thủy ti&#234;n v&#224;ng">
+                                            <img src="@{/web/shop292/images/Hoa%20thủy%20tiên%20vàng%20(Copy).jpg" data-original="/Uploads/shop292/images/Hoa%20th%E1%BB%A7y%20ti%C3%AAn%20v%C3%A0ng%20(Copy).jpg" alt="Thủy ti&#234;n v&#224;ng" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/thuy-tien-vang.html" title="Thủy ti&#234;n v&#224;ng">Thủy ti&#234;n v&#224;ng</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9769,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/cat-tuong-trang.html" title="C&#225;t tường trắng">
+                                            <img src="@{/web/shop292/images/hoa-cat-tuong-echo-trang-f19-1%20(Copy).jpg" data-original="/Uploads/shop292/images/hoa-cat-tuong-echo-trang-f19-1%20(Copy).jpg" alt="C&#225;t tường trắng" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/cat-tuong-trang.html" title="C&#225;t tường trắng">C&#225;t tường trắng</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9560,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/thu-hai-duong-vang.html" title="Thu hải đường v&#224;ng">
+                                            <img src="@{/web/shop292/images/thu-hai-duong%20vàng%20(Copy).jpg" data-original="/Uploads/shop292/images/thu-hai-duong%20v%C3%A0ng%20(Copy).jpg" alt="Thu hải đường v&#224;ng" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/thu-hai-duong-vang.html" title="Thu hải đường v&#224;ng">Thu hải đường v&#224;ng</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9787,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/lan-hac-dinh-nau.html" title="Lan Hạc đỉnh n&#226;u">
+                                            <img src="@{/web/shop292/images/Lan%20Hạc%20Đỉnh%20nâu%20(Copy).jpg" data-original="/Uploads/shop292/images/Lan%20H%E1%BA%A1c%20%C4%90%E1%BB%89nh%20n%C3%A2u%20(Copy).jpg" alt="Lan Hạc đỉnh n&#226;u" class="img-responsive lazy-img" />
+                                        </a>
+                                        <span class="new">Mới</span>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/lan-hac-dinh-nau.html" title="Lan Hạc đỉnh n&#226;u">Lan Hạc đỉnh n&#226;u</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9738,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/hoa-do-quyen.html" title="Hoa đỗ quy&#234;n">
+                                            <img src="@{/web/shop292/images/Hoa%20đỗ%20quyên%20(Copy).jpg" data-original="/Uploads/shop292/images/Hoa%20%C4%91%E1%BB%97%20quy%C3%AAn%20(Copy).jpg" alt="Hoa đỗ quy&#234;n" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/hoa-do-quyen.html" title="Hoa đỗ quy&#234;n">Hoa đỗ quy&#234;n</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9762,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/cam-tu-cau-xanh.html" title="Cẩm t&#250; cầu xanh">
+                                            <img src="@{/web/shop292/images/truyen-thuyet-ve-hoa-cam-tu-cau11-455x500.jpg" data-original="/Uploads/shop292/images/truyen-thuyet-ve-hoa-cam-tu-cau11-455x500.jpg" alt="Cẩm t&#250; cầu xanh" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/cam-tu-cau-xanh.html" title="Cẩm t&#250; cầu xanh">Cẩm t&#250; cầu xanh</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9571,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/lan-xanh-hoang-hau.html" title="Lan xanh Ho&#224;ng hậu">
+                                            <img src="@{/web/shop292/images/lan%20xanh%20Hoàng%20hậu%20(Copy).jpg" data-original="/Uploads/shop292/images/lan%20xanh%20Ho%C3%A0ng%20h%E1%BA%ADu%20(Copy).jpg" alt="Lan xanh Ho&#224;ng hậu" class="img-responsive lazy-img" />
+                                        </a>
+                                        <span class="hot">Hot</span>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/lan-xanh-hoang-hau.html" title="Lan xanh Ho&#224;ng hậu">Lan xanh Ho&#224;ng hậu</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9742,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/hoa-chuong-tim.html" title="Hoa chu&#244;ng t&#237;m">
+                                            <img src="@{/web/shop292/images/hoa%20chuông%20tím%20(Copy).jpg" data-original="/Uploads/shop292/images/hoa%20chu%C3%B4ng%20t%C3%ADm%20(Copy).jpg" alt="Hoa chu&#244;ng t&#237;m" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/hoa-chuong-tim.html" title="Hoa chu&#244;ng t&#237;m">Hoa chu&#244;ng t&#237;m</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9760,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/hoa-phang-xe.html" title="Hoa Phăng-x&#234;">
+                                            <img src="@{/web/shop292/images/Hoa%20Phăng-xê%201%20(Copy).jpg" data-original="/Uploads/shop292/images/Hoa%20Ph%C4%83ng-x%C3%AA%201%20(Copy).jpg" alt="Hoa Phăng-x&#234;" class="img-responsive lazy-img" />
+                                        </a>
+                                        <span class="hot">Hot</span>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/hoa-phang-xe.html" title="Hoa Phăng-x&#234;">Hoa Phăng-x&#234;</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9766,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/song-doi-cam-don.html" title="Sống đời cam đơn">
+                                            <img src="@{/web/shop292/images/chau-song-doi%20cam%20(Copy).jpg" data-original="/Uploads/shop292/images/chau-song-doi%20cam%20(Copy).jpg" alt="Sống đời cam đơn" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/song-doi-cam-don.html" title="Sống đời cam đơn">Sống đời cam đơn</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9746,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/cat-tuong-trang-vien-tim.html" title="C&#225;t tường trắng viền t&#237;m">
+                                            <img src="@{/web/shop292/images/product_1365997620%20(Copy).jpg" data-original="/Uploads/shop292/images/product_1365997620%20(Copy).jpg" alt="C&#225;t tường trắng viền t&#237;m" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/cat-tuong-trang-vien-tim.html" title="C&#225;t tường trắng viền t&#237;m">C&#225;t tường trắng viền t&#237;m</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9561,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/hoa-song-doi-vang.html" title="Hoa sống đời v&#224;ng">
+                                            <img src="@{/web/shop292/images/hoa-song-doi-vang%20(Copy).jpg" data-original="/Uploads/shop292/images/hoa-song-doi-vang%20(Copy).jpg" alt="Hoa sống đời v&#224;ng" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/hoa-song-doi-vang.html" title="Hoa sống đời v&#224;ng">Hoa sống đời v&#224;ng</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9770,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                <div class="product-item">
+                                    <div class="image image-resize">
+                                        <a href="san-pham/tulip-cam.html" title="Tulip cam">
+                                            <img src="@{/web/shop292/images/tulip%20cam%20(Copy).jpg" data-original="/Uploads/shop292/images/tulip%20cam%20(Copy).jpg" alt="Tulip cam" class="img-responsive lazy-img" />
+                                        </a>
+                                    </div>
+                                    <div class="right-block">
+                                        <h2 class="name">
+                                            <a href="san-pham/tulip-cam.html" title="Tulip cam">Tulip cam</a>
+                                        </h2>
+                                        <div class="rating">
+                                            <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span class="price-new">Li&#234;n hệ</span>
+                                        </div>
+                                        <div class="button">
+                                            <a class="btn btn-default btn-add-cart" href="javascript:void(0)" onclick="AddToCard(9788,1)">Mua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="trang-chu2679.html?page=1" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="trang-chu2679.html?page=1">1</a></li>
+                                <li><a href="trang-chu4658.html?page=2">2</a></li>
+                                <li><a href="trang-chu9ba9.html?page=3">3</a></li>
+                                <li><a href="trang-chufdb0.html?page=4">4</a></li>
+                                <li><a href="trang-chuaf4d.html?page=5">5</a></li>
+                                <li><a href="trang-chuc575.html?page=6">6</a></li>
+                                <li><a href="trang-chu235c.html?page=7">7</a></li>
+                                <li>
+                                    <a href="trang-chu235c.html?page=7" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                    <!--Template--
+                    --End-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <th:block th:include="/_footer"></th:block>
+
+</div>
+
+
+
+<div style="display: none;" id="loading-mask">
+    <div id="loading_mask_loader" class="loader">
+        <img alt="Loading..." src="@{/web/Images/ajax-loader-main.gif" />
+        <div>
+            Please wait...
+        </div>
+    </div>
+</div>
+<a class="back-to-top" href="#" style="display: inline;">
+    <i class="fa fa-angle-up">
+    </i>
+</a>
+
+
+</body>
+
+</html>
+<script type="text/javascript">
+    $(".header-content").css({ "background": 'url(/Uploads/shop292/images/DLF.jpg)  top center' });
+    $("html").addClass('');
+    $(document).ready(function () {
+        $("img.lazy-img").each(function () {
+
+        });
+        $("img.lazy-img").lazyload({
+            effect: "fadeIn",
+            threshold: 200
+        });
+    });
+</script>
+

@@ -11,6 +11,8 @@ public class BookEntity extends BaseEntity {
     @Column
     private String title;
     @Column
+    private String active;
+    @Column
     private String shortDescription;
     @Column
     private String description;
@@ -18,53 +20,32 @@ public class BookEntity extends BaseEntity {
     private Long price;
     @Column
     private Long quantity;
-//map
-
-    @ManyToOne
-    @JoinColumn(name = "active_id")
-    private ActiveEntity active;
-
-    @OneToMany(mappedBy = "book")
-    private List<CommentEntity> commentList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "book")
-    private List<OrderedItemEntity> orderedItemList = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "bookList")
-    private List<UserEntity> userList = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "bookList")
+    @ManyToMany
+    @JoinTable(name = "author_book",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<AuthorEntity> authorList = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "bookList")
-    private List<ShopEntity> shopList = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "category_book",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<CategoryEntity> categoryList = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "bookList")
-    private List<CatergoryEntity> catergoryList = new ArrayList<>();
-
-    //getter, setter
-    public List<CatergoryEntity> getCatergoryList() {
-        return catergoryList;
+    public List<CategoryEntity> getCategoryList() {
+        return categoryList;
     }
 
-    public void setCatergoryList(List<CatergoryEntity> catergoryList) {
-        this.catergoryList = catergoryList;
+    public void setCategoryList(List<CategoryEntity> categoryList) {
+        this.categoryList = categoryList;
     }
 
-    public List<CommentEntity> getCommentList() {
-        return commentList;
+    public List<AuthorEntity> getAuthorList() {
+        return authorList;
     }
 
-    public void setCommentList(List<CommentEntity> commentList) {
-        this.commentList = commentList;
-    }
-
-    public List<UserEntity> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<UserEntity> userList) {
-        this.userList = userList;
+    public void setAuthorList(List<AuthorEntity> authorList) {
+        this.authorList = authorList;
     }
 
     public String getTitle() {
@@ -107,35 +88,11 @@ public class BookEntity extends BaseEntity {
         this.quantity = quantity;
     }
 
-    public ActiveEntity getActive() {
+    public String getActive() {
         return active;
     }
 
-    public void setActive(ActiveEntity active) {
+    public void setActive(String active) {
         this.active = active;
-    }
-
-    public List<AuthorEntity> getAuthorList() {
-        return authorList;
-    }
-
-    public void setAuthorList(List<AuthorEntity> authorList) {
-        this.authorList = authorList;
-    }
-
-    public List<ShopEntity> getShopList() {
-        return shopList;
-    }
-
-    public void setShopList(List<ShopEntity> shopList) {
-        this.shopList = shopList;
-    }
-
-    public List<OrderedItemEntity> getOrderedItemList() {
-        return orderedItemList;
-    }
-
-    public void setOrderedItemList(List<OrderedItemEntity> orderedItemList) {
-        this.orderedItemList = orderedItemList;
     }
 }

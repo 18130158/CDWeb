@@ -1,0 +1,265 @@
+<div class="header"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+
+    <script src="@{/web/Scripts/common/login.js}" type="text/javascript"></script>
+    <section class="top-link clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav navbar-nav topmenu-contact pull-left">
+                        <li><i class="fa fa-phone"></i> <span>Hotline:0989.250 270</span></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right topmenu  hidden-xs hidden-sm">
+                        <li class="order-check"><a href="kiem-tra-don-hang.html"><i
+                                class="fa fa-pencil-square-o"></i> Kiểm tra đơn hàng</a></li>
+                        <li class="order-cart"><a href="gio-hang.html"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>
+                        </li>
+                        <li class="account-login"><a href="dang-nhap.html"><i class="fa fa-sign-in"></i> Đăng nhập
+                        </a></li>
+                        <li class="account-register"><a href="dang-ky.html"><i class="fa fa-key"></i> Đăng ký </a>
+                        </li>
+                    </ul>
+                    <div class="show-mobile hidden-lg hidden-md">
+                        <div class="quick-user">
+                            <div class="quickaccess-toggle">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="inner-toggle">
+                                <ul class="login links">
+                                    <li>
+                                        <a href="dang-ky.html"><i class="fa fa-sign-in"></i> Đăng ký</a>
+                                    </li>
+                                    <li>
+                                        <a href="dang-nhap.html"><i class="fa fa-key"></i> Đăng nhập</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="quick-access">
+                            <div class="quickaccess-toggle">
+                                <i class="fa fa-list"></i>
+                            </div>
+                            <div class="inner-toggle">
+                                <ul class="links">
+                                    <li><a id="mobile-wishlist-total" href="kiem-tra-don-hang.html"
+                                           class="wishlist"><i class="fa fa-pencil-square-o"></i> Kiểm tra đơn hàng</a>
+                                    </li>
+                                    <li><a href="gio-hang.html" class="shoppingcart"><i
+                                            class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="header-banner">
+        <a th:href="@{/}"><img src="@{/web/shop292/images/DLF.jpg}" class="img-responsive"></a>
+    </section>
+
+    <section class="navigation-menu clearfix">
+        <div class="container">
+            <div class="menu-top">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="menu-cate menu-quick-select">
+                            <div class="menu-cate-title">
+                                    <span><i class="fa fa-th-list"></i><a
+                                            href="san-pham.html">Danh mục sản phẩm</a></span>
+                                <i class="fa fa-chevron-circle-down"></i>
+                            </div>
+                            <ul class="menu-cate-content">
+                                <li>
+                                    <a href="san-pham/hoa-cat-canh-7915.html">
+                                        <i class="icon-menu fa fa-dashboard"></i>
+                                        Hoa cắt c&#224;nh<span class="arrow-menu"><i
+                                            class="fa fa-chevron-right "></i></span>
+                                    </a>
+                                    <div class="sub-menu hidden-xs">
+                                        <ul class="colum0">
+                                            <li>
+                                                <a href="san-pham/hoa-hong-7935.html">Hoa hồng</a>
+                                            </li>
+                                            <li>
+                                                <a href="san-pham/cam-chuong-7937.html">Cẩm chướng</a>
+                                            </li>
+                                            <li>
+                                                <a href="san-pham/thuy-tien-7940.html">Thủy ti&#234;n</a>
+                                            </li>
+                                            <li>
+                                                <a href="san-pham/cam-tu-cau-7943.html">Cẩm t&#250; cầu</a>
+                                            </li>
+                                        </ul>
+                                        <ul class="colum1">
+                                            <li>
+                                                <a href="san-pham/lyly-7936.html">Lyly</a>
+                                            </li>
+                                            <li>
+                                                <a href="san-pham/cat-tuong-7939.html">C&#225;t tường</a>
+                                            </li>
+                                            <li>
+                                                <a href="san-pham/thach-thao-7941.html">Thạch thảo</a>
+                                            </li>
+                                            <li>
+                                                <a href="san-pham/loai-khac-7944.html">Loại kh&#225;c</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="san-pham/hoa-hop-hoa-gio-7901.html">
+                                        <i class="icon-menu fa fa-ge"></i>
+                                        Hoa hộp/ Hoa giỏ<span class="arrow-menu"><i
+                                            class="fa fa-chevron-right "></i></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="san-pham/hoa-chau-hoa-gio-treo-7905.html">
+                                        <i class="icon-menu fa fa-tree"></i>
+                                        Hoa chậu/ Hoa giỏ treo<span class="arrow-menu"><i
+                                            class="fa fa-chevron-right "></i></span>
+                                    </a>
+                                    <div class="sub-menu hidden-xs">
+                                        <ul class="colum0">
+                                            <li>
+                                                <a href="san-pham/hoa-gio-treo-7907.html">Hoa giỏ treo</a>
+                                            </li>
+                                            <li>
+                                                <a href="san-pham/hoa-chau-7947.html">Hoa chậu</a>
+                                            </li>
+                                            <li>
+                                                <a href="san-pham/song-doi-7946.html">Sống đời</a>
+                                            </li>
+                                        </ul>
+                                        <ul class="colum1">
+                                            <li>
+                                                <a href="san-pham/thu-hai-duong-7908.html">Thu hải đường</a>
+                                            </li>
+                                            <li>
+                                                <a href="san-pham/cuc-cac-loai-7945.html">C&#250;c c&#225;c loại</a>
+                                            </li>
+                                            <li>
+                                                <a href="san-pham/tulip-7948.html">Tulip</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="san-pham/hoa-lan-7906.html">
+                                        <i class="icon-menu fa fa-gift"></i>
+                                        Hoa lan<span class="arrow-menu"><i class="fa fa-chevron-right "></i></span>
+                                    </a>
+                                    <div class="sub-menu hidden-xs">
+                                        <ul class="colum0">
+                                            <li>
+                                                <a href="san-pham/lan-rung-7950.html">Lan rừng</a>
+                                            </li>
+                                            <li>
+                                                <a href="san-pham/dia-lan-7952.html">Địa lan</a>
+                                            </li>
+                                        </ul>
+                                        <ul class="colum1">
+                                            <li>
+                                                <a href="san-pham/lan-ho-diep-7951.html">Lan hồ điệp</a>
+                                            </li>
+                                            <li>
+                                                <a href="san-pham/phong-lan-7953.html">Phong lan</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="san-pham/hoa-su-kien-7909.html">
+                                        <i class="icon-menu fa fa-pagelines"></i>
+                                        Hoa sự kiện<span class="arrow-menu"><i
+                                            class="fa fa-chevron-right "></i></span>
+                                    </a>
+                                    <div class="sub-menu hidden-xs">
+                                        <ul class="colum0">
+                                            <li>
+                                                <a href="san-pham/hoa-tiec-cuoi-7910.html">Hoa tiệc cưới</a>
+                                            </li>
+                                            <li>
+                                                <a href="san-pham/hoa-hoi-nghi-khach-san-7954.html">Hoa hội nghị/ Kh&#225;ch
+                                                    sạn</a>
+                                            </li>
+                                        </ul>
+                                        <ul class="colum1">
+                                            <li>
+                                                <a href="san-pham/hoa-le-hoi-7911.html">Hoa lễ hội</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="san-pham/tieu-canh-san-vuon-7912.html">
+                                        <i class="icon-menu fa fa-leaf"></i>
+                                        Tiểu cảnh/ S&#226;n vườn<span class="arrow-menu"><i
+                                            class="fa fa-chevron-right "></i></span>
+                                    </a>
+                                    <div class="sub-menu hidden-xs">
+                                        <ul class="colum0">
+                                            <li>
+                                                <a href="san-pham/hoa-4-mua-hoa-bui-7913.html">Hoa 4 m&#249;a/ hoa
+                                                    bụi</a>
+                                            </li>
+                                        </ul>
+                                        <ul class="colum1">
+                                            <li>
+                                                <a href="san-pham/canh-quan-xanh-7914.html">Cảnh quan xanh</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-9 ">
+                        <nav class="navbar nav-menu">
+                            <div class="navbar-header">
+                                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
+                                        data-target="#mobile-menu" aria-controls="mobile-menu"
+                                        aria-expanded="false">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <nav id="mobile-menu" class="mobile-menu collapse navbar-collapse">
+                                <ul class='menu nav navbar-nav'>
+                                    <li class="level0"><a class='' href='trang-chu.html'><span>Trang chủ</span></a>
+                                    </li>
+                                    <li class="level0"><a class=''
+                                                          href='gioi-thieu.html'><span>Giới thiệu</span></a></li>
+                                    <li class="level0"><a class='' href='san-pham.html'><span>Sản phẩm</span></a>
+                                    </li>
+                                    <li class="level0"><a class='' href='tin-tuc.html'><span>Cẩm nang DLF</span></a>
+                                    </li>
+                                    <li class="level0"><a class='' href='content/dich-vu.html'><span>Dịch vụ</span></a>
+                                    </li>
+                                    <li class="level0"><a class='' href='lien-he.html'><span>Liên hệ</span></a></li>
+                                </ul>
+                            </nav>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var str = location.href.toLowerCase();
+            $("ul.menu li a").each(function () {
+                if (str.indexOf(this.href.toLowerCase()) >= 0) {
+                    $("ul.menu li").removeClass("active");
+                    $(this).parent().addClass("active");
+                }
+            });
+        });
+    </script>
+</div>

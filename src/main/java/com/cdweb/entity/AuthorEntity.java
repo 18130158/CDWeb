@@ -1,6 +1,5 @@
 package com.cdweb.entity;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,16 +17,16 @@ public class AuthorEntity extends BaseEntity {
     @Column
     private String information;
 
+    @ManyToMany(mappedBy = "authorList")
+    private List<BookEntity> bookList=new ArrayList<>();
 
-    //map
-    @ManyToMany
-    @JoinTable(name = "author_book",
-            joinColumns = @JoinColumn(name = "author_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id"))
-    private List<BookEntity> bookList = new ArrayList<>();
+    public List<BookEntity> getBookList() {
+        return bookList;
+    }
 
-
-    //getter,setter
+    public void setBookList(List<BookEntity> bookList) {
+        this.bookList = bookList;
+    }
 
     public String getName() {
         return name;
@@ -53,11 +52,4 @@ public class AuthorEntity extends BaseEntity {
         this.information = information;
     }
 
-    public List<BookEntity> getBookList() {
-        return bookList;
-    }
-
-    public void setBookList(List<BookEntity> bookList) {
-        this.bookList = bookList;
-    }
 }

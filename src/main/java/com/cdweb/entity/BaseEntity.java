@@ -1,14 +1,16 @@
 package com.cdweb.entity;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 	
 	@Id
@@ -16,15 +18,19 @@ public abstract class BaseEntity {
 	private Long id;
 	
 	@Column
+	@CreatedBy
 	private String createdBy;
 	
 	@Column
+	@CreatedDate
 	private Date createdDate;
 	
 	@Column
+	@LastModifiedBy
 	private String modifiedBy;
 	
 	@Column
+	@LastModifiedBy
 	private Date modifiedDate;
 	
 	public Long getId() {

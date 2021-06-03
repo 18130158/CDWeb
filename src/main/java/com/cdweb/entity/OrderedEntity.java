@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "ordered")
-public class OrderedEntity extends BaseEntity{
+public class OrderedEntity extends BaseEntity {
     //column
     @Column(name = "ordered_date")
     private Date orderDate;
@@ -15,17 +15,12 @@ public class OrderedEntity extends BaseEntity{
     private Date receiveDate;
     @Column
     private Long totalPrice;
-
+    @Column
+    private int status;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @ManyToOne
-    @JoinColumn(name = "ordered_state_id")
-    private OrderedStateEntity orderedState;
-
-    @OneToMany(mappedBy = "ordered")
-    private List<OrderedItemEntity> orderedItemList = new ArrayList<>();
 
     public Date getOrderDate() {
         return orderDate;
@@ -59,20 +54,12 @@ public class OrderedEntity extends BaseEntity{
         this.user = user;
     }
 
-    public OrderedStateEntity getOrderedState() {
-        return orderedState;
+    public int getStatus() {
+        return status;
     }
 
-    public void setOrderedState(OrderedStateEntity orderedState) {
-        this.orderedState = orderedState;
-    }
-
-    public List<OrderedItemEntity> getOrderedItemList() {
-        return orderedItemList;
-    }
-
-    public void setOrderedItemList(List<OrderedItemEntity> orderedItemList) {
-        this.orderedItemList = orderedItemList;
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
 

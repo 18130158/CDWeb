@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", //
+        uniqueConstraints = { //
+                @UniqueConstraint(name = "USER_UK", columnNames = "user_name")})
 public class UserEntity extends BaseEntity {
     //column
-    @Column
+    @Column(name = "user_name")
     private String userName;
     @Column
     private String password;
@@ -18,35 +20,23 @@ public class UserEntity extends BaseEntity {
     private String email;
     @Column
     private String address;
+    @Column
+    private int status;
     //map
 
-    @OneToMany(mappedBy = "user")
-    private List<OrderedEntity> orderedList = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "userList")
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<RoleEntity> roleList = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "user_book",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id"))
-    private List<BookEntity> bookList = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "user_state_id")
-    private UserStateEntity userState;
-
-
-    @OneToMany(mappedBy = "user")
-    private List<CommentEntity> commentList = new ArrayList<>();
-
-    //getter,setter
-    public List<CommentEntity> getCommentList() {
-        return commentList;
+    public int getStatus() {
+        return status;
     }
 
-    public void setCommentList(List<CommentEntity> commentList) {
-        this.commentList = commentList;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getUserName() {
@@ -89,35 +79,11 @@ public class UserEntity extends BaseEntity {
         this.address = address;
     }
 
-    public List<OrderedEntity> getOrderedList() {
-        return orderedList;
-    }
-
-    public void setOrderedList(List<OrderedEntity> orderedList) {
-        this.orderedList = orderedList;
-    }
-
     public List<RoleEntity> getRoleList() {
         return roleList;
     }
 
     public void setRoleList(List<RoleEntity> roleList) {
         this.roleList = roleList;
-    }
-
-    public UserStateEntity getUserState() {
-        return userState;
-    }
-
-    public void setUserState(UserStateEntity userState) {
-        this.userState = userState;
-    }
-
-    public List<BookEntity> getBookList() {
-        return bookList;
-    }
-
-    public void setBookList(List<BookEntity> bookList) {
-        this.bookList = bookList;
     }
 }
