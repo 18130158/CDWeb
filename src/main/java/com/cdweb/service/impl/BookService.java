@@ -12,6 +12,7 @@ import com.cdweb.repository.BookRepository;
 import com.cdweb.repository.CategoryRepository;
 import com.cdweb.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -81,7 +82,26 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public BookDTO deleta(long[] ids) {
-        return null;
+    public void delete(long[] ids) {
+
+        for(long item: ids) {
+            bookRepository.deleteById(item);
+        }
     }
+    @Override
+    public int totalItem() {
+        return (int) bookRepository.count();
+    }
+
+    @Override
+    public List<BookDTO> findAll(Pageable pageable) {
+        List<BookDTO> results = new ArrayList<>();
+        List<BookEntity> entities = bookRepository.findAll(pageable).getContent();
+        for (BookEntity item: entities) {
+            BookDTO newDTO = bookConverter.toDTO(item);
+            results.add(newDTO);
+        }
+        return results;
+    }
+
 }

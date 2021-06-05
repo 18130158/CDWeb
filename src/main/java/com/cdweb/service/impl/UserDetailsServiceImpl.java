@@ -26,12 +26,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private RoleRepository roleRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-
-		UserEntity userEntity = this.userRepository.findByUserNameAndStatus(userName,SystemConstant.ACTIVE_USER);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		UserEntity userEntity = this.userRepository.findByEmailAndIsEnabled(email,SystemConstant.ACTIVE_USER);
+		System.out.println(userEntity);
 		if (userEntity == null) {
-			System.out.println("User not found! " + userName);
-			throw new UsernameNotFoundException("User " + userName + " was not found in the database or not active");
+			System.out.println("User not found! " + email);
+			throw new UsernameNotFoundException("User " + email + " was not found in the database or not active");
 		}
 
 
@@ -44,8 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 				grantList.add(authority);
 			}
 		}
-
-		UserDetails userDetails = (UserDetails) new User(userEntity.getUserName(), //
+		UserDetails userDetails = (UserDetails) new User(userEntity.getEmail(), //
 				userEntity.getPassword(), grantList);
 
 		return userDetails;

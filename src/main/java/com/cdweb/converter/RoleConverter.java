@@ -3,17 +3,19 @@ package com.cdweb.converter;
 import com.cdweb.dto.RoleDTO;
 import com.cdweb.entity.RoleEntity;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RoleConverter {
-    private ModelMapper modelMapper = new ModelMapper();
+    @Autowired
+    private ModelMapper modelMapper;
 
-    private RoleDTO toDTO(RoleEntity roleEntity) {
+    public RoleDTO toDTO(RoleEntity roleEntity) {
         return modelMapper.map(roleEntity, RoleDTO.class);
     }
 
-    private RoleEntity roleEntity(RoleDTO roleDTO) {
+    public RoleEntity roleEntity(RoleDTO roleDTO) {
         return modelMapper.map(roleDTO, RoleEntity.class);
     }
 }

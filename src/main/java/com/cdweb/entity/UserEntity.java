@@ -5,23 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "user", //
-        uniqueConstraints = { //
-                @UniqueConstraint(name = "USER_UK", columnNames = "user_name")})
+//@Table(name = "user", //
+//        uniqueConstraints = { //
+//                @UniqueConstraint(name = "USER_UK", columnNames = "email")})
+@Table(name = "user")
 public class UserEntity extends BaseEntity {
     //column
-    @Column(name = "user_name")
-    private String userName;
+    @Column
+    private String email;
     @Column
     private String password;
     @Column
     private String fullName;
     @Column
-    private String email;
-    @Column
     private String address;
     @Column
-    private int status;
+    private boolean isEnabled;
     //map
 
     @ManyToMany
@@ -31,20 +30,12 @@ public class UserEntity extends BaseEntity {
     private List<RoleEntity> roleList = new ArrayList<>();
 
 
-    public int getStatus() {
-        return status;
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 
     public String getPassword() {

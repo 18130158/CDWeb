@@ -3,17 +3,19 @@ package com.cdweb.converter;
 import com.cdweb.dto.OrderedDTO;
 import com.cdweb.entity.OrderedEntity;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OrderedConverter {
-    private ModelMapper modelMapper = new ModelMapper();
+    @Autowired
+    private ModelMapper modelMapper;
 
-    private OrderedDTO toDTO(OrderedEntity orderedEntity) {
+    public OrderedDTO toDTO(OrderedEntity orderedEntity) {
         return modelMapper.map(orderedEntity, OrderedDTO.class);
     }
 
-    private OrderedEntity toEntity(OrderedDTO orderedDTO) {
+    public OrderedEntity toEntity(OrderedDTO orderedDTO) {
         return modelMapper.map(orderedDTO, OrderedEntity.class);
     }
 }

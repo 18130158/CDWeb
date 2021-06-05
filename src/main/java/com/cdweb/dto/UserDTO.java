@@ -5,31 +5,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDTO extends AbstractDTO<UserDTO> {
-    private String userName;
     private String password;
+    private String passwordConfirm;
     private String fullName;
     private String email;
     private String address;
-    private int status;
-    private List<String> roleList = new ArrayList<>();
+    private boolean isEnabled;
+    private List<RoleDTO> roleList = new ArrayList<>();
 
     public UserDTO() {
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public String getPasswordConfirm() {
+        return passwordConfirm;
     }
 
-    public int getStatus() {
-        return status;
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
-    public String getUserName() {
-        return userName;
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 
     public String getPassword() {
@@ -64,11 +64,11 @@ public class UserDTO extends AbstractDTO<UserDTO> {
         this.address = address;
     }
 
-    public List<String> getRoleList() {
+    public List<RoleDTO> getRoleList() {
         return roleList;
     }
 
-    public void setRoleList(List<String> roleList) {
+    public void setRoleList(List<RoleDTO> roleList) {
         this.roleList = roleList;
     }
 }

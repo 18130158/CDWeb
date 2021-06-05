@@ -3,17 +3,19 @@ package com.cdweb.converter;
 import com.cdweb.dto.UserDTO;
 import com.cdweb.entity.UserEntity;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserConverter {
-    private ModelMapper modelMapper = new ModelMapper();
+    @Autowired
+    private ModelMapper modelMapper;
 
-    private UserDTO toDTO(UserEntity userEntity) {
+    public UserDTO toDTO(UserEntity userEntity) {
         return modelMapper.map(userEntity, UserDTO.class);
     }
 
-    private UserEntity toEntity(UserDTO userDTO) {
+    public UserEntity toEntity(UserDTO userDTO) {
         return modelMapper.map(userDTO, UserEntity.class);
     }
 }

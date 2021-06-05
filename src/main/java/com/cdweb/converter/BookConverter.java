@@ -3,6 +3,7 @@ package com.cdweb.converter;
 import com.cdweb.dto.BookDTO;
 import com.cdweb.entity.BookEntity;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,18 +11,10 @@ import java.util.List;
 @Component
 public class BookConverter {
 
-    private ModelMapper modelMapper = new ModelMapper();
+    @Autowired
+    private ModelMapper modelMapper;
 
     public BookDTO toDTO(BookEntity bookEntity) {
-//        BookDTO bookDTO=new BookDTO();
-//        bookDTO.setId(bookEntity.getId());
-//        bookDTO.setActive(bookEntity.getActive());
-//        bookDTO.setTitle(bookEntity.getTitle());
-//        bookDTO.setShortDescription(bookEntity.getShortDescription());
-//        bookDTO.setDescription(bookEntity.getDescription());
-//        bookDTO.setPrice(bookEntity.getPrice());
-//        bookDTO.setQuantity(bookDTO.getQuantity());
-//        List<String> categoryList
         return modelMapper.map(bookEntity, BookDTO.class);
     }
 

@@ -3,17 +3,19 @@ package com.cdweb.converter;
 import com.cdweb.dto.CommentDTO;
 import com.cdweb.entity.CommentEntity;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CommentConverter {
-    private ModelMapper modelMapper = new ModelMapper();
+    @Autowired
+    private ModelMapper modelMapper;
 
-    private CommentDTO toDTO(CommentEntity commentEntity) {
+    public CommentDTO toDTO(CommentEntity commentEntity) {
         return modelMapper.map(commentEntity, CommentDTO.class);
     }
 
-    private CommentEntity toEntity(CommentDTO commentDTO) {
+    public CommentEntity toEntity(CommentDTO commentDTO) {
         return modelMapper.map(commentDTO, CommentEntity.class);
     }
 }

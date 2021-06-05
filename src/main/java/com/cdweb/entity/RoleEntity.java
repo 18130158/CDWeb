@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "role")
 public class RoleEntity extends BaseEntity {
     //column
-    @Column
+    @Column(name = "name")
     private String name;
     //map
     @ManyToMany(mappedBy = "roleList")
