@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-    UserEntity findByEmailAndIsEnabled(String email,boolean isEnabled);
+    UserEntity findByEmailAndIsEnabled(String email, boolean isEnabled);
 
     UserEntity findByEmail(String email);
 

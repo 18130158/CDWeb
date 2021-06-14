@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-//@Table(name = "user", //
-//        uniqueConstraints = { //
-//                @UniqueConstraint(name = "USER_UK", columnNames = "email")})
-@Table(name = "user")
+@Table(name = "user", //
+        uniqueConstraints = { //
+                @UniqueConstraint(name = "USER_UK", columnNames = "email")})
+//@Table(name = "user")
 public class UserEntity extends BaseEntity {
     //column
-    @Column
+    @Column(name = "email")
     private String email;
     @Column
     private String password;
@@ -19,6 +19,8 @@ public class UserEntity extends BaseEntity {
     private String fullName;
     @Column
     private String address;
+    @Column
+    private String phone;
     @Column
     private boolean isEnabled;
     //map
@@ -76,5 +78,13 @@ public class UserEntity extends BaseEntity {
 
     public void setRoleList(List<RoleEntity> roleList) {
         this.roleList = roleList;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

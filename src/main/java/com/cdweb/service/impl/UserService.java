@@ -35,6 +35,7 @@ public class UserService implements IUserService {
     private RoleRepository roleRepository;
     @Autowired
     private RoleConverter roleConverter;
+
     @Override
     public List<UserDTO> findAll() {
         return null;
@@ -71,11 +72,11 @@ public class UserService implements IUserService {
             return null;
         } else {
             user.setPassword(encoder.encode(user.getPassword()));
-            List<RoleDTO> list=new ArrayList<>();
-            RoleEntity role=roleRepository.findByName("ROLE_USER");
+            List<RoleDTO> list = new ArrayList<>();
+            RoleEntity role = roleRepository.findByName("ROLE_USER");
             list.add(roleConverter.toDTO(role));
             user.setRoleList(list);
-            UserEntity test=this.userConverter.toEntity(user);
+            UserEntity test = this.userConverter.toEntity(user);
             userEntity = userRepository.save(test);
 
             ConfirmationToken confirmationToken = new ConfirmationToken(userEntity);
@@ -90,14 +91,15 @@ public class UserService implements IUserService {
                     + "http://localhost:8080/confirm-account?token=" + confirmationToken.getConfirmationToken());
 
             emailSenderService.sendEmail(mailMessage);
-           return userConverter.toDTO(userEntity);
+            return userConverter.toDTO(userEntity);
         }
     }
+
     @Override
-    public UserDTO confirmEmail(String confirmationToken){
+    public UserDTO confirmEmail(String confirmationToken) {
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
         if (token != null) {
-            UserDTO user =userConverter.toDTO( userRepository.findByEmailIgnoreCase(token.getUser().getEmail()));
+            UserDTO user = userConverter.toDTO(userRepository.findByEmailIgnoreCase(token.getUser().getEmail()));
             user.setEnabled(true);
             UserEntity userEntity = userRepository.save(userConverter.toEntity(user));
 //            userRepository.deleteById(user.getId());

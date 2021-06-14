@@ -24,11 +24,14 @@ public class BookConverter {
 
     public BookEntity toEntity(BookDTO bookDTO, BookEntity bookEntity) {
         bookEntity.setTitle(bookDTO.getTitle());
-        bookEntity.setActive(bookDTO.getActive());
+        bookEntity.setActive(bookDTO.isActive());
         bookEntity.setShortDescription(bookDTO.getShortDescription());
         bookEntity.setDescription(bookDTO.getDescription());
         bookEntity.setPrice(bookDTO.getPrice());
+        bookEntity.setPage(bookDTO.getPage());
+        bookEntity.setPublisher(bookDTO.getPublisher());
         bookEntity.setQuantity(bookDTO.getQuantity());
+        bookEntity.setMediaList(bookEntity.getMediaList());
         return bookEntity;
     }
 }

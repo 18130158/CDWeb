@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		System.out.println(userEntity);
 		if (userEntity == null) {
 			System.out.println("User not found! " + email);
-			throw new UsernameNotFoundException("User " + email + " was not found in the database or not active");
+			throw new UsernameNotFoundException("email " +email + " was not found in the database or not active");
 		}
 
 

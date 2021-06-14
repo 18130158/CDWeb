@@ -3,7 +3,7 @@ package com.cdweb.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "commnent")
+@Table(name = "comment")
 public class CommentEntity extends BaseEntity {
     //column
     @Column

@@ -3,6 +3,7 @@ package com.cdweb.entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name = "book")
@@ -11,41 +12,50 @@ public class BookEntity extends BaseEntity {
     @Column
     private String title;
     @Column
-    private String active;
+    private boolean active;
     @Column
     private String shortDescription;
-    @Column
+    @Column(columnDefinition = "TEXT NOT NULL" )
     private String description;
+    @Column(columnDefinition = "float default 0")
+    private double discount;
     @Column
     private Long price;
     @Column
     private Long quantity;
-    @ManyToMany
-    @JoinTable(name = "author_book",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private List<AuthorEntity> authorList = new ArrayList<>();
+    @Column
+    private String publisher;
+    @Column
+    private Long page;
+    @Column(columnDefinition = "bit default 0")
+    private boolean newBook;
+    @Column(columnDefinition = "bit default 0")
+    private boolean hotBook;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private AuthorEntity author;
 
-    @ManyToMany
-    @JoinTable(name = "category_book",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<CategoryEntity> categoryList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryEntity category;
 
-    public List<CategoryEntity> getCategoryList() {
-        return categoryList;
+    @OneToMany(mappedBy = "book")
+    private List<MediaEntity> mediaList = new ArrayList<>();
+
+    public CategoryEntity getCategory() {
+        return category;
     }
 
-    public void setCategoryList(List<CategoryEntity> categoryList) {
-        this.categoryList = categoryList;
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
     }
 
-    public List<AuthorEntity> getAuthorList() {
-        return authorList;
+    public AuthorEntity getAuthor() {
+        return author;
     }
 
-    public void setAuthorList(List<AuthorEntity> authorList) {
-        this.authorList = authorList;
+    public void setAuthor(AuthorEntity author) {
+        this.author = author;
     }
 
     public String getTitle() {
@@ -88,11 +98,59 @@ public class BookEntity extends BaseEntity {
         this.quantity = quantity;
     }
 
-    public String getActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(String active) {
+    public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public List<MediaEntity> getMediaList() {
+        return mediaList;
+    }
+
+    public void setMediaList(List<MediaEntity> mediaList) {
+        this.mediaList = mediaList;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public Long getPage() {
+        return page;
+    }
+
+    public void setPage(Long page) {
+        this.page = page;
+    }
+
+    public boolean isNewBook() {
+        return newBook;
+    }
+
+    public void setNewBook(boolean newBook) {
+        this.newBook = newBook;
+    }
+
+    public boolean isHotBook() {
+        return hotBook;
+    }
+
+    public void setHotBook(boolean hotBook) {
+        this.hotBook = hotBook;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 }

@@ -33,5 +33,4 @@ public class BookOutput {
     public void setListResult(List<BookDTO> listResult) {
         this.listResult = listResult;
     }
-
 }

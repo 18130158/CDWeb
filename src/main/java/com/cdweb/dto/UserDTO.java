@@ -10,11 +10,14 @@ public class UserDTO extends AbstractDTO<UserDTO> {
     private String fullName;
     private String email;
     private String address;
+    private String phone;
     private boolean isEnabled;
     private List<RoleDTO> roleList = new ArrayList<>();
 
     public UserDTO() {
     }
+
+
 
     public String getPasswordConfirm() {
         return passwordConfirm;
@@ -70,5 +73,13 @@ public class UserDTO extends AbstractDTO<UserDTO> {
 
     public void setRoleList(List<RoleDTO> roleList) {
         this.roleList = roleList;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

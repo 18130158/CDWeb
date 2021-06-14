@@ -17,7 +17,7 @@ public class AuthorEntity extends BaseEntity {
     @Column
     private String information;
 
-    @ManyToMany(mappedBy = "authorList")
+    @OneToMany(mappedBy = "author")
     private List<BookEntity> bookList=new ArrayList<>();
 
     public List<BookEntity> getBookList() {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "catergory", uniqueConstraints = { //
+@Table(name = "category", uniqueConstraints = { //
         @UniqueConstraint(name = "CATEGORY_UK", columnNames = "code")})
 public class CategoryEntity extends BaseEntity {
 
@@ -14,7 +14,7 @@ public class CategoryEntity extends BaseEntity {
     private String code;
     @Column
     private String name;
-    @ManyToMany(mappedBy = "categoryList")
+    @OneToMany(mappedBy = "category")
     private List<BookEntity> bookList = new ArrayList<>();
     //getter,setter
 

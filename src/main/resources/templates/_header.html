@@ -1,0 +1,147 @@
+<div class="header"
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+    <section class="top-link clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav navbar-nav topmenu-contact pull-left">
+                        <li><i class="fa fa-phone"></i> <span>Hotline:0989.250 270</span></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right topmenu  hidden-xs hidden-sm">
+                        <li class="order-check"><a href="kiem-tra-don-hang.html"><i
+                                class="fa fa-pencil-square-o"></i> Kiểm tra đơn hàng</a></li>
+                        <li class="order-cart"><a href="gio-hang.html"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>
+                        </li>
+                        <li class="account-login"><a th:href="@{/dang-nhap}"><i class="fa fa-sign-in"></i> Đăng nhập
+                        </a></li>
+                        <li class="account-register"><a th:href="@{/dang-ki}"><i class="fa fa-key"></i> Đăng ký </a>
+                        </li>
+                    </ul>
+                    <div class="show-mobile hidden-lg hidden-md">
+                        <div class="quick-user">
+                            <div class="quickaccess-toggle">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="inner-toggle">
+                                <ul class="login links">
+                                    <li>
+                                        <a th:href="@{/dang-ki}"><i class="fa fa-sign-in"></i> Đăng ký</a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/dang-nhap}"><i class="fa fa-key"></i> Đăng nhập</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="quick-access">
+                            <div class="quickaccess-toggle">
+                                <i class="fa fa-list"></i>
+                            </div>
+                            <div class="inner-toggle">
+                                <ul class="links">
+                                    <li><a id="mobile-wishlist-total" th:href="@{/kiem-tra-don-hang}"
+                                           class="wishlist"><i class="fa fa-pencil-square-o"></i> Kiểm tra đơn hàng</a>
+                                    </li>
+                                    <li><a th:href="@{/gio-hang}" class="s  hoppingcart"><i
+                                            class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="header-banner">
+        <a th:href="@{/}"><img th:src="@{/shop292/images/DLF.jpg}" class="img-responsive"></a>
+    </section>
+
+    <section class="navigation-menu clearfix">
+        <div class="container">
+            <div class="menu-top">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="menu-cate menu-quick-select">
+                            <div class="menu-cate-title">
+                                    <span><i class="fa fa-th-list"></i><a
+                                            th:href="@{/san-pham}">Danh mục sản phẩm</a></span>
+                                <i class="fa fa-chevron-circle-down"></i>
+                            </div>
+                            <ul class="menu-cate-content" id="category-load" style='font: 14px Tahoma'>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-9 ">
+                        <nav class="navbar nav-menu">
+                            <div class="navbar-header">
+                                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
+                                        data-target="#mobile-menu" aria-controls="mobile-menu"
+                                        aria-expanded="false">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <nav id="mobile-menu" class="mobile-menu collapse navbar-collapse">
+                                <ul class='menu nav navbar-nav'>
+                                    <li class="level0"><a class='' th:href="@{/}"><span>Trang chủ</span></a>
+                                    </li>
+                                    <li class="level0"><a class=''
+                                                          th:href="@{/gioi-thieu}"><span>Giới thiệu</span></a></li>
+                                    <li class="level0"><a class='' th:href="@{/san-pham}"><span>Sản phẩm</span></a>
+                                    </li>
+                                    <li class="level0"><a class='' th:href="@{/tin-tuc}"><span>Tin tức</span></a>
+                                    </li>
+                                    <li class="level0"><a class='' th:href="@{/dich-vu}"><span>Dịch vụ</span></a>
+                                    </li>
+                                    <li class="level0"><a class='' th:href="@{/lien-he}"><span>Liên hệ</span></a></li>
+                                </ul>
+                            </nav>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var str = location.href.toLowerCase();
+            $("ul.menu li a").each(function () {
+                if (str.indexOf(this.href.toLowerCase()) >= 0) {
+                    $("ul.menu li").removeClass("active");
+                    $(this).parent().addClass("active");
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //dòng này minh dùng để load data
+            loadData();
+        });
+
+        function loadData() {
+            $.ajax({
+                url: '/getCategory',
+                type: 'get',
+                success: function (rs) {
+                    var str = "";
+                    $.each(rs, function (index, category) {
+                        str += " <li>";
+                        str += "  <a href='/san-pham?category=" + category.code + "'>";
+                        str += "<i class='icon-menu fa fa-book' >  " + category.name + "</i>";
+                        str += "</a>";
+                        str += "</li>";
+
+                    });
+                    $('#category-load').html(str);
+                }
+            });
+        }
+    </script>
+</div>
