@@ -2,7 +2,8 @@ package com.cdweb.dto;
 
 import java.util.Date;
 
-public class OrderedDTO extends AbstractDTO<OrderedDTO> {
+public class OrderedDTO    {
+    private Long id;
     private UserDTO userDTO;
     private int  status;
     private Date orderedDate;
@@ -10,6 +11,14 @@ public class OrderedDTO extends AbstractDTO<OrderedDTO> {
     private Long totalPrice;
 
     public OrderedDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public UserDTO getUserDTO() {

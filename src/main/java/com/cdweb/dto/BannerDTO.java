@@ -1,10 +1,19 @@
 package com.cdweb.dto;
 
-public class BannerDTO extends AbstractDTO<BannerDTO>{
+public class BannerDTO{
+    private Long id;
     private String name;
     private String url;
 
     public BannerDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

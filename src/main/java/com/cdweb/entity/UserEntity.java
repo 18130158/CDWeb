@@ -9,8 +9,11 @@ import java.util.List;
         uniqueConstraints = { //
                 @UniqueConstraint(name = "USER_UK", columnNames = "email")})
 //@Table(name = "user")
-public class UserEntity extends BaseEntity {
+public class UserEntity {
     //column
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name = "email")
     private String email;
     @Column
@@ -31,6 +34,13 @@ public class UserEntity extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<RoleEntity> roleList = new ArrayList<>();
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public boolean isEnabled() {
         return isEnabled;

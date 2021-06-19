@@ -7,8 +7,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "ordered")
-public class OrderedEntity extends BaseEntity {
+public class OrderedEntity  {
     //column
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name = "ordered_date")
     private Date orderDate;
     @Column(name = "received_date")
@@ -21,6 +24,13 @@ public class OrderedEntity extends BaseEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public Date getOrderDate() {
         return orderDate;

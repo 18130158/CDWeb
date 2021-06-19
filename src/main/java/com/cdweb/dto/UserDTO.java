@@ -4,27 +4,25 @@ package com.cdweb.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDTO extends AbstractDTO<UserDTO> {
-    private String password;
-    private String passwordConfirm;
-    private String fullName;
+public class UserDTO {
+    private Long id;
     private String email;
-    private String address;
+    private String password;
+    private String fullName;
     private String phone;
+    private String address;
     private boolean isEnabled;
     private List<RoleDTO> roleList = new ArrayList<>();
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public UserDTO() {
-    }
-
-
-
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
     }
 
     public boolean isEnabled() {

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class UserController {
@@ -18,36 +19,43 @@ public class UserController {
     @Autowired
     BCryptPasswordEncoder encoder;
 
-    @GetMapping(value = "/register")
-    public String displayRegistration() {
-        return "/web/register";
-    }
 
-    @GetMapping(value = "/forget-password")
-    public String forgetPassword(@RequestBody UserDTO user, Model model) {
-        return "forget-password";
-    }
-
-    @PostMapping(value = "/register")
-    public String registerUser(@RequestBody UserDTO user, Model model) {
+    @PostMapping(value = "/dang-ki")
+    public ModelAndView registerUser(@ModelAttribute("User") UserDTO user) {
         UserDTO userDTO = userService.sendMail(user);
-        if (userDTO == null) {
-            model.addAttribute("message", "This email already exists!");
-            return "error";
-        } else {
-            model.addAttribute("email", userDTO.getEmail());
-            return "successfulRegisteration";
-        }
+        ModelAndView mav = new ModelAndView("dang-ki.html");
+        mav.addObject("message", "Mời bạn xác nhận tài khoản qua email: " + userDTO.getEmail());
+        return mav;
     }
 
     @RequestMapping(value = "/confirm-account", method = {RequestMethod.GET, RequestMethod.POST})
-    public String confirmEmail(@RequestParam(name = "token") String confirmationToken, Model model) {
+    public ModelAndView confirmEmail(@RequestParam(name = "token") String confirmationToken, Model model) {
         UserDTO user = userService.confirmEmail(confirmationToken);
-        if (user != null) {
-            return "/web/home";
-        } else {
-            return null;
+        return new ModelAndView("dang-nhap.html");
+    }
+
+    @GetMapping("/check-mail")
+    public UserDTO checkMail(@RequestParam(name = "email") String email) {
+        UserDTO user = userService.findByEmail(email);
+        return user;
+    }
+
+    @GetMapping("/dang-nhap")
+    public ModelAndView loginPage(@RequestParam(name = "error", required = false, defaultValue = "false") boolean error) {
+        ModelAndView mav = new ModelAndView("dang-nhap.html");
+        if (error) {
+            mav.addObject("error", "Email hoặc mật khẩu không chính xác!");
+            return mav;
         }
+
+        return mav;
+    }
+
+    @GetMapping("/dang-ki")
+    public ModelAndView registorPage() {
+        ModelAndView mav = new ModelAndView("dang-ki.html");
+        mav.addObject("mesage");
+        return mav;
     }
 
 

@@ -49,11 +49,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 
 		// Các trang không yêu cầu login
-		http.authorizeRequests().antMatchers("/", "/login", "/logout","/register").permitAll();
+		http.authorizeRequests().antMatchers("/", "/dang-nhap", "/dang-xuat","/dang-ki").permitAll();
 
 		// Trang /userInfo yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
 		// Nếu chưa login, nó sẽ redirect tới trang /login.
-		http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/gio-hang","/kiem-tra-don-hang").access("hasAnyRole('ROLE_USER')");
 
 		// Trang chỉ dành cho ADMIN
 		http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
@@ -61,19 +61,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Khi người dùng đã login, với vai trò XX.
 		// Nhưng truy cập vào trang yêu cầu vai trò YY,
 		// Ngoại lệ AccessDeniedException sẽ ném ra.
-		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
+		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/");
 
 		// Cấu hình cho Login Form.
 		http.authorizeRequests().and().formLogin()//
 				// Submit URL của trang login
 				.loginProcessingUrl("/j_spring_security_check") // Submit URL
-				.loginPage("/login")//
-				.defaultSuccessUrl("/userInfo")//
-				.failureUrl("/login?error=true")//
-				.usernameParameter("username")//
+				.loginPage("/dang-nhap")//
+				.defaultSuccessUrl("/")//
+				.failureUrl("/dang-nhap?error=true")//
+				.usernameParameter("email")//
 				.passwordParameter("password")
 				// Cấu hình cho Logout Page.
-				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+				.and().logout().logoutUrl("/dang-xuat").logoutSuccessUrl("/");
 
 		// Cấu hình Remember Me.
 		http.authorizeRequests().and() //
@@ -88,9 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		db.setDataSource(dataSource);
 		return db;
 	}
-	// Token stored in Table (Persistent_Logins)
 
-	// Token stored in Memory (Of Web Server).
 	@Bean
 	public PersistentTokenRepository persistentTokenRepository1() {
 		InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl();

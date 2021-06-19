@@ -1,12 +1,21 @@
 package com.cdweb.dto;
 
-public class NewsDTO extends AbstractDTO<NewsDTO> {
+public class NewsDTO {
+    private Long id;
     private String title;
     private String thumbnail;
     private String shortDescription;
     private String content;
 
     public NewsDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {

@@ -2,9 +2,11 @@ package com.cdweb.controller;
 
 import com.cdweb.dto.BookDTO;
 import com.cdweb.dto.CategoryDTO;
+import com.cdweb.dto.UserDTO;
 import com.cdweb.service.IBannerService;
 import com.cdweb.service.IBookService;
 import com.cdweb.service.ICategoryService;
+import com.cdweb.service.IUserService;
 import com.cdweb.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -29,42 +31,43 @@ public class WebController {
     private IBookService bookService;
     @Autowired
     private IBannerService bannerService;
+    @Autowired
+    private IUserService userService;
 
     @GetMapping(value = {"/", "/trang-chu", "/index"})
-    public ModelAndView indexPage(Model model) {
+    public ModelAndView indexPage(Principal principal) {
+
 
         ModelAndView mav = new ModelAndView("index.html");
-
+        UserDTO userDTO;
+        if (principal!=null) {
+           userDTO=this.userService.findByEmail(principal.getName());
+        }else{
+            userDTO=null;
+        }
+        mav.addObject("user",userDTO);
         Pageable pageable = PageRequest.of(0, 8);
         List<BookDTO> hotList = bookService.findByHot(pageable);
 
-//        Pageable pageableItem = PageRequest.of(0, 8);
         List<BookDTO> newList = bookService.findByNew(pageable);
 
         List<BookDTO> discountList = bookService.findByDiscount(pageable);
 
-//        mav.addObject("categorylist", categoryService.findAll());
         mav.addObject("discountlist", discountList);
         mav.addObject("hotlist", hotList);
         mav.addObject("newlist", newList);
 
-//        Long count = bookService.countByCategory("null");
-//
-
-//
-//        model.addAttribute("items", items);
-//
-//        model.addAttribute("bannerlist", bannerService.findAll());
-//
-//        model.addAttribute("count", count);
 
         return mav;
     }
 
-    @GetMapping("/tin-tuc")
-    public ModelAndView news() {
 
-        return new ModelAndView("tin-tuc.html");
+    @GetMapping("/tin-tuc")
+    public List<BookDTO> news() {
+        Pageable pageable = PageRequest.of(0, 8);
+        List<BookDTO> hotList = bookService.findByHot(pageable);
+        System.out.println(hotList);
+        return hotList;
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -118,5 +121,6 @@ public class WebController {
         }
         return "/web/403Page";
     }
+
 
 }

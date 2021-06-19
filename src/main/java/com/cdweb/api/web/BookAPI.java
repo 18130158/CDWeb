@@ -1,5 +1,6 @@
 package com.cdweb.api.web;
 
+import com.cdweb.api.web.input.BookInput;
 import com.cdweb.api.web.output.BookOutput;
 import com.cdweb.dto.BookDTO;
 import com.cdweb.service.IBookService;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -34,41 +36,50 @@ public class BookAPI {
     }
 
 
+    //  ?category=lang-mang&page=1&limit=5&sort=name&order=asc
     @GetMapping("/api/san-pham")
-    public BookOutput listCustomer(Model model,
-                                      @RequestParam(name = "category", required = false, defaultValue = "null") String category,
-                                      @RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
-                                      @RequestParam(name = "limit", required = false, defaultValue = "6") Integer limit,
-                                      @RequestParam(name = "sort", required = false, defaultValue = "name") String sort,
-                                      @RequestParam(name = "order", required = false, defaultValue = "ASC") String order) {
+    public BookOutput listBook(@RequestBody BookInput input) {
 
-        page = page - 1;
-        if (!"null".equals(category)) {
-            BookOutput result=new BookOutput();
-            result.setListResult(bookService.findByCategory(category, limit, page * limit + 1, sort, order));
-            result.setTotalPage((int) Math.ceil((double) (bookService.countByCategory(category)) / limit));
-            return result;
-        } else {
-            Sort sortable = null;
-            if ("ASC".equals(order)) {
-                sortable = Sort.by(sort).ascending();
-            }
-            if ("DESC".equals(order)) {
-                sortable = Sort.by(sort).descending();
-            }
-            Pageable pageable = PageRequest.of(page, limit, sortable);
+        BookOutput bookOutput = new BookOutput();
+        Sort sortable = null;
 
-            BookOutput result=new BookOutput();
-
-            result.setListResult(bookService.findAll(pageable));
-
-            result.setTotalPage((int) Math.ceil((double) (bookService.countByCategory(category)) / limit));
-
-            return result;
+        if ("ASC".equalsIgnoreCase(input.getSortBy())) {
+            sortable = Sort.by(input.getSortName()).ascending();
         }
+        if ("DESC".equalsIgnoreCase(input.getSortBy())) {
+            sortable = Sort.by(input.getSortName()).descending();
+        }
+        Pageable pageable = PageRequest.of(input.getPage() - 1, input.getLimit(), sortable);
+        if (input.getCategory() != 0) {
+            bookOutput.setListResult(bookService.findByCategory(input.getCategory(), pageable));
+            bookOutput.setPage(input.getPage());
+            bookOutput.setTotalPage((int) Math.ceil((double) (bookService.countByCategory(input.getCategory())) / input.getLimit()));
+        } else if (input.isHot()) {
+            List<BookDTO> books=bookService.findByHot(pageable);
+            bookOutput.setListResult(books);
+            bookOutput.setPage(input.getPage());
+            bookOutput.setTotalPage((int) Math.ceil((double) (bookService.countByHot()) / input.getLimit()));
+        } else if (input.isNewBook()) {
+            bookOutput.setListResult(bookService.findByNew(pageable));
+            bookOutput.setPage(input.getPage());
+            bookOutput.setTotalPage((int) Math.ceil((double) (bookService.countByNew()) / input.getLimit()));
+        } else if (input.isSale()) {
+            bookOutput.setListResult(bookService.findByDiscount(pageable));
+            bookOutput.setPage(input.getPage());
+            bookOutput.setTotalPage((int) Math.ceil((double) (bookService.countByDiscount()) /input.getLimit()));
+        } else {
+            bookOutput.setListResult(bookService.findAll(pageable));
+            bookOutput.setPage(input.getPage());
+            bookOutput.setTotalPage((int) Math.ceil((double) (bookService.countAll()) / input.getLimit()));
+        }
+        return bookOutput;
     }
+
     @GetMapping("/api/chi-tiet-san-pham")
     public BookDTO bookDetail(@RequestParam(name = "book_id") Long id) {
         return bookService.findById(id);
     }
+
+
+
 }

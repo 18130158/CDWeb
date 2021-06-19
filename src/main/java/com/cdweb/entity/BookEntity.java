@@ -1,5 +1,7 @@
 package com.cdweb.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +9,11 @@ import java.util.Optional;
 
 @Entity
 @Table(name = "book")
-public class BookEntity extends BaseEntity {
+public class BookEntity {
     //column
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column
     private String title;
     @Column
@@ -39,7 +44,8 @@ public class BookEntity extends BaseEntity {
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "book")
+
     private List<MediaEntity> mediaList = new ArrayList<>();
 
     public CategoryEntity getCategory() {
@@ -152,5 +158,13 @@ public class BookEntity extends BaseEntity {
 
     public void setDiscount(double discount) {
         this.discount = discount;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

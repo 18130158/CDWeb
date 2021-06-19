@@ -23,6 +23,7 @@ public class BookConverter {
     }
 
     public BookEntity toEntity(BookDTO bookDTO, BookEntity bookEntity) {
+        bookEntity.setId(bookDTO.getId());
         bookEntity.setTitle(bookDTO.getTitle());
         bookEntity.setActive(bookDTO.isActive());
         bookEntity.setShortDescription(bookDTO.getShortDescription());

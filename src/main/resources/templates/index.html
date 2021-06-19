@@ -46,18 +46,9 @@
     <script th:src="@{/app/directives/paging.js}"></script>
     <link th:href="@{/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
-
-
 </head>
 <body ng-app="appMain" style="">
 <div id="fb-root"></div>
-<script>
-    function formatPrice(price) {
-        price = price.toLocaleString('it-IT', {style: 'currency', currency: 'VND'});
-        return price;
-    }
-</script>
-
 <div class="wrapper page-home">
 
 
@@ -111,6 +102,15 @@
                     <link th:href="@{/Scripts/owl-carousel/owl.theme.css}" rel="stylesheet"/>
                     <script th:src="@{/Scripts/owl-carousel/owl.carousel.min.js}"></script>
                     <!--Begin-->
+                    <section class="product-content" style="margin-top: 20px">
+                        <div class="col-sm-7"></div>
+                        <div class="col-sm-5">
+                            <form class="search" th:action="@{/search}" method="get">
+                                <input type="text" placeholder="Search.." name="search">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </section>
                     <section class="product-content">
                         <h1 class="title clearfix"><span>Đang giảm giá</span></h1>
                         <div class=" owl-carousel">
@@ -149,9 +149,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="button">
-                                                        <a class="btn btn-default btn-add-cart">Mua</a>
-                                                        <a class="btn-add-wishlist" href="#"><span></span></a><a
-                                                            class="btn-add-compare" href="#"></a>
+                                                        <a class="btn btn-default btn-add-cart ">Mua ngay</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -163,7 +161,8 @@
                                     <a class="next nextlogo"><i class="fa fa-angle-right"></i></a>
                                 </div>
                                 <div class="text-center ">
-                                    <a class="btn btn-default button-see-more">Xem thêm</a>
+                                    <a class="btn btn-default button-see-more" th:href="@{/san-pham(sale=true)}">Xem
+                                        thêm</a>
                                 </div>
                             </div>
                         </div>
@@ -226,7 +225,9 @@
                                                 </div>
                                             </div>
                                             <div class="button">
-                                                <a class="btn btn-default btn-add-cart">Mua</a>
+                                                <a class="btn btn-default btn-add-cart  buy-now">Mua ngay</a>
+                                                <a class="btn btn-default btn-add-cart"
+                                                   th:onclick=" 'addCart('+${book.id}+')' ">Thêm giỏ hàng</a>
                                             </div>
                                         </div>
                                     </div>
@@ -236,7 +237,7 @@
 
                         </div>
                         <div class="text-center ">
-                            <a class="btn btn-default button-see-more">Xem thêm</a>
+                            <a class="btn btn-default button-see-more" th:href="@{/san-pham/hot(hot=true)}">Xem thêm</a>
                         </div>
                     </section>
                     <section class="product-content clearfix">
@@ -275,7 +276,9 @@
                                                 </div>
                                             </div>
                                             <div class="button">
-                                                <a class="btn btn-default btn-add-cart">Mua</a>
+                                                <a class="btn btn-default btn-add-cart  buy-now">Mua ngay</a>
+                                                <a class="btn btn-default btn-add-cart"
+                                                   th:onclick=" 'addCart('+${book.id}+')'">Thêm giỏ hàng</a>
                                             </div>
                                         </div>
                                     </div>
@@ -285,7 +288,7 @@
 
                         </div>
                         <div class="text-center ">
-                            <a class="btn btn-default button-see-more">Xem thêm</a>
+                            <a class="btn btn-default button-see-more" th:href="@{/san-pham/new(new=true)}">Xem thêm</a>
                         </div>
                     </section>
 
@@ -300,14 +303,6 @@
 </div>
 
 
-<div style="display: none;" id="loading-mask">
-    <div id="loading_mask_loader" class="loader">
-        <img alt="Loading..." src="@{/Images/ajax-loader-main.gif"/>
-        <div>
-            Please wait...
-        </div>
-    </div>
-</div>
 <a class="back-to-top" href="#" style="display: inline;">
     <i class="fa fa-angle-up">
     </i>
@@ -315,32 +310,42 @@
 
 
 </body>
+<script type="text/javascript">
+    $(".header-content").css({"background": 'url(/Uploads/shop292/images/DLF.jpg)  top center'});
+    $("html").addClass('');
+    $(document).ready(function () {
+        $("img.lazy-img").each(function () {
 
-<!--<script type="text/javascript">-->
-<!--    $(document).ready(function () {-->
-<!--        //dòng này minh dùng để load data-->
-<!--        loadData();-->
-<!--    });-->
-<!--    function loadData() {-->
-<!--        $.ajax({-->
-<!--            url: '/getCategory',-->
-<!--            type: 'get',-->
-<!--            success: function (rs) {-->
-<!--                var str = "";-->
-<!--                $.each(rs, function (index, category) {-->
-<!--                    str += " <li>";-->
-<!--                    str += "  <a href='/san-pham?category=" + category.code + " '>";-->
-<!--                    str += "<i class='icon-menu fa fa-dashboard'> " + category.name + "</i>";-->
-<!--                    str += " <span class='arrow-menu'><i class='fa fa-chevron-right'></i></span>";-->
-<!--                    str += "</a>";-->
-<!--                    str += "</li>";-->
-<!--                });-->
-<!--                $('#category-load').html(str);-->
-<!--            }-->
+        });
+        $("img.lazy-img").lazyload({
+            effect: "fadeIn",
+            threshold: 200
+        });
+    });
+</script>
+<script type="text/javascript">
+    function addCart(book_id) {
+        $.ajax({
+            method: 'get',
+            url: 'them-san-pham',
+            dataType: 'json',
+            cache: 'false',
+            data: {
+                book_id: book_id
+            }
+        }).done(function (list) {
+            console.log(list);
+            if (list == null) {
+                window.location="http://localhost:8080/dang-nhap";
+                // location.replace( "");
+            } else {
+                alert("Hello! I am an alert box!");
+            }
+        });
+    }
 
-<!--        });-->
-<!--    }-->
-<!--</script>-->
+</script>
+
 </html>
 
 

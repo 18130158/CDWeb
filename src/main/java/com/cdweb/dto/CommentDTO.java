@@ -1,11 +1,20 @@
 package com.cdweb.dto;
 
-public class CommentDTO extends  AbstractDTO<CommentDTO>{
+public class CommentDTO {
+    private Long id;
     private UserDTO userDTO;
     private BookDTO bookDTO;
     private String review;
 
     public CommentDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public UserDTO getUserDTO() {

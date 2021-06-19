@@ -4,8 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ordered_item")
-public class OrderedItemEntity extends BaseEntity {
+public class OrderedItemEntity {
     //column
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column
     private Long quantity;
     @Column
@@ -18,6 +21,14 @@ public class OrderedItemEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "ordered_id")
     private OrderedEntity ordered;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     //getter,setter
     public OrderedEntity getOrdered() {

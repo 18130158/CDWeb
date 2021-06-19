@@ -1,6 +1,7 @@
 package com.cdweb.dto;
 
-public class MediaDTO extends AbstractDTO<MediaDTO>{
+public class MediaDTO {
+    private Long id;
     private String path;
     private BookDTO book;
 
@@ -12,9 +13,17 @@ public class MediaDTO extends AbstractDTO<MediaDTO>{
         this.path = path;
     }
 
-    public BookDTO getBook() {
-        return book;
+
+
+    public Long getId() {
+        return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
 
     public void setBook(BookDTO book) {
         this.book = book;

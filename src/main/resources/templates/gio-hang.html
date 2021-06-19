@@ -11,7 +11,7 @@
     <title>Giỏ h&#224;ng</title>
     <meta name="description"/>
     <meta name="keywords"/>
-    <link th:href="@{/web/shop292/files/icon.png}" rel="shortcut icon" type="image/x-icon" />
+    <link th:href="@{/shop292/files/icon.png}" rel="shortcut icon" type="image/x-icon" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="fb:app_id" content="227481454296289"/>
@@ -34,10 +34,6 @@
     <script th:src="@{/Scripts/bootstrap/js/bootstrap.min.js}"></script>
     <script th:src="@{/Scripts/jQuery-ui/jquery-ui.min.js}" type="text/javascript"></script>
 
-    <script th:src="@{/Scripts/common/fix-height.js}" data-img-box=".image-resize" type="text/javascript"></script>
-    <script th:src="@{/Scripts/common/common.js}" type="text/javascript"></script>
-    <script th:src="@{/Scripts/common/jquery.cookie.js}" type="text/javascript"></script>
-    <script th:src="@{/Scripts/common/mycard.js}" type="text/javascript"></script>
     <script th:src="@{/Scripts/lazyLoad/jquery.lazyload.min.js}" type="text/javascript"></script>
 
     <script th:src="@{/Scripts/angularJS/angular.min.js}"></script>
@@ -45,6 +41,10 @@
     <script type="text/javascript" th:src="@{/Scripts/angular-loading-spinner/spin.min.js}"></script>
     <script type="text/javascript" th:src="@{/Scripts/angular-loading-spinner/angular-spinner.min.js}"></script>
     <script type="text/javascript" th:src="@{/Scripts/angular-loading-spinner/angular-loading-spinner.js}"></script>
+    <script th:src="@{/app/appMain.js}"></script>
+    <script th:src="@{/app/directives/directive.js}"></script>
+    <script th:src="@{/app/directives/angular-summernote.js}"></script>
+    <script th:src="@{/app/directives/paging.js}"></script>
     <link th:href="@{/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
 
@@ -57,7 +57,7 @@
 
 <div class="wrapper">
 
-    <th:block th:include="/web/_header"></th:block>
+    <th:block th:include="/_header"></th:block>
 
 
     <div class="main">
@@ -68,21 +68,12 @@
                     <div class="breadcrumb clearfix">
                         <ul>
                             <li itemtype="http://shema.org/Breadcrumb" itemscope="" class="home">
-                                <a title="Đến trang chủ" href="index.html" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                                <a title="Đến trang chủ" th:href="@{/}" itemprop="url"><span itemprop="title">Trang chủ</span></a>
                             </li>
                             <li class="icon-li"><strong>Giỏ hàng</strong></li>
                         </ul>
                     </div>
-                    <script type="text/javascript">
-                        $(".link-site-more").hover(function () {
-                            $(this).find(".s-c-n").show();
-                        }, function () {
-                            $(this).find(".s-c-n").hide();
-                        });
-                    </script>
-                    <script src="../../../static/web/app/services/orderServices.js"></script>
-                    <script src="../../../static/web/app/controllers/orderController.js"></script>
-                    <div class="cart-content" ng-controller="orderController" ng-init="initOrderCartController()">
+                    <div class="cart-content">
                         <h1><span>Giỏ hàng của tôi</span></h1>
                         <div class="steps clearfix">
                             <ul class="clearfix">
@@ -104,6 +95,7 @@
                                     <thead>
                                     <tr>
                                         <th></th>
+                                        <th></th>
                                         <th>Tên sản phẩm</th>
                                         <th>Giá</th>
                                         <th>Số lượng</th>
@@ -112,42 +104,58 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="item in OrderDetails">
-                                        <td class="image">
-                                            <a href="san-pham/%7b%7bitem.ProductCode%7d%7d.html"> <img
-                                                    ng-src="{{item.ProductImage}}" class="img-responsive"/></a>
-                                        </td>
-                                        <td class="des">
-                                            <h2>
-                                                <a href="san-pham/%7b%7bitem.ProductCode%7d%7d.html">{{item.ProductName}}</a>
-                                            </h2>
-                                            <span>{{item.VariantName}}</span>
-                                        </td>
-                                        <td class="price">{{item.Price | number:0}}đ</td>
-                                        <td class="quantity">
-                                            <input type="number" value="1" class="text" ng-model="item.Quantity"
-                                                   ng-change="updateItemCart(item)"/>
-                                        </td>
-                                        <td class="amount">
-                                            {{ item.Amount | number:0 }}đ
-                                        </td>
-                                        <td class="remove">
-                                            <a ng-click="removeItemCart(item)" href="javascript:void(0)">
-                                                <i class="glyphicon glyphicon-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+
+
+                                    <th:block th:each="item:${cartlist}">
+                                        <tr>
+                                            <td><input type="checkbox" id="check" name="check"></td>
+                                            <td class="image">
+                                                <a th:href="@{/chi-tiet-san-pham/id(id=${item.book.id})}"> <img
+                                                        th:src="${item.book.mediaList[0].path}" class="img-responsive"/></a>
+                                            </td>
+                                            <td class="des">
+                                                <h2>
+                                                    <a th:href="@{/chi-tiet-san-pham/id(id=${item.book.id})}" th:utext="${item.book.title}"></a>
+                                                </h2>
+<!--                                                <span>{{item.VariantName}}</span>-->
+                                            </td>
+                                            <td class="price">
+                                                <div><span class="price-old" style="text-decoration-line: line-through"
+                                                           th:utext="${item.book.discount}?${item.book.getPriceFormat()}"></span>
+                                                </div>
+                                                <div><span class="price-new"
+                                                           th:utext="${item.book.getPriceDiscount()}">
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="quantity">
+                                                <input style="margin-bottom: 0px" type="number" th:value="${item.quantity}" class="text"/>
+                                            </td>
+                                            <td class="amount" th:utext="${item.getTotal}">
+
+                                            </td>
+                                            <td class="remove">
+                                                <a>
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+
+                                    </th:block>
+
+
+
                                     </tbody>
                                 </table>
                             </div>
                             <div class="clearfix text-right">
                                 <span><b>Tổng thanh toán:</b></span>
-                                <span class="pay-price">
-                {{ Amount | number:0 }}đ
-            </span>
+                                <span class="pay-price" th:utext="${total}">
+
+                            </span>
                             </div>
                             <div class="button text-right">
-                                <a class="btn btn-default" href="index.html" onclick="window.history.back()">Tiếp tục
+                                <a class="btn btn-default" href="index.html" >Tiếp tục
                                     mua hàng</a>
                                 <a class="btn btn-primary" href="thanh-toan.html">Tiến hành thanh toán</a>
                             </div>
@@ -161,7 +169,7 @@
 
 
 
-    <th:block th:include="/web/_footer"></th:block>
+    <th:block th:include="/_footer"></th:block>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -176,14 +184,6 @@
 </div>
 
 
-<div style="display: none;" id="loading-mask">
-    <div id="loading_mask_loader" class="loader">
-        <img alt="Loading..." src="@{/web/Images/ajax-loader-main.gif" />
-        <div>
-            Please wait...
-        </div>
-    </div>
-</div>
 <a class="back-to-top" href="#" style="display: inline;">
     <i class="fa fa-angle-up">
     </i>
@@ -195,7 +195,7 @@
 <!-- Mirrored from runecom50.runtime.vn/gio-hang.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Apr 2021 10:04:08 GMT -->
 </html>
 <script type="text/javascript">
-    $(".header-content").css({"background": 'url(/Uploads/shop292/images/DLF.jpg)  top center'});
+    $(".header-content").css({"background": 'url(/shop292/images/DLF.jpg)  top center'});
     $("html").addClass('');
     $(document).ready(function () {
         $("img.lazy-img").each(function () {

@@ -87,8 +87,8 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
-    public List<BookDTO> findByCategory(String code, int limit, int offset, String sort, String order) {
-        List<BookEntity> booklist = bookRepository.findByCategory(code, limit, offset, sort, order);
+    public List<BookDTO> findByCategory(Long category_id, Pageable pageable) {
+        List<BookEntity> booklist = bookRepository.findAllByActiveAndCategoryId(true, category_id, pageable).getContent();
         List<BookDTO> bookResult = new ArrayList<>();
         for (BookEntity book : booklist) {
             bookResult.add(this.bookConverter.toDTO(book));
@@ -97,12 +97,11 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
-    public long countByCategory(String category) {
-        if ("null".equals(category)) {
-            return this.bookRepository.count();
+    public int countByCategory(Long category) {
+        if (category==0) {
+            return this.bookRepository.countAllByActive(true);
         } else {
-            Long category_id = this.categoryRepository.findByCode(category);
-            return this.bookRepository.countByCategory(category_id);
+            return this.bookRepository.countAllByActiveAndCategoryId(true,category);
         }
     }
 
@@ -114,8 +113,7 @@ public class BookServiceImpl implements IBookService {
     @Override
     public List<BookDTO> findByHot(Pageable pageable) {
         List<BookDTO> bookList = new ArrayList<>();
-        List<BookEntity> bookEntityList = this.bookRepository.findAllByActiveAndHotBook(true,true, pageable).getContent();
-        System.out.println(bookEntityList);
+        List<BookEntity> bookEntityList = this.bookRepository.findAllByActiveAndHotBook(true, true, pageable).getContent();
         for (BookEntity book : bookEntityList) {
             bookList.add(this.bookConverter.toDTO(book));
         }
@@ -125,7 +123,7 @@ public class BookServiceImpl implements IBookService {
     @Override
     public List<BookDTO> findByNew(Pageable pageable) {
         List<BookDTO> bookList = new ArrayList<>();
-        List<BookEntity> bookEntityList = this.bookRepository.findAllByActiveAndNewBook(true,true, pageable).getContent();
+        List<BookEntity> bookEntityList = this.bookRepository.findAllByActiveAndNewBook(true, true, pageable).getContent();
         for (BookEntity book : bookEntityList) {
             bookList.add(this.bookConverter.toDTO(book));
         }
@@ -135,12 +133,29 @@ public class BookServiceImpl implements IBookService {
     @Override
     public List<BookDTO> findByDiscount(Pageable pageable) {
         List<BookDTO> bookList = new ArrayList<>();
-        List<BookEntity> bookEntityList = this.bookRepository.findByDiscountGreaterThan(0,pageable).getContent();
+        List<BookEntity> bookEntityList = this.bookRepository.findByActiveAndDiscountGreaterThan(true,0, pageable).getContent();
         for (BookEntity book : bookEntityList) {
             bookList.add(this.bookConverter.toDTO(book));
         }
         return bookList;
     }
 
+    @Override
+    public int countByHot() {
+        return this.bookRepository.countAllByActiveAndHotBook(true,true);
+    }
 
+    @Override
+    public int countByNew() {
+        return this.bookRepository.countAllByActiveAndNewBook(true,true);
+    }
+    @Override
+    public int countAll() {
+        return this.bookRepository.countAllByActive(true);
+    }
+
+    @Override
+    public int countByDiscount() {
+        return this.bookRepository.countAllByActiveAndDiscountGreaterThan(true,0);
+    }
 }

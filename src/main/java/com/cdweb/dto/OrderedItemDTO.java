@@ -1,12 +1,21 @@
 package com.cdweb.dto;
 
-public class OrderedItemDTO extends  AbstractDTO<OrderedItemDTO>{
+public class OrderedItemDTO   {
+    private Long id;
     private OrderedDTO orderedDTO;
     private BookDTO bookDTO;
     private Long quantity;
     private Long totalPrice;
 
     public OrderedItemDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public OrderedDTO getOrderedDTO() {

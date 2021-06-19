@@ -4,7 +4,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDTO extends AbstractDTO<BookDTO> {
+public class BookDTO {
+    private Long id;
     private boolean active;
     private String title;
     private String shortDescription;
@@ -21,8 +22,15 @@ public class BookDTO extends AbstractDTO<BookDTO> {
     private List<MediaDTO> mediaList = new ArrayList<>();
 
 
-
     public BookDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public boolean isNewBook() {
@@ -137,19 +145,26 @@ public class BookDTO extends AbstractDTO<BookDTO> {
     public void setMediaList(List<MediaDTO> mediaList) {
         this.mediaList = mediaList;
     }
-    public String getPriceFormat(){
+
+    public String getPriceFormat() {
         DecimalFormat formatter = new DecimalFormat("###,###,###");
-        return formatter.format(this.price)+" VNĐ";
-    }
-    public String getPriceDiscount(){
-        double price=this.price*(1-this.discount/100);
-        DecimalFormat formatter = new DecimalFormat("###,###,###");
-        return formatter.format(price)+" VNĐ";
-    }
-    public String getDiscountFormat(){
-        DecimalFormat formatter = new DecimalFormat("##.##");
-        return formatter.format(discount)+"%";
+        return formatter.format(this.price) + " VNĐ";
     }
 
+    public String getPriceDiscount() {
+        double price = this.price * (1 - this.discount / 100);
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        return formatter.format(price) + " VNĐ";
+    }
+
+    public String getDiscountFormat() {
+        DecimalFormat formatter = new DecimalFormat("##.##");
+        return formatter.format(discount) + "%";
+    }
+
+    public static String formatPrice(double price) {
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        return formatter.format(price) + " VNĐ";
+    }
 
 }

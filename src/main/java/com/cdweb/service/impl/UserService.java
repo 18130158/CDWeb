@@ -76,8 +76,7 @@ public class UserService implements IUserService {
             RoleEntity role = roleRepository.findByName("ROLE_USER");
             list.add(roleConverter.toDTO(role));
             user.setRoleList(list);
-            UserEntity test = this.userConverter.toEntity(user);
-            userEntity = userRepository.save(test);
+            userEntity = userRepository.save( this.userConverter.toEntity(user));
 
             ConfirmationToken confirmationToken = new ConfirmationToken(userEntity);
 
@@ -102,7 +101,6 @@ public class UserService implements IUserService {
             UserDTO user = userConverter.toDTO(userRepository.findByEmailIgnoreCase(token.getUser().getEmail()));
             user.setEnabled(true);
             UserEntity userEntity = userRepository.save(userConverter.toEntity(user));
-//            userRepository.deleteById(user.getId());
             return userConverter.toDTO(userEntity);
         } else {
             return null;
