@@ -10,7 +10,7 @@ public interface IBookService extends IGeneralService<BookDTO> {
 
     public List<BookDTO> findAll(Pageable pageable);
 
-    public List<BookDTO> findByCategory(Long category_id, Pageable pageable);
+    public List<BookDTO> findByCategory(String category_code, Pageable pageable);
 
 
     public BookDTO findById(Long id);
@@ -22,7 +22,7 @@ public interface IBookService extends IGeneralService<BookDTO> {
     public List<BookDTO> findByDiscount(Pageable pageable);
 
 
-    public int countByCategory(Long category);
+    public int countByCategory(String category);
 
     public int countByHot();
 
@@ -31,4 +31,10 @@ public interface IBookService extends IGeneralService<BookDTO> {
     public int countAll();
 
     public int countByDiscount();
+
+    List<BookDTO> findByTitle(String title, Pageable pageable);
+
+    int countByTitle(String title);
+
+    List<String> autoCompleteTitle(String title);
 }

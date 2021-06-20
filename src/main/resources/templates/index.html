@@ -66,10 +66,10 @@
                 <div class="flexslider slideshow-content" id="bannerheaderhome">
                     <ul class="slides">
 
-                        <th:block th:each="book:${newlist}">
+                        <th:block th:each="banner:${bannerlist}">
                             <li>
-                                <a th:href="@{/chi-tiet-san-pham/id(id=${book.id})}">
-                                    <img th:src="${book.mediaList[0].path}" class="lazy"/>
+                                <a href="#">
+                                    <img th:src="${banner.url}" class="lazy" style="height: 350px"/>
                                 </a>
                             </li>
                         </th:block>
@@ -105,8 +105,9 @@
                     <section class="product-content" style="margin-top: 20px">
                         <div class="col-sm-7"></div>
                         <div class="col-sm-5">
-                            <form class="search" th:action="@{/search}" method="get">
-                                <input type="text" placeholder="Search.." name="search">
+                            <form class="search" th:action="@{/san-pham}" method="get">
+                                <input type="text" placeholder="Search.." name="title" id="search"
+                                       oninput="search_title()">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -191,8 +192,7 @@
                     </section>
                     <section class="product-content clearfix">
                         <h1 class="title clearfix"><span>Sản phẩm HOT</span></h1>
-                        <div class="product-block product-grid clearfix">
-
+                        <div class="product-block product-grid clearfix" id="product-hot">
                             <th:block th:each="book : ${hotlist}">
                                 <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
                                     <div class="product-item">
@@ -234,16 +234,14 @@
                                 </div>
 
                             </th:block>
-
                         </div>
                         <div class="text-center ">
                             <a class="btn btn-default button-see-more" th:href="@{/san-pham/hot(hot=true)}">Xem thêm</a>
                         </div>
                     </section>
-                    <section class="product-content clearfix">
+                    <section class="product-content clearfix" id="product-new">
                         <h1 class="title clearfix"><span>Sản phẩm MỚI</span></h1>
                         <div class="product-block product-grid clearfix">
-
                             <th:block th:each="book : ${newlist}">
                                 <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
                                     <div class="product-item">
@@ -285,7 +283,6 @@
                                 </div>
 
                             </th:block>
-
                         </div>
                         <div class="text-center ">
                             <a class="btn btn-default button-see-more" th:href="@{/san-pham/new(new=true)}">Xem thêm</a>
@@ -311,7 +308,7 @@
 
 </body>
 <script type="text/javascript">
-    $(".header-content").css({"background": 'url(/Uploads/shop292/images/DLF.jpg)  top center'});
+    $(".header-content").css({"background": 'url(/shop292/images/DLF.jpg)  top center'});
     $("html").addClass('');
     $(document).ready(function () {
         $("img.lazy-img").each(function () {
@@ -336,13 +333,29 @@
         }).done(function (list) {
             console.log(list);
             if (list == null) {
-                window.location="http://localhost:8080/dang-nhap";
+                window.location = "http://localhost:8080/dang-nhap";
                 // location.replace( "");
             } else {
                 alert("Hello! I am an alert box!");
             }
         });
     }
+
+
+    function search_title() {
+        var keySearch = document.getElementById("search").value;
+        $.ajax({
+            method: 'get',
+            url: '/autocomplete?title=' + keySearch,
+            dataType: 'json',
+            cache: 'false',
+        }).done(function (list) {
+            $("#search").autocomplete({
+                source: list
+            });
+        });
+    }
+
 
 </script>
 

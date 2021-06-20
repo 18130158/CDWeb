@@ -1,7 +1,7 @@
 package com.cdweb.api.web.input;
 
 public class BookInput {
-    private long category=0;
+    private String category="null";
     private Integer page=1;
     private Integer limit=12;
     private String sortName="id";
@@ -11,13 +11,11 @@ public class BookInput {
     private boolean sale=false;
 
 
-
-
-    public Long getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Long category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

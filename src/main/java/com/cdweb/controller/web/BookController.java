@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,29 +37,33 @@ public class BookController {
     private IShoppingCartService shoppingCartService;
 
     //  ?category=lang-mang&page=1&limit=5&sort=name&order=asc
-    @GetMapping("/san-pham")
-    public ModelAndView listCustomer(
-            @RequestParam(name = "category", required = false, defaultValue = "0") long category,
+    @GetMapping("/danh-sach-san-pham")
+    public BookOutput listCustomer(
+            @RequestParam(name = "category", required = false, defaultValue = "null") String category,
             @RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
             @RequestParam(name = "limit", required = false, defaultValue = "12") Integer limit,
             @RequestParam(name = "sort", required = false, defaultValue = "id") String sortName,
             @RequestParam(name = "order", required = false, defaultValue = "ASC") String sortBy,
             @RequestParam(name = "hot", required = false, defaultValue = "false") boolean hot,
             @RequestParam(name = "new", required = false, defaultValue = "false") boolean newBook,
-            @RequestParam(name = "sale", required = false, defaultValue = "false") boolean sale
+            @RequestParam(name = "sale", required = false, defaultValue = "false") boolean sale,
+            @RequestParam(name = "title", required = false, defaultValue = "null") String title
     ) {
-        ModelAndView mav = new ModelAndView("san-pham.html");
         BookOutput bookOutput = new BookOutput();
         Sort sortable = null;
 
-        if ("ASC".equals(sortBy)) {
+        if ("ASC".equalsIgnoreCase(sortBy)) {
             sortable = Sort.by(sortName).ascending();
         }
-        if ("DESC".equals(sortBy)) {
-            sortable = Sort.by(sortBy).descending();
+        if ("DESC".equalsIgnoreCase(sortBy)) {
+            sortable = Sort.by(sortName).descending();
         }
         Pageable pageable = PageRequest.of(page - 1, limit, sortable);
-        if (category != 0) {
+        if (!"null".equalsIgnoreCase(title)) {
+            bookOutput.setListResult(bookService.findByTitle(title, pageable));
+            bookOutput.setPage(page);
+            bookOutput.setTotalPage((int) Math.ceil((double) (bookService.countByTitle(title)) / limit));
+        } else if (!"null".equalsIgnoreCase(category)) {
             bookOutput.setListResult(bookService.findByCategory(category, pageable));
             bookOutput.setPage(page);
             bookOutput.setTotalPage((int) Math.ceil((double) (bookService.countByCategory(category)) / limit));
@@ -80,10 +85,21 @@ public class BookController {
             bookOutput.setPage(page);
             bookOutput.setTotalPage((int) Math.ceil((double) (bookService.countAll()) / limit));
         }
-        mav.addObject("output", bookOutput);
-        return mav;
+        return bookOutput;
     }
 
+    @GetMapping("/san-pham")
+    public ModelAndView productPage(Principal principal) {
+        ModelAndView mav = new ModelAndView("san-pham.html");
+        UserDTO userDTO;
+        if (principal != null) {
+            userDTO = this.userService.findByEmail(principal.getName());
+        } else {
+            userDTO = null;
+        }
+        mav.addObject("user", userDTO);
+        return mav;
+    }
 
     @GetMapping("/chi-tiet-san-pham")
     public BookDTO bookDetail(@RequestParam(name = "book_id") Long id) {
@@ -98,7 +114,7 @@ public class BookController {
     @GetMapping("/them-san-pham")
     public List<ShoppingCartDTO> addProduct(@RequestParam(name = "book_id", required = false, defaultValue = "0") Long book_id, Principal principal) {
         System.out.println(book_id);
-        if (principal==null){
+        if (principal == null) {
             System.out.println("null");
             return null;
         }
@@ -106,20 +122,25 @@ public class BookController {
 
         return this.shoppingCartService.addProduct(book_id, email);
     }
+
     @GetMapping("/shopping-cart")
-    public ModelAndView shoppingCart(Principal principal){
-        if (principal==null){
-           return new ModelAndView("dang-nhap.html");
+    public ModelAndView shoppingCart(Principal principal) {
+        if (principal == null) {
+            return new ModelAndView("dang-nhap.html");
         }
         String email = principal.getName();
-        ModelAndView mav=new ModelAndView("gio-hang.html");
-        List<ShoppingCartDTO> cartList=this.shoppingCartService.getProduct(email);
-        double total=0;
-        for (ShoppingCartDTO cart:cartList){
-            total+=cart.getBook().getPrice()*(1-cart.getBook().getDiscount()/100)* cart.getQuantity();
+        ModelAndView mav = new ModelAndView("gio-hang.html");
+        List<ShoppingCartDTO> cartList = this.shoppingCartService.getProduct(email);
+        double total = 0;
+        for (ShoppingCartDTO cart : cartList) {
+            total += cart.getBook().getPrice() * (1 - cart.getBook().getDiscount() / 100) * cart.getQuantity();
         }
-        mav .addObject("total", BookDTO.formatPrice(total));
-        mav.addObject("cartlist",cartList);
+        mav.addObject("total", BookDTO.formatPrice(total));
+        mav.addObject("cartlist", cartList);
         return mav;
+    }
+    @GetMapping("/autocomplete")
+    public List<String> autoComplete(@RequestParam(name = "title") String title){
+        return this.bookService.autoCompleteTitle(title);
     }
 }

@@ -50,10 +50,10 @@ public class BookServiceImpl implements IBookService {
         } else {
             bookEntity = bookConverter.toEntity(bookDTO);
         }
-        if (bookDTO.getAuthor() != null) {
-            AuthorEntity author = this.authorRepository.findAuthorById(bookDTO.getAuthor().getId());
-            bookEntity.setAuthor(author);
-        }
+//        if (bookDTO.getAuthor() != null) {
+//            AuthorEntity author = this.authorRepository.findAuthorById(bookDTO.getAuthor().getId());
+//            bookEntity.setAuthor(author);
+//        }
         CategoryEntity category = this.categoryRepository.findCategoryById(bookDTO.getCategory().getId());
         bookEntity.setCategory(category);
 
@@ -87,8 +87,8 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
-    public List<BookDTO> findByCategory(Long category_id, Pageable pageable) {
-        List<BookEntity> booklist = bookRepository.findAllByActiveAndCategoryId(true, category_id, pageable).getContent();
+    public List<BookDTO> findByCategory(String category_code, Pageable pageable) {
+        List<BookEntity> booklist = bookRepository.findAllByActiveAndCategoryCode(true, category_code, pageable).getContent();
         List<BookDTO> bookResult = new ArrayList<>();
         for (BookEntity book : booklist) {
             bookResult.add(this.bookConverter.toDTO(book));
@@ -97,11 +97,11 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
-    public int countByCategory(Long category) {
-        if (category==0) {
+    public int countByCategory(String category_code) {
+        if ("null".equalsIgnoreCase(category_code)) {
             return this.bookRepository.countAllByActive(true);
         } else {
-            return this.bookRepository.countAllByActiveAndCategoryId(true,category);
+            return this.bookRepository.countAllByActiveAndCategoryCode(true, category_code);
         }
     }
 
@@ -133,7 +133,7 @@ public class BookServiceImpl implements IBookService {
     @Override
     public List<BookDTO> findByDiscount(Pageable pageable) {
         List<BookDTO> bookList = new ArrayList<>();
-        List<BookEntity> bookEntityList = this.bookRepository.findByActiveAndDiscountGreaterThan(true,0, pageable).getContent();
+        List<BookEntity> bookEntityList = this.bookRepository.findByActiveAndDiscountGreaterThan(true, 0, pageable).getContent();
         for (BookEntity book : bookEntityList) {
             bookList.add(this.bookConverter.toDTO(book));
         }
@@ -142,13 +142,14 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     public int countByHot() {
-        return this.bookRepository.countAllByActiveAndHotBook(true,true);
+        return this.bookRepository.countAllByActiveAndHotBook(true, true);
     }
 
     @Override
     public int countByNew() {
-        return this.bookRepository.countAllByActiveAndNewBook(true,true);
+        return this.bookRepository.countAllByActiveAndNewBook(true, true);
     }
+
     @Override
     public int countAll() {
         return this.bookRepository.countAllByActive(true);
@@ -156,6 +157,31 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     public int countByDiscount() {
-        return this.bookRepository.countAllByActiveAndDiscountGreaterThan(true,0);
+        return this.bookRepository.countAllByActiveAndDiscountGreaterThan(true, 0);
+    }
+
+    @Override
+    public List<BookDTO> findByTitle(String title, Pageable pageable) {
+        List<BookDTO> bookList = new ArrayList<>();
+        List<BookEntity> bookEntityList = this.bookRepository.findByActiveAndTitleContains(true, title, pageable).getContent();
+        for (BookEntity book : bookEntityList) {
+            bookList.add(this.bookConverter.toDTO(book));
+        }
+        return bookList;
+    }
+
+    @Override
+    public int countByTitle(String title) {
+        return this.bookRepository.countAllByActiveAndTitleContains(true, title);
+    }
+
+    @Override
+    public List<String> autoCompleteTitle(String title) {
+        List<BookEntity> bookEntityList = this.bookRepository.findByActiveAndTitleContains(true, title);
+        List<String> list=new ArrayList<>();
+        for (BookEntity book:bookEntityList){
+            list.add(book.getTitle());
+        }
+        return list;
     }
 }

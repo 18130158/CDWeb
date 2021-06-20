@@ -40,19 +40,19 @@ public class WebController {
 
         ModelAndView mav = new ModelAndView("index.html");
         UserDTO userDTO;
-        if (principal!=null) {
-           userDTO=this.userService.findByEmail(principal.getName());
-        }else{
-            userDTO=null;
+        if (principal != null) {
+            userDTO = this.userService.findByEmail(principal.getName());
+        } else {
+            userDTO = null;
         }
-        mav.addObject("user",userDTO);
+        mav.addObject("user", userDTO);
         Pageable pageable = PageRequest.of(0, 8);
         List<BookDTO> hotList = bookService.findByHot(pageable);
 
         List<BookDTO> newList = bookService.findByNew(pageable);
 
         List<BookDTO> discountList = bookService.findByDiscount(pageable);
-
+        mav.addObject("bannerlist", this.bannerService.findAll());
         mav.addObject("discountlist", discountList);
         mav.addObject("hotlist", hotList);
         mav.addObject("newlist", newList);

@@ -21,16 +21,13 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
     Page<BookEntity> findAllByActiveAndNewBook(boolean active, boolean newBook, Pageable pageable);
 
-    Page<BookEntity> findAllByActiveAndCategoryId(boolean active, Long category, Pageable pageable);
+    Page<BookEntity> findAllByActiveAndCategoryCode(boolean active, String category, Pageable pageable);
 
 
+    public Page<BookEntity> findByActiveAndDiscountGreaterThan(boolean active, double discount, Pageable pageable);
 
 
-    public Page<BookEntity> findByActiveAndDiscountGreaterThan(boolean active,double discount, Pageable pageable);
-
-
-
-    public int countAllByActiveAndCategoryId(boolean active, Long category_id);
+    public int countAllByActiveAndCategoryCode(boolean active, String category_code);
 
     public int countAllByActiveAndHotBook(boolean active, boolean hot_book);
 
@@ -39,5 +36,11 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
     public int countAllByActive(boolean active);
 
-    public int countAllByActiveAndDiscountGreaterThan(boolean active,double discount);
+    public int countAllByActiveAndDiscountGreaterThan(boolean active, double discount);
+
+    public Page<BookEntity> findByActiveAndTitleContains(boolean b, String title, Pageable pageable);
+
+    public int countAllByActiveAndTitleContains(boolean active, String title);
+
+    public List<BookEntity> findByActiveAndTitleContains(boolean active, String title);
 }

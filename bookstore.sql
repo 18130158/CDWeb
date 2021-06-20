@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 19, 2021 lúc 07:00 PM
+-- Thời gian đã tạo: Th6 20, 2021 lúc 09:33 PM
 -- Phiên bản máy phục vụ: 10.4.19-MariaDB
 -- Phiên bản PHP: 8.0.6
 
@@ -46,6 +46,16 @@ CREATE TABLE `banner` (
   `url` varchar(255) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Đang đổ dữ liệu cho bảng `banner`
+--
+
+INSERT INTO `banner` (`id`, `name`, `url`) VALUES
+(1, '1', 'CDweb/banner/8da743d575aecda9c96e190035d32f9e.jpg'),
+(2, '2', 'CDweb/banner/93f7db9464f68d979696a20a58d80be4.png'),
+(3, '3', 'CDweb/banner/muonkiepnhansinh_resize_920x420.jpg'),
+(4, '4', 'CDweb/banner/TGDQ920x420.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -84,7 +94,7 @@ INSERT INTO `book` (`id`, `active`, `description`, `discount`, `hot_book`, `new_
 (9, b'1', 'Truyện cổ tích Anđécxen từ lâu đã quen thuộc với các bạn nhỏ trên khắp thế giới. Những câu chuyện cổ gợi mở trí tưởng tượng, sự hiểu biết của các em về thế giới xung quanh. Hơn thế nữa, truyện cổ tích Anđécxen giáo dục các em lòng yêu thương, biết ơn và kính trọng đối với ông bà, cha mẹ… Ngay cả người lớn, khi đọc cũng cảm nhận được những điều thú vị và bổ ích qua các câu chuyện nhỏ đáng yêu.', 0, b'0', b'1', 89, 57, 'NXB Văn học', 11, NULL, 'Truyện cổ Andecxen', NULL, 3),
 (8, b'1', '“Cuốn sách này thực sự rất hay, nó vừa giúp tôi được giải trí sau những giờ làm việc căng thẳng vừa đem đến cho tôi những bài học quý giá về sự tự tin, lòng dũng cảm và có niềm tin vào cuộc sống. Tôi không thể đặt cuốn sách xuống cho đến khi đọc xong, nội dung của cuốn sách hấp dẫn hơn những gì tôi vẫn nghĩ, nó thực sự là một cuốn sách tuyệt vời\" - Kendda', 0, b'1', b'0', 88, 33, 'NXB Văn học', 10, NULL, 'Rump - Cậu bé xe rơm thành vàng', NULL, 3),
 (7, b'1', '“Nếu bạn muốn lũ trẻ nhà bạn thông minh, hãy kể cho chúng nghe truyện cổ tích. Nếu bạn muốn chúng thông minh hơn nữa, hãy kể nhiều truyện cổ tích hơn.” – Albert Einstein', 0, b'1', b'1', 100, 50, 'NXB Văn học', 9, NULL, 'Truyện cổ tích Việt Nam hay nhất (Tập 1)', NULL, 3),
-(6, b'1', 'Khu vườn ngôn từ kể về một tình yêu còn xa xưa hơn cả tình yêu. Khái niệm tình yêu trong tiếng Nhật hiện đại là luyến hoặc ái, nhưng vào thời xưa nó được viết là cô bi, nghĩa là nỗi buồn một mình. Shinkai Makoto đã cấu tứ Khu vườn ngôn từ theo ý nghĩa cổ điển này, miêu tả tình yêu theo khái niệm ban sơ của nó, tức là cô bi - nỗi buồn khi một mình thương nhớ một người. ', 20, b'1', b'1', 200, 90, 'NXB Văn học', 15, NULL, ' Khu Vườn Ngôn Từ', NULL, 6),
+(6, b'1', 'Khu vườn ngôn từ kể về một tình yêu còn xa xưa hơn cả tình yêu. Khái niệm tình yêu trong tiếng Nhật hiện đại là luyến hoặc ái, nhưng vào thời xưa nó được viết là cô bi, nghĩa là nỗi buồn một mình. Shinkai Makoto đã cấu tứ Khu vườn ngôn từ theo ý nghĩa cổ điển này, miêu tả tình yêu theo khái niệm ban sơ của nó, tức là cô bi - nỗi buồn khi một mình thương nhớ một người. ', 20, b'1', b'1', 200, 90, 'NXB Văn học', 15, NULL, 'Khu Vườn Ngôn Từ', NULL, 6),
 (5, b'1', 'Bạch Lăng Lăng, nữ sinh khoa Điện khí, trẻ trung, xinh đẹp và rất tự hào khi quen được một người bạn lý tưởng qua mạng, chàng du học sinh của một trường nổi tiếng của Mỹ, người mang biệt danh “nhà khoa học”: Mãi Mãi Là Bao Xa. Qua những cuộc chuyện trò trên QQ, Lăng Lăng đã gắn bó với chàng trai đó lúc nào cô cũng không hay, cảm xúc lớn dần, sự chia sẻ lớn dần và đến một ngày cô phát hiện ra mình đã yêu người con trai “tài giỏi” và không một chút khuyết điểm ấy. Nhưng sự tỉnh táo giúp cô ý thức được rằng, thế giới mạng chỉ là ảo, họ ở cách nhau cả một đại dương mênh mông, anh lại quá xuất sắc và ưu tú, mối quan hệ của họ sẽ không có kết quả gì. Nhất là khi anh thông báo, nếu anh tiếp tục sự nghiệp nghiên cứu lần này, rất có thể anh phải định cư bên Mỹ, mãi mãi không trở về.', 0, b'0', b'0', 220, 90, 'NXB Văn học', 30, NULL, 'Mãi Mãi Là Bao Xa', NULL, 6),
 (4, b'1', 'Hồ Ly Biết Yêu Nàng là hồ ly, vốn thuộc về ma giới - nơi quanh năm suốt tháng chìm trong mây mù, dù thần tiên cũng không thể đi vào; chàng là thần tiên, là mặt trời chiếu sáng cho muôn loài, được thế gian muôn đời sùng bái.Luật trời viết rằng, thần tiên và yêu ma không thể ở bên nhau. Nhưng trái tim nàng mách bảo rằng, ngoài chàng ra, nàng không muốn ở bên bất cứ một người nào khác.Số mệnh đã định, rằng nàng sinh ra để làm chủ nhân của ma giới, nhưng nàng chỉ muốn làm chủ nhân của trái tim chàng.…Liệu có một ngày, vầng dương kia thôi chiếu sáng, để trở thành một phu quân bình thường của hồ ly? Liệu có một ngày, hồ ly kia không còn chống lại số mệnh nữa, chấp nhận làm phu nhân của ma vương? Liệu có một ngày, ma giới kia không còn u ám nữa, để ánh dương chiếu tỏ?Bất kể thế nào, hồ ly cũng tin rằng, dù nàng không còn gì cả, ánh dương vẫn chỉ thuộc về mình nàng mà thôi. Có hồ ly, ánh dương kia càng thêm rực rỡ. Có vầng dương, hồ ly… lần đầu biết yêu…', 0, b'1', b'1', 200, 80, 'NXB Văn học', 20, NULL, 'Hồ ly biết yêu', NULL, 6),
 (3, b'1', 'Vật Lí 9 (Song Ngữ Việt - Anh) Sách giáo khoa Vật lý song ngữ Việt - Anh - Sách giáo khoa song ngữ Việt - Anh Vật lý - Sách giáo khoa Lý song ngữ Việt - Anh - Sách giáo khoa song ngữ Vật lý - Sách giáo khoa song ngữ lý Nhà xuất bản Giáo dục Việt Nam', 0, b'0', b'0', 125, 20, 'NXB Giao dục Việt Nam', 20, NULL, 'Vật lí 9', NULL, 2),
@@ -113,7 +123,7 @@ INSERT INTO `book` (`id`, `active`, `description`, `discount`, `hot_book`, `new_
 (22, b'1', 'Những câu chuyện ẩn dụ về lối sống ở hiền gặp lành của cha ông sẽ đưa các em tới thế giới cổ tích màu nhiệm, nơi điều thiện được trân trọng, cái ác bị trừng phạt; và để lại những bài học ý nghĩa, thú vị, đầy tinh thần hướng thiện.', 0, b'0', b'0', 70, 50, 'NXB Văn học', 20, NULL, 'CỔ TÍCH VIỆT NAM - Ở HIỀN GẶP LÀNH', NULL, 3),
 (25, b'1', 'Ta có thực sự là những cá nhân tự do với bản sắc riêng… hay tất cả chúng ta đều chỉ biết tuân phục số đông? Thiên tài là nhờ dưỡng dục hay tự nhiên? Vô thức điều khiển chúng ta như thế nào? Những câu hỏi như trên chính là tiền đề cho các công trình của nhiều tư tưởng gia và khoa học gia lớn của thế giới, trong một lĩnh vực giàu sức lôi cuốn, đó là tâm lí học.', 0, b'1', b'1', 125, 70, 'NXB Dân Trí', 6, NULL, 'TÂM LÝ HỌC - KHÁI LƯỢC NHỮNG TƯ TƯỞNG LỚN', NULL, 4),
 (24, b'1', 'Giữa vô vàn nỗi đau của chúng ta trong cuộc sống, có một cơn đau trầm lặng nhưng liên lỉ, ảnh hưởng sâu đậm đến tất cả những ai chạm đến nó. Không chỉ kẻ mang nỗi đau này mới là người vác thánh giá mà cả bố mẹ, anh em, bà con, và bạn bè cũng cùng sẻ chia trên đường khổ nạn. Nỗi đau đó, Nguyễn Thị Phương Hoa, một chuyên gia tâm lý và là một người mẹ, đã chia sẻ cùng bạn đọc trong tác phẩm, “Có Một Cơn Đau Mang Tên Trầm Cảm”.', 0, b'0', b'0', 144, 60, 'NXB Văn hóa-Văn nghệ', 8, NULL, 'Có một cơn đau mang tên trầm cảm', NULL, 4),
-(26, b'1', 'Người nhạy cảm được sinh ra với những xúc cảm tinh tế và mãnh liệt hơn người khác: dễ khóc, dễ cười, dễ đồng cảm với người khác, đôi khi thích thu mình, đôi khi lại muốn hòa nhập cùng mọi người, suy nghĩ về nhiều thứ, dễ cảm thấy lạc lõng, chỉ một kích thích nhỏ cũng khiến tinh thần bất ổn…', 11, b'0', b'0', 155, 59, 'NXB Thế giới', 6, NULL, 'NGƯỜI NHẠY CẢM - MÓN QUÀ HAY LỜI NGUYỀN', 0, 4),
+(26, b'1', 'Người nhạy cảm được sinh ra với những xúc cảm tinh tế và mãnh liệt hơn người khác: dễ khóc, dễ cười, dễ đồng cảm với người khác, đôi khi thích thu mình, đôi khi lại muốn hòa nhập cùng mọi người, suy nghĩ về nhiều thứ, dễ cảm thấy lạc lõng, chỉ một kích thích nhỏ cũng khiến tinh thần bất ổn…', 11, b'0', b'0', 155, 59, 'NXB Thế giới', 6, NULL, 'NGƯỜI NHẠY CẢM - MÓN QUÀ HAY LỜI NGUYỀN', NULL, 4),
 (27, b'1', 'Vừa qua, Allan & Barbara Pease đã quay trở lại với quyển sách quan trọng nhất của họ: Tại sao đàn ông thích tình dục và phụ nữ cần tình yêu. Đây là một quyển sách hài hước, dễ đọc. Trong quyển sách này, họ đã tiết lộ một sự thật về hai phái; đồng thời bằng tài năng của mình, họ đã làm cho các kiến thức khoa học trở nên thú vị, lôi cuốn, dễ hiểu, qua đó hướng dẫn chúng ta cách vận dụng những kiến thức ấy để tìm kiếm tình yêu, giải quyết các rắc rối trong chuyện tình cảm và sống hạnh phúc hơn với người bạn đời.', 0, b'1', b'1', 69, 88, 'NXB Tổng hợp TP HCM', 5, NULL, 'TẠI SAO ĐÀN ÔNG THÍCH TÌNH DỤC VÀ PHỤ NỮ CẦN TÌNH YÊU (TÁI BẢN 2019)', NULL, 4),
 (29, b'1', 'Nếu lựa chọn của bạn tìm là một cuốn Sci-fi kinh điển, đây sẽ là cuốn sách dành cho bạn. Đến với cuốn sách này, bạn có thể bắt đầu một hành trình khám phá thế giới đại dương nhiều bí ẩn với thuyền trưởng Nemo và các thủy thủ trên tàu Nautilus.\r\n\r\nTác phẩm được viết bằng giọng văn lôi cuốn, tình tiết hấp dẫn với sự xuất hiện của những sinh vật biển và cuộc phiêu lưu thám hiểm đại dương của các nhân vật chính. Được phát hành lần đầu năm 1869, tác phẩm đến nay vẫn còn nguyên sức hút, đặc biệt là với những người ham tìm tòi về đại dương.\r\n\r\nSách có nhiều phiên bản phát hành tại Việt Nam, bạn đọc có thể tham khảo review hoặc đọc thử trên các trang bán để chọn ra bản dịch ưng ý nhất.', 0, b'0', b'0', 88, 145, 'NXB Văn học', 5, NULL, 'Hai Vạn Dặm Dưới Biển', NULL, 5),
 (28, b'1', 'Trước tuổi trưởng thành, người trẻ nào cũng đi qua một giai đoạn khó khăn, thậm chí là khủng hoảng liên quan đến tình yêu, giới tính, thậm chí cả tình dục. Nhu cầu cần được giải đáp, giải thích về tình yêu, giới tính, tình dục một cách khoa học của người trẻ là chính đáng và cần thiết. Những giải thích thiếu khoa học hoặc chỉ mang tính chất câu khách rẻ tiền trong một xã hội tràn ngập thông tin, cộng thêm việc không hiểu tâm sinh lý của con em từ chính các phụ huynh, nhiều khi đẩy người trẻ đến những bị kịch thương tâm.', 0, b'1', b'1', 72, 79, 'Báo Hoa Học Trò', 4, NULL, 'LÀM SAO ĐỂ SỐNG HẠNH PHÚC?', NULL, 4),
@@ -210,54 +220,54 @@ CREATE TABLE `media` (
 --
 
 INSERT INTO `media` (`id`, `path`, `book_id`) VALUES
-(42, 'CDweb\\1\\Khung-long-co-de-trung-khong.jpg', 42),
-(1, 'CDweb\\1\\Len-nui-cao.jpg', 1),
-(13, 'CDweb\\1\\Nhung-mang-mau-du-lich-vn.png', 13),
-(12, 'CDweb\\1\\Phat-trien-thong-minh-4-tuoi.png', 12),
-(11, 'CDweb\\1\\Phat-trien-thong-minh-5-tuoi.png', 11),
-(10, 'CDweb\\1\\Phat-trien-thong-minh-6-tuoi.png', 10),
-(43, 'CDweb\\2\\150-bai-van-lop-12.jpg', 43),
-(2, 'CDweb\\2\\bo-sach-lop-6.jpg', 2),
-(20, 'CDweb\\2\\cong-nghe-10.jpg', 20),
-(19, 'CDweb\\2\\sinh-hoc-7.jpg', 19),
-(21, 'CDweb\\2\\ap-hat-1.jpg', 21),
-(3, 'CDweb\\2\\vat-li-9.jpg', 3),
-(9, 'CDweb\\3\\andecxen.png', 9),
-(22, 'CDweb\\3\\o-hien-gap-lanh.jpg', 22),
-(8, 'CDweb\\3\\rump.jpg', 8),
-(23, 'CDweb\\3\\su-tich-nui-vang.jpg', 23),
-(44, 'CDweb\\3\\han-thoai-the-gioi.jpg', 44),
-(7, 'CDweb\\3\\truyen-co-tich-vn-hay-nhat-tap-1.jpg', 7),
-(28, 'CDweb\\4\\lam-sao-de-song-hanh-phuc.jpg', 28),
-(24, 'CDweb\\4\\mot-con-dau-mang-ten-tram-cam.jpg', 24),
-(26, 'CDweb\\4\\nguoi-nhay-cam.jpg', 26),
-(27, 'CDweb\\4\\tai-sao-dan-ong-thich.jpg', 27),
-(25, 'CDweb\\4\\tam-li-hoc.jpg', 25),
-(45, 'CDweb\\4\\thuat-doc-tam.jpg', 45),
-(30, 'CDweb\\5\\cuoc-chien-luan-hoi.jpg', 30),
-(46, 'CDweb\\5\\gene_atlantis.jpg', 46),
-(31, 'CDweb\\5\\ke_trom_giac_mo.jpg', 31),
-(32, 'CDweb\\5\\nguoi-may-co-mo-ve-cuu-dien-khong.jpg', 32),
-(33, 'CDweb\\5\\nguoi-minh-hoa.jpg', 33),
-(29, 'CDweb\\5\\sach-hai-van-dam-duoi-day-bien-214x300.gif', 29),
-(47, 'CDweb\\6\\bo-lo-mot-nguoi.jpg', 47),
-(35, 'CDweb\\6\\don-phuong-anh-khong-thương-em.jpg', 35),
-(4, 'CDweb\\6\\ho-ly-biet-yeu.jpg', 4),
-(6, 'CDweb\\6\\khu-vuon-ngon-tu.jpg', 6),
-(5, 'CDweb\\6\\mai-mai-la-bao-xa.jpg', 5),
-(34, 'CDweb\\6\\nghe-noi-anh-muon-chia-tay.jpg', 34),
-(36, 'CDweb\\7\\an-mang-tren-song-nile.jpg', 36),
-(38, 'CDweb\\7\\hoa-nguc.jpg', 38),
-(37, 'CDweb\\7\\Mat_ma_davinci.jpg', 37),
-(39, 'CDweb\\7\\mau_lanh.jpg', 39),
-(41, 'CDweb\\7\\sat-nhan-mang.jpg', 41),
-(40, 'CDweb\\7\\su-im-lang-cua-bay-cuu.jpg', 40),
-(18, 'CDweb\\8\\conan-34.jpg', 18),
-(17, 'CDweb\\8\\conan-74.jpg', 17),
-(16, 'CDweb\\8\\conan-la-thu-thach-dau.jpg', 16),
-(48, 'CDweb\\8\\doraemon-tap-8', 48),
-(14, 'CDweb\\8\\doraemon-tuyen-tap-truyen-mau-ky-thuat-so.jpg', 14),
-(15, 'CDweb\\8\\fujiko-doraemon-tap-11.jpg', 15);
+(18, 'CDweb/8/conan-34.jpg', 18),
+(17, 'CDweb/8/conan-74.jpg', 17),
+(16, 'CDweb/8/conan-la-thu-thach-dau.jpg', 16),
+(48, 'CDweb/8/doraemon-tap-8.jpg', 48),
+(14, 'CDweb/8/doraemon-tuyen-tap-truyen-mau-ky-thuat-so.jpg', 14),
+(15, 'CDweb/8/fujiko-doraemon-tap-11.jpg', 15),
+(36, 'CDweb/7/an-mang-tren-song-nile.jpg', 36),
+(38, 'CDweb/7/hoa-nguc.jpg', 38),
+(37, 'CDweb/7/Mat_ma_davinci.jpg', 37),
+(39, 'CDweb/7/mau_lanh.jpg', 39),
+(41, 'CDweb/7/sat-nhan-mang.jpg', 41),
+(40, 'CDweb/7/su-im-lang-cua-bay-cuu.jpg', 40),
+(12, 'CDweb/1/Phat-trien-thong-minh-4-tuoi.png', 12),
+(11, 'CDweb/1/Phat-trien-thong-minh-5-tuoi.png', 11),
+(10, 'CDweb/1/Phat-trien-thong-minh-6-tuoi.png', 10),
+(43, 'CDweb/2/150-bai-van-lop-12.jpg', 43),
+(2, 'CDweb/2/bo-sach-lop-6.jpg', 2),
+(20, 'CDweb/2/cong-nghe-10.jpg', 20),
+(19, 'CDweb/2/sinh-hoc-7.jpg', 19),
+(21, 'CDweb/2/tap-hat-1.jpg', 21),
+(3, 'CDweb/2/vat-li-9.jpg', 3),
+(9, 'CDweb/3/andecxen.png', 9),
+(22, 'CDweb/3/o-hien-gap-lanh.jpg', 22),
+(8, 'CDweb/3/rump.jpg', 8),
+(23, 'CDweb/3/su-tich-nui-vang.jpg', 23),
+(44, 'CDweb/3/than-thoai-the-gioi.jpg', 44),
+(7, 'CDweb/3/truyen-co-tich-vn-hay-nhat-tap-1.jpg', 7),
+(28, 'CDweb/4/lam-sao-de-song-hanh-phuc.jpg', 28),
+(24, 'CDweb/4/mot-con-dau-mang-ten-tram-cam.jpg', 24),
+(26, 'CDweb/4/nguoi-nhay-cam.jpg', 26),
+(27, 'CDweb/4/tai-sao-dan-ong-thich.jpg', 27),
+(25, 'CDweb/4/tam-li-hoc.jpg', 25),
+(45, 'CDweb/4/thuat-doc-tam.jpg', 45),
+(30, 'CDweb/5/cuoc-chien-luan-hoi.jpg', 30),
+(46, 'CDweb/5/gene_atlantis.jpg', 46),
+(31, 'CDweb/5/ke_trom_giac_mo.jpg', 31),
+(32, 'CDweb/5/nguoi-may-co-mo-ve-cuu-dien-khong.jpg', 32),
+(33, 'CDweb/5/nguoi-minh-hoa.jpg', 33),
+(29, 'CDweb/5/sach-hai-van-dam-duoi-day-bien-214x300.gif', 29),
+(47, 'CDweb/6/bo-lo-mot-nguoi.jpg', 47),
+(35, 'CDweb/6/don-phuong-anh-khong-thuong-em.jpg', 35),
+(4, 'CDweb/6/ho-ly-biet-yeu.jpg', 4),
+(6, 'CDweb/6/khu-vuon-ngon-tu.jpg', 6),
+(5, 'CDweb/6/mai-mai-la-bao-xa.jpg', 5),
+(34, 'CDweb/6/nghe-noi-anh-muon-chia-tay.jpg', 34),
+(42, 'CDweb/1/Khung-long-co-de-trung-khong.jpg', 42),
+(1, 'CDweb/1/Len-nui-cao.jpg', 1),
+(13, 'CDweb/1/Nhung-mang-mau-du-lich-vn.png', 13);
 
 -- --------------------------------------------------------
 
@@ -346,6 +356,13 @@ CREATE TABLE `shopping_cart` (
   `book_id` bigint(20) DEFAULT NULL,
   `user_id` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Đang đổ dữ liệu cho bảng `shopping_cart`
+--
+
+INSERT INTO `shopping_cart` (`id`, `quantity`, `book_id`, `user_id`) VALUES
+(1, 1, 14, 1);
 
 -- --------------------------------------------------------
 
@@ -511,7 +528,7 @@ ALTER TABLE `author`
 -- AUTO_INCREMENT cho bảng `banner`
 --
 ALTER TABLE `banner`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `book`
@@ -565,7 +582,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT cho bảng `shopping_cart`
 --
 ALTER TABLE `shopping_cart`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `user`

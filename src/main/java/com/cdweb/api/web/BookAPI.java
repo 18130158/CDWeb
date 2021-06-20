@@ -50,7 +50,7 @@ public class BookAPI {
             sortable = Sort.by(input.getSortName()).descending();
         }
         Pageable pageable = PageRequest.of(input.getPage() - 1, input.getLimit(), sortable);
-        if (input.getCategory() != 0) {
+        if ( !"null".equalsIgnoreCase(input.getCategory())) {
             bookOutput.setListResult(bookService.findByCategory(input.getCategory(), pageable));
             bookOutput.setPage(input.getPage());
             bookOutput.setTotalPage((int) Math.ceil((double) (bookService.countByCategory(input.getCategory())) / input.getLimit()));

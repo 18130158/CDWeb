@@ -11,7 +11,7 @@
     <title>Sản phẩm</title>
     <meta name="description"/>
     <meta name="keywords"/>
-    <link th:href="@{/web/shop292/files/icon.png}" rel="shortcut icon" type="image/x-icon"/>
+    <link th:href="@{/shop292/files/icon.png}" rel="shortcut icon" type="image/x-icon"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="fb:app_id" content="227481454296289"/>
@@ -49,7 +49,7 @@
     <link th:href="@{/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
 
-    <script th:src="@{/Scripts/twbspagination/twbs-pagination.js}"></script>
+    <script th:src="@{/Scripts/myJS/ajax-san-pham.js}"></script>
 
 </head>
 <body ng-app="appMain" style="">
@@ -82,7 +82,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-
+                    <section class="product-content" style="margin-top: 20px">
+                        <div class="col-sm-7"></div>
+                        <div class="col-sm-5">
+                            <form class="search" th:action="@{/san-pham}" method="get">
+                                <input type="text" placeholder="Search.." name="title" id="search"
+                                       oninput="search_title()">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </section>
                     <section class="product-content clearfix">
                         <h1 class="title clearfix"><span>Sản phẩm</span></h1>
                         <nav class="navbar navbar-default product-filter">
@@ -94,94 +103,28 @@
                             </ul>
                             <div class="limit">
                                 <span>Sản phẩm/trang</span>
-                                <select id="lblimit" name="lblimit" class="nb_item">
-                                    <option value="?limit=10">10</option>
-                                    <option value="?limit=12">12</option>
+                                <select onchange="sortWith()" id="lblimit" name="lblimit" class="nb_item">
+                                    <option value="?limit=8">8</option>
+                                    <option selected="selected" value="?limit=12">12</option>
+                                    <option value="?limit=16">16</option>
                                     <option value="?limit=20">20</option>
-                                    <option value="?limit=50">50</option>
+                                    <option value="?limit=40">40</option>
                                     <option value="?limit=100">100</option>
-                                    <option value="?limit=250">250</option>
-                                    <option value="?limit=500">500</option>
                                 </select>
                             </div>
                             <div class="sort">
                                 <span>Sắp xếp</span>
-                                <select class="selectProductSort" id="lbsort">
-                                    <option selected="selected" value="?sort=index&amp;order=asc">Mặc định</option>
+                                <select class="selectProductSort" id="lbsort" onchange="sortWith()">
+                                    <option selected="selected" value="">Mặc định</option>
                                     <option value="?sort=price&amp;order=asc">Gi&#225; tăng dần</option>
                                     <option value="?sort=price&amp;order=desc">Gi&#225; giảm dần</option>
-                                    <option value="?sort=name&amp;order=asc">T&#234;n sản phẩm: A to Z</option>
-                                    <option value="?sort=name&amp;order=desc">T&#234;n sản phẩm: Z to A</option>
+                                    <option value="?sort=title&amp;order=asc">T&#234;n sản phẩm: A to Z</option>
+                                    <option value="?sort=title&amp;order=desc">T&#234;n sản phẩm: Z to A</option>
                                 </select>
                             </div>
                         </nav>
-                        <div class="product-block product-grid clearfix " id="products">
-
-                            <th:block th:each="book : ${output.getListResult()}">
-                                <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
-                                    <div class="product-item">
-                                        <div class="image image-resize">
-                                            <a th:href="@{/chi-tiet-san-pham/id(id=${book.id})}">
-                                                <img th:src="${book.mediaList[0].path}"
-                                                     style="display: inline-block;height: 252px ">
-                                            </a>
-                                            <span class="hot"
-                                                  th:utext=" ${book.discount}? ${book.getDiscountFormat()}:Mới "></span>
-                                        </div>
-                                        <div class="right-block">
-                                            <h2 class="name">
-                                                <a th:href="@{/chi-tiet-san-pham/id(id=${book.id})}"
-                                                   th:utext="${book.title}"></a>
-                                            </h2>
-                                            <div class="rating">
-                                                <div class="rating-1">
-                                <span class="rating-img">
-                                </span>
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <div><span class="price-old"
-                                                           th:utext="${book.discount}?${book.getPriceFormat()}"></span>
-                                                </div>
-                                                <div><span class="price-new"
-                                                           th:utext="${book.getPriceDiscount()}">
-                                                        </span>
-                                                </div>
-                                            </div>
-                                            <div class="button">
-                                                <a class="btn btn-default btn-add-cart">Mua</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </th:block>
-
-                        </div>
-                        <div class="navigation">
-                            <ul class="pagination" id="pagination"></ul>
-                            <input type="hidden" value="" id="page" name="page"/>
-                            <input type="hidden" value="" id="limit" name="limit"/>
-                            <input type="hidden" th:value="${output.totalPage}" id="totalPage" name="page"/>
-                            <input type="hidden" th:value="${output.getPage}" id="currentPage" name="limit"/>
-                        </div>
-                        <script>
-                            var totalPages = document.getElementById("totalPage").value;
-                            var currentPage = document.getElementById("currentPage").value;
-                            $(function () {
-                                window.pagObj = $('#pagination').twbsPagination({
-                                    totalPages: totalPages,
-                                    visiblePages: 7,
-                                    startPage: currentPage,
-                                    onPageClick: function (event, page) {
-                                        if (currentPage != page) {
-                                            $('#limit').val(2);
-                                            $('#page').val(page);
-                                        }
-                                    }
-                                });
-                            });
-                        </script>
+                        <div class="product-block product-grid clearfix " id="products"></div>
+                        <div class="navigation" id="navigation"></div>
                     </section>
                     <!--Template--
                     --End-->
@@ -241,6 +184,60 @@
             $('#products .item').addClass('grid-group-item');
         });
     });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var currentLocation = window.location;
+        console.log(currentLocation);
+        console.log(currentLocation.search)
+        $.ajax({
+            method: 'GET',
+            url: "danh-sach-san-pham" + currentLocation.search,
+            dataType: 'json',
+            cache: 'false'
+        }).done(function (result) {
+            show(result);
+        });
+    });
+
+
+    function sortWith() {
+        var sortValue = document.getElementById("lbsort").value;
+        var searchValue = window.location.search;
+
+        var limit = document.getElementById("lblimit").value;
+        var sort = sortValue != "" ? "&" + sortValue.substring(1) : "";
+        var search = searchValue != "" ? "&" + searchValue.substring(1) : "";
+        var query = limit + sort + search;
+
+        console.log(query);
+        $.ajax({
+            method: 'GET',
+            url: "danh-sach-san-pham" + query,
+            dataType: 'json',
+            cache: 'false'
+        }).done(function (result) {
+            show(result);
+        });
+    }
+
+
+    function search_title() {
+        var keySearch = document.getElementById("search").value;
+        $.ajax({
+            method: 'get',
+            url: '/autocomplete?title=' + keySearch,
+            dataType: 'json',
+            cache: 'false',
+        }).done(function (list) {
+            $("#search").autocomplete({
+                source: list,
+                disabled: false
+            });
+        });
+    }
+
 </script>
 
 
