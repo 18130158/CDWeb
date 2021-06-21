@@ -18,6 +18,8 @@ public class CategoryEntity  {
     @Column
     private String name;
 
+    @OneToMany(mappedBy = "category")
+    List<BookEntity> bookList=new ArrayList<>();
     //getter,setter
 
 

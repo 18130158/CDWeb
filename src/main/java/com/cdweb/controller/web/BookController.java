@@ -31,10 +31,6 @@ public class BookController {
     private IBookService bookService;
     @Autowired
     private IUserService userService;
-    @Autowired
-    private OrderedItemRepository orderedItemRepository;
-    @Autowired
-    private IShoppingCartService shoppingCartService;
 
     //  ?category=lang-mang&page=1&limit=5&sort=name&order=asc
     @GetMapping("/danh-sach-san-pham")
@@ -111,34 +107,8 @@ public class BookController {
         return bookService.save(bookDTO);
     }
 
-    @GetMapping("/them-san-pham")
-    public List<ShoppingCartDTO> addProduct(@RequestParam(name = "book_id", required = false, defaultValue = "0") Long book_id, Principal principal) {
-        System.out.println(book_id);
-        if (principal == null) {
-            System.out.println("null");
-            return null;
-        }
-        String email = principal.getName();
 
-        return this.shoppingCartService.addProduct(book_id, email);
-    }
 
-    @GetMapping("/shopping-cart")
-    public ModelAndView shoppingCart(Principal principal) {
-        if (principal == null) {
-            return new ModelAndView("dang-nhap.html");
-        }
-        String email = principal.getName();
-        ModelAndView mav = new ModelAndView("gio-hang.html");
-        List<ShoppingCartDTO> cartList = this.shoppingCartService.getProduct(email);
-        double total = 0;
-        for (ShoppingCartDTO cart : cartList) {
-            total += cart.getBook().getPrice() * (1 - cart.getBook().getDiscount() / 100) * cart.getQuantity();
-        }
-        mav.addObject("total", BookDTO.formatPrice(total));
-        mav.addObject("cartlist", cartList);
-        return mav;
-    }
     @GetMapping("/autocomplete")
     public List<String> autoComplete(@RequestParam(name = "title") String title){
         return this.bookService.autoCompleteTitle(title);

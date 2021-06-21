@@ -45,11 +45,12 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
                 cart.setUser(user);
                 cart.setQuantity(1);
             } else {
+                cart.setId(entity.getId());
                 cart.setBook(book);
                 cart.setUser(user);
                 cart.setQuantity(entity.getQuantity() + 1);
             }
-            ShoppingCartEntity test=this.shoppingCartConverter.toEntity(cart);
+            ShoppingCartEntity test = this.shoppingCartConverter.toEntity(cart);
             this.shoppingCartRepository.save(test);
         }
         List<ShoppingCartDTO> cartDTO = new ArrayList<>();
@@ -62,11 +63,29 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
     @Override
     public List<ShoppingCartDTO> getProduct(String email) {
         UserDTO user = this.userService.findByEmail(email);
-        List<ShoppingCartEntity> cartEntities=this.shoppingCartRepository.findAllByUser(user.getId());
-        List<ShoppingCartDTO> cartList=new ArrayList<>();
-        for (ShoppingCartEntity s:cartEntities ) {
+        List<ShoppingCartEntity> cartEntities = this.shoppingCartRepository.findAllByUser(user.getId());
+        List<ShoppingCartDTO> cartList = new ArrayList<>();
+        for (ShoppingCartEntity s : cartEntities) {
             cartList.add(this.shoppingCartConverter.toDTO(s));
         }
         return cartList;
+    }
+
+    @Override
+    public List<ShoppingCartDTO> updateQuantity(long id, int quantity, String name) {
+        UserDTO user = this.userService.findByEmail(name);
+        ShoppingCartEntity cartEntity = this.shoppingCartRepository.findCart(id, user.getId());
+        ShoppingCartDTO cartDTO = new ShoppingCartDTO();
+        if (quantity == 0) {
+            this.shoppingCartRepository.delete(cartEntity);
+            return getProduct(user.getEmail());
+        } else {
+            cartDTO.setId(cartEntity.getId());
+            cartDTO.setBook(this.bookService.findById(id));
+            cartDTO.setUser(user);
+            cartDTO.setQuantity(quantity);
+            this.shoppingCartRepository.save(this.shoppingCartConverter.toEntity(cartDTO));
+            return getProduct(user.getEmail());
+        }
     }
 }

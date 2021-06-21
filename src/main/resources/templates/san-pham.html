@@ -223,20 +223,7 @@
     }
 
 
-    function search_title() {
-        var keySearch = document.getElementById("search").value;
-        $.ajax({
-            method: 'get',
-            url: '/autocomplete?title=' + keySearch,
-            dataType: 'json',
-            cache: 'false',
-        }).done(function (list) {
-            $("#search").autocomplete({
-                source: list,
-                disabled: false
-            });
-        });
-    }
+
 
 </script>
 

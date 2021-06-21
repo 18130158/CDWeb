@@ -36,6 +36,7 @@ public class BookEntity {
     private boolean newBook;
     @Column(columnDefinition = "bit default 0")
     private boolean hotBook;
+
     @ManyToOne
     @JoinColumn(name = "author_id")
     private AuthorEntity author;
@@ -45,7 +46,6 @@ public class BookEntity {
     private CategoryEntity category;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "book")
-
     private List<MediaEntity> mediaList = new ArrayList<>();
 
     public CategoryEntity getCategory() {

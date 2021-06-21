@@ -58,7 +58,7 @@ public class UserService implements IUserService {
 
     @Override
     public UserDTO findByEmail(String email) {
-        UserEntity userEntity = this.userRepository.findByEmail(email);
+        UserEntity userEntity = this.userRepository.findByEmailAndIsEnabled(email,true);
         if (userEntity != null) {
             return this.userConverter.toDTO(userEntity);
         }

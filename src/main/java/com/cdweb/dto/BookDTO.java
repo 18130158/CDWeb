@@ -148,13 +148,13 @@ public class BookDTO {
 
     public String getPriceFormat() {
         DecimalFormat formatter = new DecimalFormat("###,###,###");
-        return formatter.format(this.price) + " VNĐ";
+        return formatter.format(this.price) + " VND";
     }
 
     public String getPriceDiscount() {
         double price = this.price * (1 - this.discount / 100);
         DecimalFormat formatter = new DecimalFormat("###,###,###");
-        return formatter.format(price) + " VNĐ";
+        return formatter.format(price) + " VND";
     }
 
     public String getDiscountFormat() {
@@ -164,7 +164,7 @@ public class BookDTO {
 
     public static String formatPrice(double price) {
         DecimalFormat formatter = new DecimalFormat("###,###,###");
-        return formatter.format(price) + " VNĐ";
+        return formatter.format(price) + " VND";
     }
 
 }

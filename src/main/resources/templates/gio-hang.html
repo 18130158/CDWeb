@@ -11,7 +11,7 @@
     <title>Giỏ h&#224;ng</title>
     <meta name="description"/>
     <meta name="keywords"/>
-    <link th:href="@{/shop292/files/icon.png}" rel="shortcut icon" type="image/x-icon" />
+    <link th:href="@{/shop292/files/icon.png}" rel="shortcut icon" type="image/x-icon"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="fb:app_id" content="227481454296289"/>
@@ -47,9 +47,7 @@
     <script th:src="@{/app/directives/paging.js}"></script>
     <link th:href="@{/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
-
-
-
+    <script th:src="@{/Scripts/myJS/ajax-san-pham.js}"></script>
 
 </head>
 <body ng-app="appMain" style="">
@@ -68,107 +66,51 @@
                     <div class="breadcrumb clearfix">
                         <ul>
                             <li itemtype="http://shema.org/Breadcrumb" itemscope="" class="home">
-                                <a title="Đến trang chủ" th:href="@{/}" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                                <a title="Đến trang chủ" th:href="@{/}" itemprop="url"><span
+                                        itemprop="title">Trang chủ</span></a>
                             </li>
                             <li class="icon-li"><strong>Giỏ hàng</strong></li>
                         </ul>
                     </div>
                     <div class="cart-content">
                         <h1><span>Giỏ hàng của tôi</span></h1>
-                        <div class="steps clearfix">
-                            <ul class="clearfix">
-                                <li class="cart active col-md-2 col-xs-12 col-sm-4 col-md-offset-3 col-sm-offset-0 col-xs-offset-0">
-                                    <span><i
-                                            class="glyphicon glyphicon-shopping-cart"></i></span><span>Giỏ hàng của tôi</span><span
-                                        class="step-number"><a>1</a></span></li>
-                                <li class="payment col-md-2 col-xs-12 col-sm-4"><span><i
-                                        class="glyphicon glyphicon-usd"></i></span><span>Thanh toán</span><span
-                                        class="step-number"><a>2</a></span></li>
-                                <li class="finish col-md-2 col-xs-12 col-sm-4"><span><i
-                                        class="glyphicon glyphicon-ok"></i></span><span>Hoàn tất</span><span
-                                        class="step-number"><a>3</a></span></li>
-                            </ul>
-                        </div>
-                        <div class="cart-block">
-                            <div class="cart-info table-responsive">
-                                <table class="table product-list">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Giá</th>
-                                        <th>Số lượng</th>
-                                        <th>Thành tiền</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-
-                                    <th:block th:each="item:${cartlist}">
+                        <form action="">
+                            <div class="cart-block">
+                                <div class="cart-info table-responsive">
+                                    <table class="table product-list">
+                                        <thead>
                                         <tr>
-                                            <td><input type="checkbox" id="check" name="check"></td>
-                                            <td class="image">
-                                                <a th:href="@{/chi-tiet-san-pham/id(id=${item.book.id})}"> <img
-                                                        th:src="${item.book.mediaList[0].path}" class="img-responsive"/></a>
-                                            </td>
-                                            <td class="des">
-                                                <h2>
-                                                    <a th:href="@{/chi-tiet-san-pham/id(id=${item.book.id})}" th:utext="${item.book.title}"></a>
-                                                </h2>
-<!--                                                <span>{{item.VariantName}}</span>-->
-                                            </td>
-                                            <td class="price">
-                                                <div><span class="price-old" style="text-decoration-line: line-through"
-                                                           th:utext="${item.book.discount}?${item.book.getPriceFormat()}"></span>
-                                                </div>
-                                                <div><span class="price-new"
-                                                           th:utext="${item.book.getPriceDiscount()}">
-                                                        </span>
-                                                </div>
-                                            </td>
-                                            <td class="quantity">
-                                                <input style="margin-bottom: 0px" type="number" th:value="${item.quantity}" class="text"/>
-                                            </td>
-                                            <td class="amount" th:utext="${item.getTotal}">
-
-                                            </td>
-                                            <td class="remove">
-                                                <a>
-                                                    <i class="glyphicon glyphicon-trash"></i>
-                                                </a>
-                                            </td>
+                                            <th></th>
+                                            <th></th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Thành tiền</th>
+                                            <th></th>
                                         </tr>
-
-                                    </th:block>
-
-
-
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody id="items">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="clearfix text-right" style=" padding: 15px;  font-size: 20px;">
+                                    <span><b>Tổng thanh toán:</b></span>
+                                    <span class="pay-price" id="total-price"></span>
+                                </div>
+                                <input type="hidden" value="" id="total">
+                                <div class="button text-right">
+                                    <a class="btn btn-default" th:href="@{/san-pham}">Tiếp tục
+                                        mua hàng</a>
+                                    <a class="btn btn-primary button-submit" type="submit" href="thanh-toan.html">Tiến
+                                        hành thanh toán</a>
+                                </div>
                             </div>
-                            <div class="clearfix text-right">
-                                <span><b>Tổng thanh toán:</b></span>
-                                <span class="pay-price" th:utext="${total}">
-
-                            </span>
-                            </div>
-                            <div class="button text-right">
-                                <a class="btn btn-default" href="index.html" >Tiếp tục
-                                    mua hàng</a>
-                                <a class="btn btn-primary" href="thanh-toan.html">Tiến hành thanh toán</a>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
     <th:block th:include="/_footer"></th:block>
 
     <script type="text/javascript">
@@ -207,5 +149,107 @@
             threshold: 200
         });
     });
+
+
+    $(document).ready(function () {
+        $.ajax({
+            method: "get",
+            url: "cart-item",
+            dataType: "json",
+            cache: "false"
+        }).done(function (result) {
+            showCart(result)
+        });
+    });
+
+    function showCart(result) {
+        var str = "";
+        for (let item of result.list) {
+            str += " <tr>";
+            str += "      <td><input type='checkbox' id='check" + item.book.id + "' name='check' onclick='setTotalPrice(" + item.book.id + "," + item.book.price + "," + item.book.discount + "," + item.quantity + ")' checked></td>"
+            str += "     <td class='image'>";
+            str += "       <a href='/chi-tiet-san-pham?id=" + item.book.id + "'> ";
+            str += "  <img   src='" + item.book.mediaList[0].path + "' class='img-responsive'/></a>";
+            str += "   </td>";
+            str += "   <td class='des'>";
+            str += "     <h2>";
+            str += "       <a href='/chi-tiet-san-pham?id=" + item.book.id + "'>";
+            str += "    </a>" + item.book.title;
+            str += "  </h2>";
+            str += "  </td>";
+            str += "  <td class='price'>";
+            str += "   <div><span class='price-old' style='text-decoration-line: line-through'>"
+            str += item.book.discount ? formatPrice(item.book.price) : "" + "</span>";
+            str += " </div>";
+            str += " <div><span class='price-new'>";
+            str += item.book.priceDiscount + "</span>";
+            str += "     </div>";
+            str += "  </td>";
+            str += "  <td class='quantity'>";
+            str += "  <input style='margin-bottom: 0px' type='number' class='text' id='quantity" + item.book.id + "' onchange='quantityChange(" + item.book.id + ")' value='" + item.quantity + "'/>";
+            str += "</td>";
+            str += " <td class='amount'>" + item.total;
+            str += "  </td>";
+            str += "   <td class='remove'>";
+            str += "    <a>";
+            str += "      <i class='glyphicon glyphicon-trash' onclick='deleteItem("+item.book.id+")'></i>";
+            str += "    </a>";
+            str += "   </td>";
+            str += " </tr>";
+        }
+
+        $('#items').html(str);
+        $('#total-price').html(formatPrice(result.total));
+        $('#total').val(result.total);
+
+    }
+
+    function setTotalPrice(id, price, discount, quantity) {
+        var total = document.getElementById("total").value;
+        total = Number(total);
+        var price = Number(price);
+        var discount = Number(discount);
+        var quantity = Number(quantity);
+        var checkBox = document.getElementById("check" + id);
+        if (checkBox.checked) {
+            total = total + quantity * price * (1 - discount / 100);
+        } else {
+            total = total - quantity * price * (1 - discount / 100);
+        }
+        $('#total-price').html(formatPrice(total));
+        $('#total').val(total);
+    }
+
+    function quantityChange(id) {
+        var quantity = document.getElementById("quantity" + id).value;
+        if (quantity == 0) {
+            $('#quantity' + id).val(1);
+        } else {
+            $.ajax({
+                method: "get",
+                url: "update-quantity",
+                data: {
+                    id: id,
+                    quantity: quantity
+                }
+            }).done(function (rs) {
+                showCart(rs);
+            });
+        }
+    }
+    function deleteItem(id) {
+
+
+            $.ajax({
+                method: "get",
+                url: "update-quantity",
+                data: {
+                    id: id,
+                    quantity: 0
+                }
+            }).done(function (rs) {
+                showCart(rs);
+            });
+    }
 </script>
 

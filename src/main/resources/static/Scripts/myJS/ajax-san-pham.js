@@ -1,9 +1,11 @@
 function movePage(page) {
+
+    var searchValue = window.location.search;
     $.ajax({
-        method:"get",
-        url:"danh-sach-san-pham?page="+page,
+        method: "get",
+        url: "danh-sach-san-pham?page=" + page + "&" + searchValue.substring(1),
         dataType: "json",
-        cache:"false"
+        cache: "false"
     }).done(function (result) {
         show(result);
     });
@@ -49,6 +51,9 @@ function showProduct(list) {
         str += "</div>";
         str += "  <div class='button'>";
         str += " <a class='btn btn-default btn-add-cart'>Mua</a>";
+        str += "  <a class='btn btn-default btn-add-cart'";
+        str += "onclick=' addCart(" + book.id + ")' >Thêm giỏ hàng</a>";
+        str += "</div>";
         str += " </div>";
         str += "</div>";
         str += "</div>";
@@ -56,6 +61,7 @@ function showProduct(list) {
     }
     return str;
 }
+
 
 function pagination(total, page) {
     var str = "";
@@ -70,10 +76,10 @@ function pagination(total, page) {
         str += " </li>";
     } else {
         str += "<li class='page-item first'>";
-        str += " <a href='#' class='page-link' id='first-page' onclick='movePage("+1+")'>Trang đầu</a>"
+        str += " <a href='#' class='page-link' id='first-page' onclick='movePage(" + 1 + ")'>Trang đầu</a>"
         str += "</li>";
         str += " <li class='page-item prev'>";
-        str += "    <a href='#' class='page-link' onclick='movePage("+(page-1)+")'>&lt;&lt;</a>";
+        str += "    <a href='#' class='page-link' onclick='movePage(" + (page - 1) + ")'>&lt;&lt;</a>";
         str += " </li>";
     }
 
@@ -84,7 +90,7 @@ function pagination(total, page) {
             str += " </li>";
         } else {
             str += "<li class='page-item '>";
-            str += " <a href='#' class='page-link' onclick='movePage("+i+")'>" + i + "</a>";
+            str += " <a href='#' class='page-link' onclick='movePage(" + i + ")'>" + i + "</a>";
             str += " </li>";
         }
 
@@ -100,14 +106,53 @@ function pagination(total, page) {
     } else {
 
         str += " <li class='page-item prev'>";
-        str += "    <a href='#' class='page-link' onclick='movePage("+(page+1)+")'>&gt;&gt;</a>";
+        str += "    <a href='#' class='page-link' onclick='movePage(" + (page + 1) + ")'>&gt;&gt;</a>";
         str += " </li>";
 
         str += "   <li class='page-item last'>";
-        str += " <a href='#' class='page-link' id='first-page' onclick='movePage("+total+")'>Trang cuối</a>"
+        str += " <a href='#' class='page-link' id='first-page' onclick='movePage(" + total + ")'>Trang cuối</a>"
         str += "</li>";
     }
 
     str += "</ul>";
     return str;
+}
+
+function addCart(book_id) {
+    $.ajax({
+        method: 'get',
+        url: 'them-san-pham',
+        dataType: 'json',
+        cache: 'false',
+        data: {
+            book_id: book_id
+        }
+    }).done(function (list) {
+        console.log(list);
+        if (list == null) {
+            window.location = "http://localhost:8080/dang-nhap";
+        } else {
+            alert("Sản phẩm đã được thêm vào giỏ hàng!");
+        }
+    });
+}
+
+
+function search_title() {
+    var keySearch = document.getElementById("search").value;
+    $.ajax({
+        method: 'get',
+        url: '/autocomplete?title=' + keySearch,
+        dataType: 'json',
+        cache: 'false',
+    }).done(function (list) {
+        $("#search").autocomplete({
+            source: list
+        });
+    });
+}
+
+function formatPrice(price) {
+    price = price.toLocaleString('it-IT', {style: 'currency', currency: 'VND'});
+    return price;
 }

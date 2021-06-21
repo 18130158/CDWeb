@@ -46,6 +46,8 @@
     <script th:src="@{/app/directives/paging.js}"></script>
     <link th:href="@{/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/Scripts/myJS/ajax-san-pham.js}"></script>
+
 </head>
 <body ng-app="appMain" style="">
 <div id="fb-root"></div>
@@ -236,12 +238,12 @@
                             </th:block>
                         </div>
                         <div class="text-center ">
-                            <a class="btn btn-default button-see-more" th:href="@{/san-pham/hot(hot=true)}">Xem thêm</a>
+                            <a class="btn btn-default button-see-more" th:href="@{/san-pham(hot=true)}">Xem thêm</a>
                         </div>
                     </section>
-                    <section class="product-content clearfix" id="product-new">
+                    <section class="product-content clearfix" >
                         <h1 class="title clearfix"><span>Sản phẩm MỚI</span></h1>
-                        <div class="product-block product-grid clearfix">
+                        <div class="product-block product-grid clearfix" id="product-new">
                             <th:block th:each="book : ${newlist}">
                                 <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
                                     <div class="product-item">
@@ -285,7 +287,7 @@
                             </th:block>
                         </div>
                         <div class="text-center ">
-                            <a class="btn btn-default button-see-more" th:href="@{/san-pham/new(new=true)}">Xem thêm</a>
+                            <a class="btn btn-default button-see-more" th:href="@{/san-pham(new=true)}">Xem thêm</a>
                         </div>
                     </section>
 
@@ -319,45 +321,11 @@
             threshold: 200
         });
     });
-</script>
-<script type="text/javascript">
-    function addCart(book_id) {
-        $.ajax({
-            method: 'get',
-            url: 'them-san-pham',
-            dataType: 'json',
-            cache: 'false',
-            data: {
-                book_id: book_id
-            }
-        }).done(function (list) {
-            console.log(list);
-            if (list == null) {
-                window.location = "http://localhost:8080/dang-nhap";
-                // location.replace( "");
-            } else {
-                alert("Hello! I am an alert box!");
-            }
-        });
-    }
-
-
-    function search_title() {
-        var keySearch = document.getElementById("search").value;
-        $.ajax({
-            method: 'get',
-            url: '/autocomplete?title=' + keySearch,
-            dataType: 'json',
-            cache: 'false',
-        }).done(function (list) {
-            $("#search").autocomplete({
-                source: list
-            });
-        });
-    }
-
 
 </script>
+
+
+
 
 </html>
 

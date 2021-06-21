@@ -2965,9 +2965,6 @@ End CSS structure reset Bootstrap
     width: auto;
 }
 
-.cart-content .cart-block table.product-list tbody .des {
-    color: #aaaaaa;
-}
 
 .cart-content .cart-block table.product-list tbody .des h2 a {
     color: #3c3f44;

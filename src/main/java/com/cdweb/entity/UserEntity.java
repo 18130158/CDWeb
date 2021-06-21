@@ -34,6 +34,7 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<RoleEntity> roleList = new ArrayList<>();
 
+
     public Long getId() {
         return id;
     }
