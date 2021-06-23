@@ -98,9 +98,25 @@ public class BookController {
     }
 
     @GetMapping("/chi-tiet-san-pham")
-    public BookDTO bookDetail(@RequestParam(name = "book_id") Long id) {
+    public ModelAndView bookDetailPage(Principal principal)
+    {
+        ModelAndView mav = new ModelAndView("chi-tiet-san-pham.html");
+        UserDTO userDTO;
+        if (principal != null) {
+            userDTO = this.userService.findByEmail(principal.getName());
+        } else {
+            userDTO = null;
+        }
+        mav.addObject("user", userDTO);
+        return mav;
+    }
+
+
+    @GetMapping("/thong-tin-san-pham")
+    public BookDTO bookDetailProduct(@RequestParam(name = "id") Long id) {
         return bookService.findById(id);
     }
+
 
     @PostMapping(value = "/save-book")
     public BookDTO createBook(@RequestBody BookDTO bookDTO) {

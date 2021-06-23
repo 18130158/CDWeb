@@ -124,7 +124,7 @@
                                         <div class="product-item-box  ">
                                             <div class="product-item">
                                                 <div class="image image-resize">
-                                                    <a th:href="@{/chi-tiet-san-pham/id(id=${book.id})}">
+                                                    <a th:href="@{/chi-tiet-san-pham(id=${book.id})}">
                                                         <img class="img-responsive" style="height: 152px"
                                                              th:src="${book.mediaList[0].path}"/>
                                                     </a>
@@ -133,7 +133,7 @@
                                                 </div>
                                                 <div class="right-block">
                                                     <h2 class="name">
-                                                        <a th:href="@{/chi-tiet-san-pham/id(id=${book.id})}"
+                                                        <a th:href="@{/chi-tiet-san-pham(id=${book.id})}"
                                                            th:utext="${book.title}"></a>
                                                     </h2>
                                                     <div class="rating">
@@ -199,7 +199,7 @@
                                 <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
                                     <div class="product-item">
                                         <div class="image image-resize">
-                                            <a th:href="@{/chi-tiet-san-pham/id(id=${book.id})}">
+                                            <a th:href="@{/chi-tiet-san-pham(id=${book.id})}">
                                                 <img th:src="${book.mediaList[0].path}"
                                                      style="display: inline-block;height: 252px ">
                                             </a>
@@ -208,7 +208,7 @@
                                         </div>
                                         <div class="right-block">
                                             <h2 class="name">
-                                                <a th:href="@{/chi-tiet-san-pham/id(id=${book.id})}"
+                                                <a th:href="@{/chi-tiet-san-pham(id=${book.id})}"
                                                    th:utext="${book.title}"></a>
                                             </h2>
                                             <div class="rating">
@@ -248,7 +248,7 @@
                                 <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
                                     <div class="product-item">
                                         <div class="image image-resize">
-                                            <a th:href="@{/chi-tiet-san-pham/id(id=${book.id})}">
+                                            <a th:href="@{/chi-tiet-san-pham(id=${book.id})}">
                                                 <img th:src="${book.mediaList[0].path}"
                                                      style="display: inline-block;height: 252px ">
                                             </a>
@@ -257,7 +257,7 @@
                                         </div>
                                         <div class="right-block">
                                             <h2 class="name">
-                                                <a th:href="@{/chi-tiet-san-pham/id(id=${book.id})}"
+                                                <a th:href="@{/chi-tiet-san-pham(id=${book.id})}"
                                                    th:utext="${book.title}"></a>
                                             </h2>
                                             <div class="rating">
