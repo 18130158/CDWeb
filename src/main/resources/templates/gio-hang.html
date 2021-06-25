@@ -74,7 +74,7 @@
                     </div>
                     <div class="cart-content">
                         <h1><span>Giỏ hàng của tôi</span></h1>
-                        <form action="">
+                        <form th:action="@{/thanh-toan}" method="post" th:object="${orderedInput}">
                             <div class="cart-block">
                                 <div class="cart-info table-responsive">
                                     <table class="table product-list">
@@ -101,8 +101,7 @@
                                 <div class="button text-right">
                                     <a class="btn btn-default" th:href="@{/san-pham}">Tiếp tục
                                         mua hàng</a>
-                                    <a class="btn btn-primary button-submit" type="submit" href="thanh-toan.html">Tiến
-                                        hành thanh toán</a>
+                                    <button class="btn btn-primary button-submit" type="submit">Thanh toán</button>
                                 </div>
                             </div>
                         </form>
@@ -166,7 +165,7 @@
         var str = "";
         for (let item of result.list) {
             str += " <tr>";
-            str += "      <td><input type='checkbox' id='check" + item.book.id + "' name='check' onclick='setTotalPrice(" + item.book.id + "," + item.book.price + "," + item.book.discount + "," + item.quantity + ")' checked></td>"
+            str += "      <td><input type='checkbox' id='check" + item.book.id + "' name='carts' field='carts' value='" + item.id + "' onclick='setTotalPrice(" + item.book.id + "," + item.book.price + "," + item.book.discount + "," + item.quantity + ")' checked></td>"
             str += "     <td class='image'>";
             str += "       <a href='/chi-tiet-san-pham?id=" + item.book.id + "'> ";
             str += "  <img   src='" + item.book.mediaList[0].path + "' class='img-responsive'/></a>";
@@ -192,7 +191,7 @@
             str += "  </td>";
             str += "   <td class='remove'>";
             str += "    <a>";
-            str += "      <i class='glyphicon glyphicon-trash' onclick='deleteItem("+item.book.id+")'></i>";
+            str += "      <i class='glyphicon glyphicon-trash' onclick='deleteItem(" + item.book.id + ")'></i>";
             str += "    </a>";
             str += "   </td>";
             str += " </tr>";
@@ -222,12 +221,18 @@
 
     function quantityChange(id) {
         var quantity = document.getElementById("quantity" + id).value;
-        if (quantity == 0) {
+
+        if (quantity >= 10) {
+            quantity = 10;
+        }
+        if (quantity <= 0) {
             $('#quantity' + id).val(1);
         } else {
             $.ajax({
                 method: "get",
                 url: "update-quantity",
+                dataType: 'json',
+                cache: 'false',
                 data: {
                     id: id,
                     quantity: quantity
@@ -237,19 +242,43 @@
             });
         }
     }
+
     function deleteItem(id) {
 
 
-            $.ajax({
-                method: "get",
-                url: "update-quantity",
-                data: {
-                    id: id,
-                    quantity: 0
-                }
-            }).done(function (rs) {
-                showCart(rs);
-            });
+        $.ajax({
+            method: "get",
+            url: "update-quantity",
+            dataType: 'json',
+            cache: 'false',
+            data: {
+                id: id,
+                quantity: 0
+            }
+        }).done(function (rs) {
+            showCart(rs);
+        });
     }
+
+    function payment() {
+        var check = document.getElementsByName("check");
+        var list = new Array();
+        if (check[i].checked === true) {
+            list.push(check[i].value);
+        }
+        console.log(list);
+        $.ajax({
+            method: "post",
+            url:"thanh-toan",
+            dataType: 'json',
+            cache: 'false',
+            data:{
+                list:list
+            }
+        }).done(function () {
+            // window.location="http://localhost:8080/thanh-toan";
+        });
+    }
+
 </script>
 

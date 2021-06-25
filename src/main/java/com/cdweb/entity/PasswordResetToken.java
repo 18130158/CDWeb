@@ -5,31 +5,32 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "confirmation_token", uniqueConstraints = { //
-        @UniqueConstraint(name = "CT_UK", columnNames = "confirmation_token")})
-public class ConfirmationToken {
+public class PasswordResetToken {
+    private static final int EXPIRATION = 60 * 24;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "token_id")
     private long tokenid;
 
-    @Column(name = "confirmation_token")
-    private String confirmationToken;
+    @Column(name = "token")
+    private String token;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 
-    @OneToOne(targetEntity = UserEntity.class, fetch = FetchType.EAGER)
+    @OneToOne( fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
     private UserEntity user;
 
-    public ConfirmationToken() {
-    }
-
-    public ConfirmationToken(UserEntity user) {
+    public PasswordResetToken(UserEntity user) {
         this.user = user;
         createdDate = new Date();
-        confirmationToken = UUID.randomUUID().toString();
+        token = UUID.randomUUID().toString();
+    }
+
+    public PasswordResetToken() {
     }
 
     public long getTokenid() {
@@ -40,12 +41,12 @@ public class ConfirmationToken {
         this.tokenid = tokenid;
     }
 
-    public String getConfirmationToken() {
-        return confirmationToken;
+    public String getToken() {
+        return token;
     }
 
-    public void setConfirmationToken(String confirmationToken) {
-        this.confirmationToken = confirmationToken;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public Date getCreatedDate() {

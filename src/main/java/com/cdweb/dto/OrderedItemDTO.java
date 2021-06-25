@@ -2,10 +2,10 @@ package com.cdweb.dto;
 
 public class OrderedItemDTO   {
     private Long id;
-    private OrderedDTO orderedDTO;
-    private BookDTO bookDTO;
+    private OrderedDTO ordered;
+    private BookDTO book;
     private Long quantity;
-    private Long totalPrice;
+    private double totalPrice;
 
     public OrderedItemDTO() {
     }
@@ -18,20 +18,20 @@ public class OrderedItemDTO   {
         this.id = id;
     }
 
-    public OrderedDTO getOrderedDTO() {
-        return orderedDTO;
+    public OrderedDTO getOrdered() {
+        return ordered;
     }
 
-    public void setOrderedDTO(OrderedDTO orderedDTO) {
-        this.orderedDTO = orderedDTO;
+    public void setOrdered(OrderedDTO ordered) {
+        this.ordered = ordered;
     }
 
-    public BookDTO getBookDTO() {
-        return bookDTO;
+    public BookDTO getBook() {
+        return book;
     }
 
-    public void setBookDTO(BookDTO bookDTO) {
-        this.bookDTO = bookDTO;
+    public void setBook(BookDTO book) {
+        this.book = book;
     }
 
     public Long getQuantity() {
@@ -42,11 +42,11 @@ public class OrderedItemDTO   {
         this.quantity = quantity;
     }
 
-    public Long getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Long totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 }

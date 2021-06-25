@@ -27,18 +27,7 @@ public class BannerServiceImpl implements IBannerService {
         return results;
     }
 
-    @Override
-    public BannerDTO save(BannerDTO bannerDTO) {
-        return null;
-    }
 
-    @Override
-    public BannerDTO update(BannerDTO bannerDTO) {
-        return null;
-    }
 
-    @Override
-    public void delete(long[] ids) {
 
-    }
 }

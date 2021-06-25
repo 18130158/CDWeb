@@ -5,12 +5,15 @@ import com.cdweb.converter.UserConverter;
 import com.cdweb.dto.RoleDTO;
 import com.cdweb.dto.UserDTO;
 import com.cdweb.entity.ConfirmationToken;
+import com.cdweb.entity.PasswordResetToken;
 import com.cdweb.entity.RoleEntity;
 import com.cdweb.entity.UserEntity;
 import com.cdweb.repository.ConfirmationTokenRepository;
+import com.cdweb.repository.PasswordResetTokenRepository;
 import com.cdweb.repository.RoleRepository;
 import com.cdweb.repository.UserRepository;
 import com.cdweb.service.IUserService;
+import com.cdweb.utils.EncrytedPasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,30 +38,13 @@ public class UserService implements IUserService {
     private RoleRepository roleRepository;
     @Autowired
     private RoleConverter roleConverter;
+    @Autowired
+    private PasswordResetTokenRepository passwordTokenRepository;
 
-    @Override
-    public List<UserDTO> findAll() {
-        return null;
-    }
-
-    @Override
-    public UserDTO save(UserDTO userDTO) {
-        UserEntity user = this.userRepository.findByEmail(userDTO.getEmail());
-        return null;
-    }
-
-    @Override
-    public UserDTO update(UserDTO userDTO) {
-        return null;
-    }
-
-    @Override
-    public void delete(long[] ids) {
-    }
 
     @Override
     public UserDTO findByEmail(String email) {
-        UserEntity userEntity = this.userRepository.findByEmailAndIsEnabled(email,true);
+        UserEntity userEntity = this.userRepository.findByEmailAndIsEnabled(email, true);
         if (userEntity != null) {
             return this.userConverter.toDTO(userEntity);
         }
@@ -76,7 +62,7 @@ public class UserService implements IUserService {
             RoleEntity role = roleRepository.findByName("ROLE_USER");
             list.add(roleConverter.toDTO(role));
             user.setRoleList(list);
-            userEntity = userRepository.save( this.userConverter.toEntity(user));
+            userEntity = userRepository.save(this.userConverter.toEntity(user));
 
             ConfirmationToken confirmationToken = new ConfirmationToken(userEntity);
 
@@ -105,5 +91,50 @@ public class UserService implements IUserService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public UserDTO sendMailForgetPassword(String email) {
+        UserEntity user = this.userRepository.findByEmail(email);
+        PasswordResetToken passwordResetToken = new PasswordResetToken(user);
+        this.passwordTokenRepository.save(passwordResetToken);
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(user.getEmail());
+        mailMessage.setSubject("Forget Password!");
+        mailMessage.setFrom("bookstore@gmail.com");
+        mailMessage.setText("To change your password, please click here : "
+                + "http://localhost:8080/forget-password?token=" + passwordResetToken.getToken());
+        emailSenderService.sendEmail(mailMessage);
+        return userConverter.toDTO(user);
+    }
+
+    @Override
+    public UserDTO confirmEmailForgetPassword(String token) {
+        PasswordResetToken passwordResetToken = this.passwordTokenRepository.findByToken(token);
+        if (passwordResetToken != null) {
+            return userConverter.toDTO(passwordResetToken.getUser());
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public UserDTO changePassword(UserDTO user) {
+        UserEntity userEntity = this.userRepository.findByEmailAndIsEnabled(user.getEmail(), true);
+        UserDTO userDTO = new UserDTO();
+        userDTO = this.userConverter.toDTO(userEntity);
+        userDTO.setPassword(encoder.encode(user.getPassword()));
+        userEntity = this.userRepository.save(this.userConverter.toEntity(userDTO));
+        if (userEntity != null) {
+            PasswordResetToken passwordResetToken = this.passwordTokenRepository.findByUser(userEntity);
+            this.passwordTokenRepository.delete(passwordResetToken);
+        }
+        return this.userConverter.toDTO(userEntity);
+    }
+
+    @Override
+    public boolean checkPass(String password, String email) {
+        UserEntity userEntity = this.userRepository.findByEmail(email);
+        return encoder.matches(userEntity.getPassword(), password);
     }
 }

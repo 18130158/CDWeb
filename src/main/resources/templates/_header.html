@@ -9,63 +9,9 @@
                     <ul class="nav navbar-nav topmenu-contact pull-left">
                         <li><i class="fa fa-phone"></i> <span>Hotline:0989.250 270</span></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right topmenu  hidden-xs hidden-sm">
-                        <li class="order-check"><a href="kiem-tra-don-hang.html"><i
-                                class="fa fa-pencil-square-o"></i> Kiểm tra đơn hàng</a></li>
-
-                        <li class="order-cart"><a th:href="@{/shopping-cart}"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>
-                        </li>
-                        <th:block th:if="${user}">
-
-
-
-                            <li class="account-login"><a th:href="@{/thong-tin-khach-hang/id(id=${user.id})}">Xin chào,
-                                <i class=""
-                                   th:utext="${user.fullName}"></i>
-                            </a>
-                            </li>
-                            <li class="account-login"><a th:href="@{/dang-xuat}"><i class="fa fa-sign-in"></i></a>
-                        </th:block>
-
-                        <th:block th:unless="${user}">
-                            <li class="account-login"><a th:href="@{/dang-nhap}"><i class="fa fa-sign-in"></i> Đăng nhập
-                            </a></li>
-                            <li class="account-register"><a th:href="@{/dang-ki}"><i class="fa fa-key"></i> Đăng ký </a>
-                            </li>
-                        </th:block>
+                    <ul class="nav navbar-nav navbar-right topmenu  hidden-xs hidden-sm" id="header">
 
                     </ul>
-                    <div class="show-mobile hidden-lg hidden-md">
-                        <div class="quick-user">
-                            <div class="quickaccess-toggle">
-                                <i class="fa fa-user"></i>
-                            </div>
-                            <div class="inner-toggle">
-                                <ul class="login links">
-                                    <li>
-                                        <a th:href="@{/dang-ki}"><i class="fa fa-sign-in"></i> Đăng ký</a>
-                                    </li>
-                                    <li>
-                                        <a th:href="@{/dang-nhap}"><i class="fa fa-key"></i> Đăng nhập</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="quick-access">
-                            <div class="quickaccess-toggle">
-                                <i class="fa fa-list"></i>
-                            </div>
-                            <div class="inner-toggle">
-                                <ul class="links">
-                                    <li><a id="mobile-wishlist-total" th:href="@{/kiem-tra-don-hang}"
-                                           class="wishlist"><i class="fa fa-pencil-square-o"></i> Kiểm tra đơn hàng</a>
-                                    </li>
-                                    <li><a th:href="@{/gio-hang}" class="s  hoppingcart"><i
-                                            class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -126,6 +72,54 @@
     </section>
     <script type="text/javascript">
         $(document).ready(function () {
+            $.ajax(
+                {
+                    method: 'get',
+                    url: 'user',
+                    dataType: 'json',
+                    cache: 'false'
+                }
+            ).done(function (user) {
+                var str = "";
+                str += " <li class='order-check'>";
+                str += "<a href='/kiem-tra-don-hang'>";
+                str += "<i class='fa fa-pencil-square-o'></i> Kiểm tra đơn hàng</a>"
+                str += "</li>";
+
+                str += "   <li class='order-cart'>";
+                str += "    <a href='/gio-hang'>";
+                str += "       <i class='fa fa-shopping-cart'></i> Giỏ hàng";
+                str += " </a>";
+                str += " </li>";
+                if (user) {
+                    str += "<li class='account-login'>";
+                    str += "  <a href='/thong-tin-ca-nhan'>Xin chào,<i>" + user.fullName + "</i></a>";
+                    str += " </li>";
+                    str += " <li class='account-login'>";
+                    str += "   <a href='/dang-xuat'>";
+                    str += "     <i class='fa fa-sign-in'></i>";
+                    str += "  </a>";
+                    str += "</li>";
+                } else {
+                    str += "    <li class='account-login'>";
+                    str += "     <a href='/dang-nhap'>";
+                    str += "      <i class='fa fa-sign-in'></i> Đăng nhập";
+
+                    str += "  </a>";
+                    str += "</li>";
+                    str += "   <li class='account-register'>";
+                    str += "      <a href='/dang-ki'>";
+                    str += "    <i class='fa fa-key'></i> Đăng ký";
+
+                    str += "   </a>";
+                    str += " </li>";
+
+                }
+                $('#header').html(str);
+            });
+        });
+
+        $(document).ready(function () {
             //dòng này minh dùng để load data
             loadData();
         });
@@ -148,7 +142,6 @@
                 }
             });
         }
-
 
 
     </script>

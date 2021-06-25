@@ -33,13 +33,5 @@ public class CategoryServiceImpl implements ICategoryService {
         return this.categoryConverter.toDTO(categoryRepository.save(this.categoryConverter.toEntity(categoryDTO)));
     }
 
-    @Override
-    public CategoryDTO update(CategoryDTO categoryDTO) {
-        return null;
-    }
 
-    @Override
-    public void delete(long[] ids) {
-
-    }
 }

@@ -1,7 +1,9 @@
 package com.cdweb.service;
 
+import com.cdweb.dto.OrderedItemDTO;
+
 import java.security.Principal;
 
 public interface IOrderItemService {
-    public int addProduct(long id, Principal principal);
+    public OrderedItemDTO save(OrderedItemDTO orderedItem);
 }

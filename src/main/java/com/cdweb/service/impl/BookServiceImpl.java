@@ -62,10 +62,7 @@ public class BookServiceImpl implements IBookService {
         return bookConverter.toDTO(bookEntity);
     }
 
-    @Override
-    public BookDTO update(BookDTO bookDTO) {
-        return null;
-    }
+
 
     @Override
     public void delete(long[] ids) {

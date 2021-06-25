@@ -6,7 +6,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface IBookService extends IGeneralService<BookDTO> {
+public interface IBookService  {
+
+    List<BookDTO> findAll();
+
+    BookDTO save(BookDTO bookDTO);
+
+    void delete(long[] ids);
 
     public List<BookDTO> findAll(Pageable pageable);
 

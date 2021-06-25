@@ -2,8 +2,8 @@ package com.cdweb.dto;
 
 public class CommentDTO {
     private Long id;
-    private UserDTO userDTO;
-    private BookDTO bookDTO;
+    private UserDTO user;
+    private BookDTO book;
     private String review;
 
     public CommentDTO() {
@@ -17,20 +17,20 @@ public class CommentDTO {
         this.id = id;
     }
 
-    public UserDTO getUserDTO() {
-        return userDTO;
+    public UserDTO getUser() {
+        return user;
     }
 
-    public void setUserDTO(UserDTO userDTO) {
-        this.userDTO = userDTO;
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
-    public BookDTO getBookDTO() {
-        return bookDTO;
+    public BookDTO getBook() {
+        return book;
     }
 
-    public void setBookDTO(BookDTO bookDTO) {
-        this.bookDTO = bookDTO;
+    public void setBook(BookDTO book) {
+        this.book = book;
     }
 
     public String getReview() {

@@ -16,6 +16,6 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCartEntity
     @Query(value = "select count(s.id) from shopping_cart s where user_id=:user_id ",nativeQuery = true)
     public int countBook(@Param("user_id")long user_id);
 
-    @Query(value = "select s.* from shopping_cart s where user_id=:user_id",nativeQuery = true)
+    @Query(value = "select s.* from shopping_cart s where user_id=:user_id ORDER BY s.id desc",nativeQuery = true)
     public List<ShoppingCartEntity> findAllByUser(@Param("user_id") long user_id);
 }

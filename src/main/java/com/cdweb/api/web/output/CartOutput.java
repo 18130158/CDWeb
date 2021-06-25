@@ -2,6 +2,7 @@ package com.cdweb.api.web.output;
 
 import com.cdweb.dto.ShoppingCartDTO;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,10 @@ public class CartOutput {
     public void setTotal(double total) {
         this.total = total;
     }
-
+    public String getFormat() {
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        return formatter.format(total) + " VND";
+    }
     public List<ShoppingCartDTO> getList() {
         return list;
     }

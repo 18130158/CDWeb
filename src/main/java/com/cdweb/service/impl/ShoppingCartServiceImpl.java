@@ -88,4 +88,14 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
             return getProduct(user.getEmail());
         }
     }
+
+    @Override
+    public ShoppingCartDTO getId(long id) {
+        return this.shoppingCartConverter.toDTO(this.shoppingCartRepository.getOne(id));
+    }
+
+    @Override
+    public void delete(ShoppingCartDTO shoppingCartDTO) {
+        this.shoppingCartRepository.delete(this.shoppingCartConverter.toEntity(shoppingCartDTO));
+    }
 }

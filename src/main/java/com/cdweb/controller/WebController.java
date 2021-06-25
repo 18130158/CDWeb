@@ -39,13 +39,6 @@ public class WebController {
 
 
         ModelAndView mav = new ModelAndView("index.html");
-        UserDTO userDTO;
-        if (principal != null) {
-            userDTO = this.userService.findByEmail(principal.getName());
-        } else {
-            userDTO = null;
-        }
-        mav.addObject("user", userDTO);
         Pageable pageable = PageRequest.of(0, 8);
         List<BookDTO> hotList = bookService.findByHot(pageable);
 
@@ -70,57 +63,13 @@ public class WebController {
         return hotList;
     }
 
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String adminPage(Model model, Principal principal) {
-
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-        String userInfo = WebUtils.toString(loginedUser);
-        model.addAttribute("title", "Welcome to My Page");
-
-        model.addAttribute("userInfo", userInfo);
-
-        return "/web/adminPage";
+    @GetMapping("/kiem-tra-don-hang")
+    public ModelAndView checkOrder(Principal principal) {
+        return principal != null ? new ModelAndView("kiem-tra-don-hang.html") : new ModelAndView("dang-nhap.html");
     }
-
-    @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
-    public String logoutSuccessfulPage(Model model) {
-        model.addAttribute("title", "Logout");
-        return "/web/logoutSuccessfulPage";
+    @GetMapping("/thong-tin-ca-nhan")
+    public ModelAndView profile(Principal principal) {
+        return principal != null ? new ModelAndView("thong-tin-ca-nhan.html") : new ModelAndView("dang-nhap.html");
     }
-
-    @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
-    public String userInfo(Model model, Principal principal) {
-
-        // Sau khi user login thanh cong se co principal
-        String userName = principal.getName();
-
-        System.out.println("User Name: " + userName);
-
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-        String userInfo = WebUtils.toString(loginedUser);
-        model.addAttribute("userInfo", userInfo);
-
-        return "/web/userInfoPage";
-    }
-
-    @RequestMapping(value = "/403", method = RequestMethod.GET)
-    public String accessDenied(Model model, Principal principal) {
-
-        if (principal != null) {
-            User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-            String userInfo = WebUtils.toString(loginedUser);
-
-            model.addAttribute("userInfo", userInfo);
-
-            String message = "Hi " + principal.getName() //
-                    + "<br> You do not have permission to access this page!";
-            model.addAttribute("message", message);
-        }
-        return "/web/403Page";
-    }
-
 
 }

@@ -32,13 +32,4 @@ public class AuthorServiceImpl implements IAuthorService {
         return this.authorConverter.toDTO(this.authorRepository.save(this.authorConverter.toEntity(authorDTO)));
     }
 
-    @Override
-    public AuthorDTO update(AuthorDTO authorDTO) {
-        return null;
-    }
-
-    @Override
-    public void delete(long[] ids) {
-
-    }
 }

@@ -10,4 +10,8 @@ public interface IShoppingCartService {
     public List<ShoppingCartDTO> getProduct(String email);
 
     public List<ShoppingCartDTO> updateQuantity(long id, int quantity, String name);
+
+    public ShoppingCartDTO getId(long id);
+
+    public void delete(ShoppingCartDTO shoppingCartDTO);
 }

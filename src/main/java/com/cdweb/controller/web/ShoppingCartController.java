@@ -19,7 +19,7 @@ public class ShoppingCartController {
     @Autowired
     private IShoppingCartService shoppingCartService;
 
-    @GetMapping("/shopping-cart")
+    @GetMapping("/gio-hang")
     public ModelAndView shoppingCart(Principal principal) {
         return principal == null ? new ModelAndView("dang-nhap.html") : new ModelAndView("gio-hang.html");
     }

@@ -10,9 +10,12 @@ public class ShoppingCartDTO {
 
     public String getTotal() {
         DecimalFormat formatter = new DecimalFormat("###,###,###");
-        return formatter.format(this.quantity * this.book.getPrice() * (1 - this.book.getDiscount() / 100)) + " VNĐ";
+        return formatter.format(this.quantity * this.book.getPrice() * (1 - this.book.getDiscount() / 100)) + " VND";
     }
-
+    public String getTotal(double p) {
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        return formatter.format(p) + " VND";
+    }
     public UserDTO getUser() {
         return user;
     }

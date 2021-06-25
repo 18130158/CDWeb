@@ -25,7 +25,7 @@ function checkMail() {
                     email: email
                 }
             }).done(function (user) {
-                if (user!=null&&user.email == email) {
+                if (user != null && user.email == email) {
                     document.getElementById("emailError").innerHTML = "Email này đã có người đăng ký. Thử lại";
                     document.getElementById("emailError").style.display = "block";
                 } else {
@@ -52,21 +52,16 @@ function checkMail() {
 function checkPass() {
     var pass = document.getElementById("password").value;
 
-    if (email.length == 0) {
-        document.getElementById("passError").innerHTML = "Bạn không thể để trống dữ liệu này!";
+
+    if (pass.length < 8) {
+        document.getElementById("passError").innerHTML = "Mật khẩu có ít nhất 8 ký tự. Thử lại";
         document.getElementById("passError").style.display = "block";
         return false;
     } else {
+        document.getElementById("passError").innerHTML = "";
+        document.getElementById("passError").style.display = "none";
+        return true;
 
-        if (pass.length < 8) {
-            document.getElementById("passError").innerHTML = "Mật khẩu có ít nhất 8 ký tự. Thử lại";
-            document.getElementById("passError").style.display = "block";
-            return false;
-        } else {
-            document.getElementById("passError").innerHTML = "";
-            document.getElementById("passError").style.display = "none";
-            return true;
-        }
     }
 }
 

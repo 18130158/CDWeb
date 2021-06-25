@@ -50,8 +50,8 @@ function showProduct(list) {
         str += "</div>";
         str += "</div>";
         str += "  <div class='button'>";
-        str += " <a class='btn btn-default btn-add-cart'>Mua</a>";
-        str += "  <a class='btn btn-default btn-add-cart'";
+        str += " <a class='btn btn-default' onclick='buyNow("+book.id+")'>Mua ngay</a>";
+        str += "  <a class='btn btn-default'";
         str += "onclick=' addCart(" + book.id + ")' >Thêm giỏ hàng</a>";
         str += "</div>";
         str += " </div>";
@@ -128,9 +128,8 @@ function addCart(book_id) {
             book_id: book_id
         }
     }).done(function (list) {
-        console.log(list);
         if (list == null) {
-            window.location = "http://localhost:8080/dang-nhap";
+            window.location ="http://localhost:8080/dang-nhap";
         } else {
             alert("Sản phẩm đã được thêm vào giỏ hàng!");
         }
@@ -155,4 +154,21 @@ function search_title() {
 function formatPrice(price) {
     price = price.toLocaleString('it-IT', {style: 'currency', currency: 'VND'});
     return price;
+}
+function buyNow(book_id) {
+    $.ajax({
+        method: 'get',
+        url: 'them-san-pham',
+        dataType: 'json',
+        cache: 'false',
+        data: {
+            book_id: book_id
+        }
+    }).done(function (list) {
+        if (list == null) {
+            window.location = "http://localhost:8080/dang-nhap";
+        } else {
+            window.location="http://localhost:8080/gio-hang";
+        }
+    });
 }

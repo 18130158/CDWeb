@@ -7,22 +7,24 @@ import java.util.List;
 
 @Entity
 @Table(name = "ordered")
-public class OrderedEntity  {
+public class OrderedEntity {
     //column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "ordered_date")
-    private Date orderDate;
+    private String orderDate;
     @Column(name = "received_date")
-    private Date receiveDate;
+    private String receiveDate;
     @Column
-    private Long totalPrice;
+    private double totalPrice;
     @Column
-    private int status;
+    private String status;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
+    @OneToMany(mappedBy = "ordered")
+    private List<OrderedItemEntity> orderedItemList = new ArrayList<>();
 
     public void setId(Long id) {
         this.id = id;
@@ -32,27 +34,27 @@ public class OrderedEntity  {
         return id;
     }
 
-    public Date getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 
-    public Date getReceiveDate() {
+    public String getReceiveDate() {
         return receiveDate;
     }
 
-    public void setReceiveDate(Date receiveDate) {
+    public void setReceiveDate(String receiveDate) {
         this.receiveDate = receiveDate;
     }
 
-    public Long getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Long totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -64,12 +66,20 @@ public class OrderedEntity  {
         this.user = user;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<OrderedItemEntity> getOrderedItemList() {
+        return orderedItemList;
+    }
+
+    public void setOrderedItemList(List<OrderedItemEntity> orderedItemList) {
+        this.orderedItemList = orderedItemList;
     }
 }
 

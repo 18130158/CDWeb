@@ -12,12 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
+
 @RestController
 public class UserController {
     @Autowired
     private IUserService userService;
-    @Autowired
-    BCryptPasswordEncoder encoder;
 
 
     @PostMapping(value = "/dang-ki")
@@ -58,5 +58,55 @@ public class UserController {
         return mav;
     }
 
+    @GetMapping("/user")
+    public UserDTO user(Principal principal) {
+        return principal != null ? this.userService.findByEmail(principal.getName()) : null;
+    }
 
+    @GetMapping("/quen-mat-khau")
+    public ModelAndView forgetPasswordPage() {
+        ModelAndView mav = new ModelAndView("quen-mat-khau.html");
+        mav.addObject("message", false);
+        return mav;
+    }
+
+    @PostMapping("/send-mail-forget-password")
+    public ModelAndView newPassword(@ModelAttribute("user") UserDTO user) {
+        UserDTO userDTO = userService.sendMailForgetPassword(user.getEmail());
+        ModelAndView mav = new ModelAndView("quen-mat-khau.html");
+        mav.addObject("message", true);
+        return mav;
+    }
+
+    @RequestMapping(value = "/forget-password", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView forgetPassword(@RequestParam(name = "token") String confirmationToken) {
+        UserDTO user = userService.confirmEmailForgetPassword(confirmationToken);
+        ModelAndView mav = new ModelAndView("doi-mat-khau.html");
+        mav.addObject("forget", true);
+        mav.addObject("email", user.getEmail());
+        return mav;
+    }
+
+    @PostMapping("/change-password")
+    public ModelAndView changePassword(@ModelAttribute("user") UserDTO user, Principal principal) {
+        UserDTO userDTO = userService.changePassword(user);
+        if (principal == null) {
+            return new ModelAndView("dang-nhap.html");
+        } else {
+            return new ModelAndView("thong-tin-ca-nhan.html");
+        }
+    }
+
+    @GetMapping("/doi-mat-khau")
+    public ModelAndView changePasswordPage(Principal principal) {
+        ModelAndView mav = new ModelAndView("doi-mat-khau.html");
+        mav.addObject("forget", false);
+        mav.addObject("email", principal.getName());
+        return mav;
+    }
+
+    @GetMapping("/check-password")
+    public boolean checkPassword(@RequestParam(name = "password") String password, Principal principal) {
+        return this.userService.checkPass(password, principal.getName());
+    }
 }

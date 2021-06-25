@@ -50,7 +50,6 @@
 
 </head>
 <body ng-app="appMain" style="">
-<div id="fb-root"></div>
 <div class="wrapper page-home">
 
 
@@ -152,7 +151,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="button">
-                                                        <a class="btn btn-default btn-add-cart ">Mua ngay</a>
+                                                        <a class="btn btn-default " th:onclick="'buyNow('+${book.id}+')'">Mua ngay</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -227,8 +226,8 @@
                                                 </div>
                                             </div>
                                             <div class="button">
-                                                <a class="btn btn-default btn-add-cart  buy-now">Mua ngay</a>
-                                                <a class="btn btn-default btn-add-cart"
+                                                <a class="btn btn-default " th:onclick="'buyNow('+${book.id}+')'">Mua ngay</a>
+                                                <a class="btn btn-default "
                                                    th:onclick=" 'addCart('+${book.id}+')' ">Thêm giỏ hàng</a>
                                             </div>
                                         </div>
@@ -276,8 +275,8 @@
                                                 </div>
                                             </div>
                                             <div class="button">
-                                                <a class="btn btn-default btn-add-cart  buy-now">Mua ngay</a>
-                                                <a class="btn btn-default btn-add-cart"
+                                                <a class="btn btn-default " th:onclick="'buyNow('+${book.id}+')'">Mua ngay</a>
+                                                <a class="btn btn-default "
                                                    th:onclick=" 'addCart('+${book.id}+')'">Thêm giỏ hàng</a>
                                             </div>
                                         </div>
@@ -321,6 +320,8 @@
             threshold: 200
         });
     });
+
+
 
 </script>
 

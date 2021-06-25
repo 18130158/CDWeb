@@ -129,4 +129,5 @@ public class BookController {
     public List<String> autoComplete(@RequestParam(name = "title") String title){
         return this.bookService.autoCompleteTitle(title);
     }
+    
 }

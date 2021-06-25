@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org">
 
 
-<!-- Mirrored from runecom50.runtime.vn/dang-nhap.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Apr 2021 10:04:08 GMT -->
+<!-- Mirrored from runecom50.runtime.vn/dang-ky.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Apr 2021 10:04:10 GMT -->
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=utf-8"/><!-- /Added by HTTrack -->
 <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="text/html; charset=utf-8"/>
     <meta charset="UTF-8"/>
-    <title>Đăng nhập</title>
+    <title>Đăng k&#253; th&#224;nh vi&#234;n</title>
     <meta name="description"/>
     <meta name="keywords"/>
     <link th:href="@{/shop292/files/icon.png}" rel="shortcut icon" type="image/x-icon"/>
@@ -19,7 +18,7 @@
 
     <meta content="vi_VN" property="og:locale"/>
     <meta content="website" property="og:type"/>
-    <meta content="Đăng nhập" property="og:title"/>
+    <meta content="Đăng k&#253; th&#224;nh vi&#234;n" property="og:title"/>
     <meta property="og:description"/>
     <meta property="og:image"/>
     <meta property="og:url"/>
@@ -50,7 +49,6 @@
     <link th:href="@{/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
 
-
 </head>
 <body ng-app="appMain" style="">
 
@@ -58,6 +56,7 @@
 <div class="wrapper">
 
     <th:block th:include="/_header"></th:block>
+
 
     <div class="main">
         <div class="container">
@@ -69,11 +68,11 @@
             Tài khoản
         </span>
                         </h3>
-                        <ul>
-                            <li><a th:href="@{/login}"><i class="fa fa-sign-in"></i>Đăng nhập</a></li>
-                            <li><a th:href="@{/register}"><i class="fa fa-key"></i>Đăng ký</a></li>
-                            <li><a th:href="@{/forget-password}"><i class="fa fa-key"></i>Quên mật khẩu</a></li>
-                        </ul>
+<!--                        <ul>-->
+<!--                            <li><a th:href="@{/dang-nhap}"><i class="fa fa-sign-in"></i>Đăng nhập</a></li>-->
+<!--                            <li><a th:href="@{/dang-ki}"><i class="fa fa-key"></i>Đăng ký</a></li>-->
+<!--                            <li><a th:href="@{/quen-mat-khau}"><i class="fa fa-key"></i>Quên mật khẩu</a></li>-->
+<!--                        </ul>-->
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -83,50 +82,17 @@
                             <li itemtype="http://shema.org/Breadcrumb" itemscope="" class="home">
                                 <a title="Đến trang chủ" href="index.html" itemprop="url"><span itemprop="title">Trang chủ</span></a>
                             </li>
-                            <li class="icon-li"><strong>Đăng nhập</strong></li>
+                            <li class="icon-li"><strong>Đăng ký tài khoản</strong></li>
                         </ul>
                     </div>
-                    <div class="login-content clearfix">
-                        <h1 class="title"><span>Đăng nhập hệ thống</span></h1>
-
-                        <div class="alert alert-success fade in" th:if="${error}">
-                            <button data-dismiss="alert" class="close"></button>
-                            <i class="fa-fw fa fa-check"></i>
-                            <strong th:utext="${error}"></strong>
-                        </div>
-                        <div class="col-md-6 col-md-offset-3 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
-                            <form method="post" th:action="@{/j_spring_security_check}" class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Email</label>
-                                    <div class="col-sm-8">
-                                        <input name="email" type="email" class="form-control"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Mật khẩu</label>
-                                    <div class="col-sm-8">
-                                        <input name="password" type="password" class="form-control"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label"></label>
-
-                                    <div class="col-sm-8">
-                                        <input type="checkbox" name="remember-me" id="remember-me"/>
-                                        <label for="remember-me">Nhớ mật khẩu</label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-4 col-sm-8">
-                                        <button type="submit" class="btn btn-default">Đăng nhập</button>
-                                        <a th:href="@{/quen-mat-khau}">Quên mật khẩu</a>
-                                    </div>
-
-                                </div>
-                            </form>
-                        </div>
+                    <div class="register-content clearfix">
                     </div>
+                    <table class="table product-list">
+                        <tbody id="user">
 
+                        </tbody>
+                    </table>
+                    <div><a th:href="@{/doi-mat-khau}" style="color: #eb5858">Đổi mật khẩu</a></div>
                 </div>
             </div>
         </div>
@@ -148,14 +114,6 @@
 </div>
 
 
-<div style="display: none;" id="loading-mask">
-    <div id="loading_mask_loader" class="loader">
-        <img alt="Loading..." th:src="@{/Images/ajax-loader-main.gif}"/>
-        <div>
-            Please wait...
-        </div>
-    </div>
-</div>
 <a class="back-to-top" href="#" style="display: inline;">
     <i class="fa fa-angle-up">
     </i>
@@ -178,5 +136,36 @@
             threshold: 200
         });
     });
-</script>
+    $(document).ready(function () {
+        $.ajax(
+            {
+                method: 'get',
+                url: 'user',
+                dataType: 'json',
+                cache: 'false'
+            }
+        ).done(function (user) {
+            var str = "";
 
+            str += " <tr>";
+            str += "    <td class='control-label'>Email:</td>";
+            str += "   <td>" + user.email + "</td>";
+            str += "  </tr>";
+            str += "   <tr>";
+            str += "      <td class='control-label'>Họ và tên:</td>";
+            str += "    <td>" + user.fullName + "</td>";
+            str += "  </tr>";
+            str += "   <tr>";
+            str += "    <td class='control-label'>Địa chỉ:</td>";
+            str += "    <td>" + user.address + "</td>";
+            str += " </tr>";
+            str += "  <tr>";
+            str += "     <td class='control-label'>Số điện thoại:</td>";
+            str += "    <td>" + user.phone + "</td>";
+            str += " </tr>";
+
+            $('#user').html(str);
+        });
+    });
+
+</script>

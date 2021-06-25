@@ -12,7 +12,7 @@ public class OrderedItemEntity {
     @Column
     private Long quantity;
     @Column
-    private Long totalPrice;
+    private double totalPrice;
     //map
     @ManyToOne
     @JoinColumn(name = "book_id")
@@ -31,9 +31,7 @@ public class OrderedItemEntity {
     }
 
     //getter,setter
-    public OrderedEntity getOrdered() {
-        return ordered;
-    }
+
 
     public void setOrdered(OrderedEntity ordered) {
         this.ordered = ordered;
@@ -48,11 +46,11 @@ public class OrderedItemEntity {
         this.quantity = quantity;
     }
 
-    public Long getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Long totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
