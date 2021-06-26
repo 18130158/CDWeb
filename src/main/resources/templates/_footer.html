@@ -1,6 +1,14 @@
-<div class="footer"  xmlns:th="http://www.thymeleaf.org"
-     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="footer"  th:fragment="footer">
     <div class="footer-content clearfix">
         <div class="container">
             <div class="row">
@@ -78,7 +86,8 @@
                         <div class="social-icon">
                             <ul>
                                 <li><a target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="https://www.facebook.com/runtime.vn" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://www.facebook.com/runtime.vn" target="_blank"><i
+                                        class="fa fa-facebook"></i></a></li>
                                 <li><a target="_blank"><i class="fa fa-youtube"></i></a></li>
                                 <li><a target="_blank"><i class="fa fa-twitter "></i></a></li>
                             </ul>
@@ -97,7 +106,8 @@
                         <div class="letter-content">
                             <div class="new-paper">
                                 <div class="input-box">
-                                    <input type="text" name="email" id="txtNewsletter" class="input-text form-control" value="" placeholder="Your Emain Address" />
+                                    <input type="text" name="email" id="txtNewsletter" class="input-text form-control"
+                                           value="" placeholder="Your Emain Address"/>
                                 </div>
                                 <div class="button text-center">
                                     <a class="btn btn-primary">Nhận tin</a>
@@ -110,3 +120,7 @@
         </div>
     </div>
 </div>
+</body>
+</html>
+
+

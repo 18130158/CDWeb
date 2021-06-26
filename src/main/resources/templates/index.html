@@ -52,8 +52,7 @@
 <body ng-app="appMain" style="">
 <div class="wrapper page-home">
 
-<!--    <div class="header" th:replace="~{/_header}"></div>-->
-    <!--    <th:block th:include="/_header"></th:block>-->
+    <div th:insert="~{_header :: header}"></div>
 
     <div class="container">
         <div class="row">
@@ -345,9 +344,7 @@
         </div>
     </div>
 
-
-<!--    <div class="footer" th:replace="~{/_footer}"></div>-->
-    <!--    <th:block th:include="/_footer"></th:block>-->
+    <div th:insert="~{_footer :: footer}"></div>
 
 </div>
 
