@@ -8,7 +8,7 @@
 <head>
     <meta content="text/html; charset=utf-8"/>
     <meta charset="UTF-8"/>
-    <title>Đăng k&#253; th&#224;nh vi&#234;n</title>
+    <title>Thông tin cá nhân</title>
     <meta name="description"/>
     <meta name="keywords"/>
     <link th:href="@{/shop292/files/icon.png}" rel="shortcut icon" type="image/x-icon"/>
@@ -68,11 +68,11 @@
             Tài khoản
         </span>
                         </h3>
-<!--                        <ul>-->
-<!--                            <li><a th:href="@{/dang-nhap}"><i class="fa fa-sign-in"></i>Đăng nhập</a></li>-->
-<!--                            <li><a th:href="@{/dang-ki}"><i class="fa fa-key"></i>Đăng ký</a></li>-->
-<!--                            <li><a th:href="@{/quen-mat-khau}"><i class="fa fa-key"></i>Quên mật khẩu</a></li>-->
-<!--                        </ul>-->
+                        <!--                        <ul>-->
+                        <!--                            <li><a th:href="@{/dang-nhap}"><i class="fa fa-sign-in"></i>Đăng nhập</a></li>-->
+                        <!--                            <li><a th:href="@{/dang-ki}"><i class="fa fa-key"></i>Đăng ký</a></li>-->
+                        <!--                            <li><a th:href="@{/quen-mat-khau}"><i class="fa fa-key"></i>Quên mật khẩu</a></li>-->
+                        <!--                        </ul>-->
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -82,17 +82,22 @@
                             <li itemtype="http://shema.org/Breadcrumb" itemscope="" class="home">
                                 <a title="Đến trang chủ" href="index.html" itemprop="url"><span itemprop="title">Trang chủ</span></a>
                             </li>
-                            <li class="icon-li"><strong>Đăng ký tài khoản</strong></li>
+                            <li class="icon-li"><strong>Thông tin tài khoản</strong></li>
                         </ul>
                     </div>
                     <div class="register-content clearfix">
                     </div>
-                    <table class="table product-list">
-                        <tbody id="user">
 
-                        </tbody>
-                    </table>
-                    <div><a th:href="@{/doi-mat-khau}" style="color: #eb5858">Đổi mật khẩu</a></div>
+
+                    <form th:action="@{/change-information}" method="post" th:object="${user}">
+                        <table class="table product-list">
+                            <tbody id="user">
+
+                            </tbody>
+                        </table>
+                    </form>
+
+
                 </div>
             </div>
         </div>
@@ -149,21 +154,36 @@
 
             str += " <tr>";
             str += "    <td class='control-label'>Email:</td>";
-            str += "   <td>" + user.email + "</td>";
+            str += "   <td>" + user.email;
+            str += "<input type='hidden' name='email' value='" + user.email + "'>";
+            str += "</td>";
             str += "  </tr>";
             str += "   <tr>";
             str += "      <td class='control-label'>Họ và tên:</td>";
-            str += "    <td>" + user.fullName + "</td>";
+            str += "    <td>";
+            str += "<input type='text' name='fullName' value=' " + user.fullName + "'>";
+            str += "</td>";
             str += "  </tr>";
             str += "   <tr>";
             str += "    <td class='control-label'>Địa chỉ:</td>";
-            str += "    <td>" + user.address + "</td>";
+            str += "    <td>";
+            str += "<input type='text' name='address' value=' " + user.address + "'>";
+            str += "</td>";
             str += " </tr>";
             str += "  <tr>";
             str += "     <td class='control-label'>Số điện thoại:</td>";
-            str += "    <td>" + user.phone + "</td>";
+            str += "    <td>";
+            str += "<input type='text' name='phone' value=' " + user.phone + "'>";
+            str += "</td>";
             str += " </tr>";
-
+            str += "<tr>";
+            str += "<td></td>";
+            str += "<td>";
+            str += "<a style='margin-right: 10px'><button type='submit' class='btn btn-default'>Lưu thông tin</button></a>"
+            str += "<a style='margin-right: 10px' class='btn btn-default' href='/thong-tin-ca-nhan'>Hủy</a>";
+            str += "<a href='/doi-mat-khau' style='color: #eb5858'>Đổi mật khẩu</a>";
+            str += "</td>"
+            str += "</tr>"
             $('#user').html(str);
         });
     });

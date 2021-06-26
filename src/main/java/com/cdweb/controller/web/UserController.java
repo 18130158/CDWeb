@@ -87,7 +87,7 @@ public class UserController {
         return mav;
     }
 
-    @PostMapping("/change-password")
+    @PostMapping("/change-information")
     public ModelAndView changePassword(@ModelAttribute("user") UserDTO user, Principal principal) {
         UserDTO userDTO = userService.changePassword(user);
         if (principal == null) {
@@ -109,4 +109,5 @@ public class UserController {
     public boolean checkPassword(@RequestParam(name = "password") String password, Principal principal) {
         return this.userService.checkPass(password, principal.getName());
     }
+
 }

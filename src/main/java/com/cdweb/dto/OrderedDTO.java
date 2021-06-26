@@ -10,20 +10,45 @@ public class OrderedDTO {
     private Long id;
     private UserDTO user;
     private String status;
-    private String orderedDate;
+    private Date orderedDate;
     private Date receiveDate;
     private double totalPrice;
+    private String name;
+    private String phone;
+    private String address;
     private List<OrderedItemDTO> orderedItemList = new ArrayList<>();
 
     public OrderedDTO() {
 
     }
 
-    public void setNowDate(){
+    public void setNowDate() {
         Calendar calendar = Calendar.getInstance();
-        String date = calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND)
-                + " " + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH + 1) + "/" + calendar.get(Calendar.YEAR);
-        this.orderedDate = date;
+        this.orderedDate = calendar.getTime();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Long getId() {
@@ -42,11 +67,11 @@ public class OrderedDTO {
         this.user = user;
     }
 
-    public String getOrderedDate() {
+    public Date getOrderedDate() {
         return orderedDate;
     }
 
-    public void setOrderedDate(String orderedDate) {
+    public void setOrderedDate(Date orderedDate) {
         this.orderedDate = orderedDate;
     }
 

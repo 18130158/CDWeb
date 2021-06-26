@@ -121,13 +121,27 @@ public class UserService implements IUserService {
     @Override
     public UserDTO changePassword(UserDTO user) {
         UserEntity userEntity = this.userRepository.findByEmailAndIsEnabled(user.getEmail(), true);
-        UserDTO userDTO = new UserDTO();
-        userDTO = this.userConverter.toDTO(userEntity);
-        userDTO.setPassword(encoder.encode(user.getPassword()));
+        UserDTO userDTO = this.userConverter.toDTO(userEntity);
+
+        if (user.getFullName() != null) {
+            userDTO.setFullName(user.getFullName());
+        }
+        if (user.getPhone() != null) {
+            userDTO.setPhone(user.getPhone());
+        }
+        if (user.getAddress() != null) {
+            userDTO.setAddress(user.getAddress());
+        }
+
+        if (user.getPassword() != null) {
+            userDTO.setPassword(encoder.encode(user.getPassword()));
+        }
         userEntity = this.userRepository.save(this.userConverter.toEntity(userDTO));
-        if (userEntity != null) {
-            PasswordResetToken passwordResetToken = this.passwordTokenRepository.findByUser(userEntity);
-            this.passwordTokenRepository.delete(passwordResetToken);
+        if (user.getPassword() != null) {
+            if (userEntity != null) {
+                PasswordResetToken passwordResetToken = this.passwordTokenRepository.findByUser(userEntity);
+                this.passwordTokenRepository.delete(passwordResetToken);
+            }
         }
         return this.userConverter.toDTO(userEntity);
     }
@@ -135,6 +149,8 @@ public class UserService implements IUserService {
     @Override
     public boolean checkPass(String password, String email) {
         UserEntity userEntity = this.userRepository.findByEmail(email);
-        return encoder.matches(userEntity.getPassword(), password);
+        return encoder.matches(password, userEntity.getPassword());
     }
+
+
 }

@@ -89,13 +89,14 @@
                     </div>
                     <div class="register-content clearfix">
                         <h1 class="title"><span>Đăng ký tài khoản</span></h1>
-                            <div  class="alert alert-success fade in" th:if="${message}">
-                                <button data-dismiss="alert" class="close"></button>
-                                <i class="fa-fw fa fa-check"></i>
-                                <strong th:utext="${message}"></strong>
-                            </div>
+                        <div class="alert alert-success fade in" th:if="${message}">
+                            <button data-dismiss="alert" class="close"></button>
+                            <i class="fa-fw fa fa-check"></i>
+                            <strong th:utext="${message}"></strong>
+                        </div>
                         <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
-                            <form method="post" class="form-horizontal" th:action="@{/dang-ki}" th:object="${User}">
+                            <form onsubmit="return submitValidation()" method="post" class="form-horizontal"
+                                  th:action="@{/dang-ki}" th:object="${User}">
                                 <h2><span>Thông tin tài khoản</span></h2>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Email<span
@@ -206,38 +207,9 @@
             threshold: 200
         });
     });
-</script>
-<!--<script type="text/javascript">-->
-<!--    $(document).ready(function (e) {-->
 
-<!--        $("#btSubmit").click(function () {-->
-<!--            var email = document.getElementById("email").value;-->
-<!--            var password = document.getElementById("password").value;-->
-<!--            var fullName = document.getElementById("fullName").value;-->
-<!--            var phone = document.getElementById("phone").value;-->
-<!--            var address = document.getElementById("address").value;-->
-<!--            if (vadidateForm()) {-->
-<!--                $.ajax({-->
-<!--                    url: 'dang-ki',-->
-<!--                    method: 'POST',-->
-<!--                    dataType: "json",-->
-<!--                    contentType: "application/json; charset=utf-8",-->
-<!--                    data: {-->
-<!--                        "email": email,-->
-<!--                        "password": password,-->
-<!--                        "fullName": fullName,-->
-<!--                        "phone": phone,-->
-<!--                        "address": address-->
-<!--                    }-->
-<!--                }).done(function (user) {-->
-<!--                    if (user != null) {-->
-<!--                        document.getElementById("confirm").style.display = "block";-->
-<!--                    }else     {-->
-<!--                        document.getElementById("confirm").innerHTML="Đăng kí không thành công!";-->
-<!--                        document.getElementById("confirm").style.display = "block";-->
-<!--                    }-->
-<!--                });-->
-<!--            }-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
+    function submitValidation() {
+        return checkMail() & checkPass() & checkName();
+    }
+</script>
+

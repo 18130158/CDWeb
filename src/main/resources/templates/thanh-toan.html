@@ -49,7 +49,6 @@
     <link th:href="@{/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
     <script th:src="@{/Scripts/myJS/ajax-san-pham.js}"></script>
 
-
 </head>
 <body ng-app="appMain" style="">
 
@@ -80,7 +79,7 @@
                         });
                     </script>
 
-                    <div class="payment-content" >
+                    <div class="payment-content">
                         <h1 class="title"><span>Thanh toán</span></h1>
                         <div class="steps clearfix">
                             <ul class="clearfix">
@@ -105,17 +104,24 @@
                                 để được hỗ trợ tốt nhất.
                             </div>
                         </div>
-                        <form class="payment-block clearfix" id="checkout-container" method="post"
+                        <form onsubmit="return checkPhone()" class="payment-block clearfix" id="checkout-container"
+                              method="post"
                               th:action="@{/dat-hang}" th:object="${orderedInput}">
                             <div class="col-md-4 col-sm-12 col-xs-12 payment-step step2">
                                 <h4>1. Địa chỉ thanh toán và giao hàng</h4>
                                 <div class="step-preview clearfix">
                                     <h2 class="title">Thông tin thanh toán</h2>
                                     <div class="info-user">
-                                        <label>Người nhận:<span th:utext="${user.fullName}"></span></label>
-                                        <label>Điện thoại:<span th:utext="${user.phone}"></span></label>
-                                        <label>Email:<span th:utext="${user.email}"></span></label>
-                                        <label>Địa chỉ:<span th:utext="${user.address}"></span></label>
+                                        <label>Email:<span name="email" th:value="${user.email}"
+                                                           th:utext="${user.email}"></span></label>
+                                        <label>Người nhận:<input type="text" name="name"
+                                                                 th:value="${user.fullName}"></label>
+                                        <label>Điện thoại:<input type="text" name="phone"
+                                                                 id="phone-number" onblur="checkPhone()"
+                                                                 th:value="${user.phone}"></label>
+                                        <div id="phoneError" style="color: red"></div>
+                                        <label>Địa chỉ:<input type="text" name="address"
+                                                              th:value="${user.address}"></label>
                                         <div class="edit-button">
                                             <a href="#modalAccount"><i class="fa fa-pencil-square-o"></i></a>
                                         </div>
@@ -139,7 +145,8 @@
                                         <div class="cart-items">
                                             <th:block th:each="cart:${output.list}">
                                                 <div class="cart-item clearfix">
-                                                    <input type="checkbox" checked style="display: none" name="carts" field="carts" th:value="${cart.id}">
+                                                    <input type="checkbox" checked style="display: none" name="carts"
+                                                           field="carts" th:value="${cart.id}">
                                                     <span class="image pull-left" style="  margin-right:10px;">
                                                         <a th:href="@{/chi-tiet-san-pham(id=${cart.book.id})}">
                                                             <img th:src="${cart.book.mediaList[0].path}"
@@ -148,7 +155,8 @@
                                                     </span>
                                                     <div class="product-info pull-left">
                                                             <span class="product-name">
-                                                                    <a th:href="@{/chi-tiet-san-pham(id=${cart.book.id})}" th:utext="${cart.book.title}">
+                                                                    <a th:href="@{/chi-tiet-san-pham(id=${cart.book.id})}"
+                                                                       th:utext="${cart.book.title}">
                                                                     </a> x <span th:utext="${cart.quantity}"></span>
                                                              </span>
                                                     </div>
@@ -235,5 +243,22 @@
             var total = price + Number(25000);
             $('#thanh-toan').html(formatPrice(total));
         });
+
+    function checkPhone() {
+        var mobile = document.getElementById("phone-number").value;
+        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        if (mobile !== '') {
+            if (vnf_regex.test(mobile) == false) {
+                $("#phoneError").html("Số điện thoại của bạn không hợp lệ!");
+                return false;
+            } else {
+                $("#phoneError").html("");
+                return true;
+            }
+        } else {
+            $("#phoneError").html("Mời bạn nhập số điện thoại");
+            return false;
+        }
+    }
 </script>
 

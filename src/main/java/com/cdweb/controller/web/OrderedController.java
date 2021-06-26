@@ -52,6 +52,9 @@ public class OrderedController {
         orderedDTO.setReceiveDate(null);
         orderedDTO.setStatus("ĐANG XỬ LÝ");
         orderedDTO.setTotalPrice(total_price + 25000);
+        orderedDTO.setName(orderedInput.getName());
+        orderedDTO.setPhone(orderedInput.getPhone());
+        orderedDTO.setAddress(orderedInput.getAddress());
         orderedDTO.setUser(this.userService.findByEmail(principal.getName()));
 
         OrderedDTO resultOrdered = this.orderedService.save(orderedDTO);
