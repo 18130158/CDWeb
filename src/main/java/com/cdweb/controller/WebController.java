@@ -40,33 +40,36 @@ public class WebController {
         ModelAndView mav = new ModelAndView("index.html");
         Pageable pageable = PageRequest.of(0, 8);
         List<BookDTO> hotList = bookService.findByHot(pageable);
-
         List<BookDTO> newList = bookService.findByNew(pageable);
-
         List<BookDTO> discountList = bookService.findByDiscount(pageable);
         mav.addObject("bannerlist", this.bannerService.findAll());
         mav.addObject("discountlist", discountList);
         mav.addObject("hotlist", hotList);
         mav.addObject("newlist", newList);
-
-
         return mav;
     }
 
 
-
     @GetMapping("/tin-tuc")
-    public List<BookDTO> news() {
-        Pageable pageable = PageRequest.of(0, 8);
-        List<BookDTO> hotList = bookService.findByHot(pageable);
-        System.out.println(hotList);
-        return hotList;
+    public ModelAndView news() {
+        return new ModelAndView("tin-tuc.html");
+    }
+
+    @GetMapping("/gioi-thieu")
+    public ModelAndView about() {
+        return new ModelAndView("gioi-thieu.html");
+    }
+
+    @GetMapping("/dich-vu")
+    public ModelAndView dichvu() {
+        return new ModelAndView("dich-vu.html");
     }
 
     @GetMapping("/kiem-tra-don-hang")
     public ModelAndView checkOrder(Principal principal) {
         return principal != null ? new ModelAndView("kiem-tra-don-hang.html") : new ModelAndView("dang-nhap.html");
     }
+
     @GetMapping("/thong-tin-ca-nhan")
     public ModelAndView profile(Principal principal) {
         return principal != null ? new ModelAndView("thong-tin-ca-nhan.html") : new ModelAndView("dang-nhap.html");

@@ -57,8 +57,8 @@
 
 <div class="wrapper">
 
-    <th:block th:include="/_header"></th:block>
-
+<!--    <th:block th:include="/_header"></th:block>-->
+    <div class="header" th:replace="/_header"></div>
 
     <div class="main">
         <div class="container">
@@ -162,8 +162,8 @@
         </div>
     </div>
 
-
-    <th:block th:include="/_footer"></th:block>
+    <div class="footer" th:replace="/_footer"></div>
+<!--    <th:block th:include="/_footer"></th:block>-->
 
     <script type="text/javascript">
         $(document).ready(function () {
