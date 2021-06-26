@@ -68,7 +68,8 @@
 
 <div class="wrapper">
 
-    <div class="header" th:replace="/_header"></div>
+    <div th:insert="~{_header :: header}"></div>
+
 
 
     <div class="main">
@@ -212,7 +213,7 @@
     </div>
 
 
-    <div class="footer" th:replace="/_footer"></div>
+    <div th:insert="~{_footer :: footer}"></div>
 
 
     <script type="text/javascript">

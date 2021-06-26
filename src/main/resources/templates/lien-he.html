@@ -53,9 +53,8 @@
 
 <div class="wrapper">
 
-    <!--    <th:block th:include="/_header"></th:block>-->
+     <div th:insert="~{_header :: header}"></div>
 
-    <div class="header" th:replace="/_header"></div>
 
 
     <div class="main">
@@ -368,9 +367,8 @@
     </div>
 
 
-    <div class="footer" th:replace="/_footer"></div>
+    <div th:insert="~{_footer :: footer}"></div>
 
-    <!--    <th:block th:include="/web/_footer"></th:block>-->
 
     <script type="text/javascript">
         $(document).ready(function () {
