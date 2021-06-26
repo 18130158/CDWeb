@@ -41,24 +41,39 @@ function showProduct(list) {
         str += "  </span>";
         str += "</div>";
         str += " </div>";
-        str += " <div class='price'>";
-        str += "   <div><span class='price-old'>";
-        str += book.discount ? book.priceFormat : "" + "</span>";
-        str += "   </div>";
-        str += " <div><span class='price-new'>" + book.priceDiscount;
-        str += " </span>";
-        str += "</div>";
-        str += "</div>";
-        str += "  <div class='button'>";
-        str += " <a class='btn btn-default' onclick='buyNow("+book.id+")'>Mua ngay</a>";
-        str += "  <a class='btn btn-default'";
-        str += "onclick=' addCart(" + book.id + ")' >Thêm giỏ hàng</a>";
-        str += "</div>";
+        if (book.quantity) {
+            str += " <div class='price'>";
+            str += "   <div><span class='price-old'>";
+            str += book.discount ? book.priceFormat : "" + "</span>";
+            str += "   </div>";
+            str += " <div><span class='price-new'>" + book.priceDiscount;
+            str += " </span>";
+            str += "</div>";
+            str += "</div>";
+            str += "  <div class='button'>";
+            str += " <a class='btn btn-default' onclick='buyNow(" + book.id + ")'>Mua ngay</a>";
+            str += "  <a class='btn btn-default'";
+            str += "onclick=' addCart(" + book.id + ")' >Thêm giỏ hàng</a>";
+            str += "</div>";
+        } else {
+
+
+            str += "   <div class='price'>";
+            str += "   <div><span class='price-old'></span>";
+            str += "   </div>";
+            str += " <div> <span class='price-new'>Hết hàng</span>";
+            str += " </div>";
+            str += " </div>";
+            str += "  <div class='button'>";
+            str += " <a class='btn btn-default' href='/chi-tiet-san-pham?id=" + book.id + "'>Chi tiết sản phẩm</a>";
+            str += " </div>";
+        }
         str += " </div>";
         str += "</div>";
         str += "</div>";
         str += "</div>";
     }
+
     return str;
 }
 
@@ -129,7 +144,7 @@ function addCart(book_id) {
         }
     }).done(function (list) {
         if (list == null) {
-            window.location ="http://localhost:8080/dang-nhap";
+            window.location = "http://localhost:8080/dang-nhap";
         } else {
             alert("Sản phẩm đã được thêm vào giỏ hàng!");
         }
@@ -155,6 +170,7 @@ function formatPrice(price) {
     price = price.toLocaleString('it-IT', {style: 'currency', currency: 'VND'});
     return price;
 }
+
 function buyNow(book_id) {
     $.ajax({
         method: 'get',
@@ -168,7 +184,7 @@ function buyNow(book_id) {
         if (list == null) {
             window.location = "http://localhost:8080/dang-nhap";
         } else {
-            window.location="http://localhost:8080/gio-hang";
+            window.location = "http://localhost:8080/gio-hang";
         }
     });
 }

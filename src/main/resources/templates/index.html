@@ -137,22 +137,39 @@
                                                     </h2>
                                                     <div class="rating">
                                                         <div class="rating-1">
-                                    <span class="rating-img">
-                                    </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div><span class="price-old"
-                                                                   th:utext="${book.discount}?${book.getPriceFormat()}"></span>
-                                                        </div>
-                                                        <div><span class="price-new"
-                                                                   th:utext="${book.getPriceDiscount()}">
+                                                        <span class="rating-img">
                                                         </span>
                                                         </div>
                                                     </div>
-                                                    <div class="button">
-                                                        <a class="btn btn-default " th:onclick="'buyNow('+${book.id}+')'">Mua ngay</a>
-                                                    </div>
+                                                    <th:block th:if="${book.quantity}">
+                                                        <div class="price">
+                                                            <div><span class="price-old"
+                                                                       th:utext="${book.discount}?${book.getPriceFormat()}"></span>
+                                                            </div>
+                                                            <div><span class="price-new"
+                                                                       th:utext="${book.getPriceDiscount()}">
+                                                        </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="button">
+                                                            <a class="btn btn-default "
+                                                               th:onclick="'buyNow('+${book.id}+')'">Mua ngay</a>
+                                                        </div>
+                                                    </th:block>
+                                                    <th:block th:unless="${book.quantity}">
+                                                        <div class="price">
+                                                            <div><span class="price-old"></span>
+                                                            </div>
+                                                            <div><span class="price-new">Hết hàng</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="button">
+                                                            <a class="btn btn-default "
+                                                               th:href="@{/chi-tiet-san-pham(id=${book.id})}">Chi tiết
+                                                                sản
+                                                                phẩm</a>
+                                                        </div>
+                                                    </th:block>
                                                 </div>
                                             </div>
                                         </div>
@@ -216,20 +233,36 @@
                                 </span>
                                                 </div>
                                             </div>
-                                            <div class="price">
-                                                <div><span class="price-old"
-                                                           th:utext="${book.discount}?${book.getPriceFormat()}"></span>
-                                                </div>
-                                                <div><span class="price-new"
-                                                           th:utext="${book.getPriceDiscount()}">
+                                            <th:block th:if="${book.quantity}">
+                                                <div class="price">
+                                                    <div><span class="price-old"
+                                                               th:utext="${book.discount}?${book.getPriceFormat()}"></span>
+                                                    </div>
+                                                    <div><span class="price-new"
+                                                               th:utext="${book.getPriceDiscount()}">
                                                         </span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="button">
-                                                <a class="btn btn-default " th:onclick="'buyNow('+${book.id}+')'">Mua ngay</a>
-                                                <a class="btn btn-default "
-                                                   th:onclick=" 'addCart('+${book.id}+')' ">Thêm giỏ hàng</a>
-                                            </div>
+                                                <div class="button">
+                                                    <a class="btn btn-default "
+                                                       th:onclick="'buyNow('+${book.id}+')'">Mua ngay</a>
+                                                    <a class="btn btn-default "
+                                                       th:onclick=" 'addCart('+${book.id}+')' ">Thêm giỏ hàng</a>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:unless="${book.quantity}">
+                                                <div class="price">
+                                                    <div><span class="price-old"></span>
+                                                    </div>
+                                                    <div><span class="price-new">Hết hàng</span>
+                                                    </div>
+                                                </div>
+                                                <div class="button">
+                                                    <a class="btn btn-default "
+                                                       th:href="@{/chi-tiet-san-pham(id=${book.id})}">Chi tiết sản
+                                                        phẩm</a>
+                                                </div>
+                                            </th:block>
                                         </div>
                                     </div>
                                 </div>
@@ -240,7 +273,7 @@
                             <a class="btn btn-default button-see-more" th:href="@{/san-pham(hot=true)}">Xem thêm</a>
                         </div>
                     </section>
-                    <section class="product-content clearfix" >
+                    <section class="product-content clearfix">
                         <h1 class="title clearfix"><span>Sản phẩm MỚI</span></h1>
                         <div class="product-block product-grid clearfix" id="product-new">
                             <th:block th:each="book : ${newlist}">
@@ -265,20 +298,36 @@
                                 </span>
                                                 </div>
                                             </div>
-                                            <div class="price">
-                                                <div><span class="price-old"
-                                                           th:utext="${book.discount}?${book.getPriceFormat()}"></span>
-                                                </div>
-                                                <div><span class="price-new"
-                                                           th:utext="${book.getPriceDiscount()}">
+                                            <th:block th:if="${book.quantity}">
+                                                <div class="price">
+                                                    <div><span class="price-old"
+                                                               th:utext="${book.discount}?${book.getPriceFormat()}"></span>
+                                                    </div>
+                                                    <div><span class="price-new"
+                                                               th:utext="${book.getPriceDiscount()}">
                                                         </span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="button">
-                                                <a class="btn btn-default " th:onclick="'buyNow('+${book.id}+')'">Mua ngay</a>
-                                                <a class="btn btn-default "
-                                                   th:onclick=" 'addCart('+${book.id}+')'">Thêm giỏ hàng</a>
-                                            </div>
+                                                <div class="button">
+                                                    <a class="btn btn-default "
+                                                       th:onclick="'buyNow('+${book.id}+')'">Mua ngay</a>
+                                                    <a class="btn btn-default "
+                                                       th:onclick=" 'addCart('+${book.id}+')' ">Thêm giỏ hàng</a>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:unless="${book.quantity}">
+                                                <div class="price">
+                                                    <div><span class="price-old"></span>
+                                                    </div>
+                                                    <div><span class="price-new">Hết hàng</span>
+                                                    </div>
+                                                </div>
+                                                <div class="button">
+                                                    <a class="btn btn-default "
+                                                       th:href="@{/chi-tiet-san-pham(id=${book.id})}">Chi tiết sản
+                                                        phẩm</a>
+                                                </div>
+                                            </th:block>
                                         </div>
                                     </div>
                                 </div>
@@ -322,10 +371,7 @@
     });
 
 
-
 </script>
-
-
 
 
 </html>

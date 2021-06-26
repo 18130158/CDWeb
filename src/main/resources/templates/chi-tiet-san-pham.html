@@ -202,19 +202,32 @@
                 str += "   </span>";
                 str += " </div>";
                 str += "  </div>";
-                str += " <div class='price'>";
-                str += " <div>";
-                str += "<span class='price-old'>";
-                str += book.discount ? book.priceFormat : +"</span>";
-                str += " </div>";
-                str += " <div>";
-                str += "<span class='price-new'>"
-                str += book.priceDiscount + "</span>";
-                str += "   </div>";
-                str += "   </div>";
-                str += "  <div class='button'>";
-                str += "     <a class='btn btn-default  '>Mua ngay</a>";
-                str += " </div>";
+                if (book.quantity) {
+                    str += " <div class='price'>";
+                    str += "   <div><span class='price-old'>";
+                    str += book.discount ? book.priceFormat : "" + "</span>";
+                    str += "   </div>";
+                    str += " <div><span class='price-new'>" + book.priceDiscount;
+                    str += " </span>";
+                    str += "</div>";
+                    str += "</div>";
+                    str += "  <div class='button'>";
+                    str += " <a class='btn btn-default' onclick='buyNow(" + book.id + ")'>Mua ngay</a>";
+                    str += "  <a class='btn btn-default'";
+                    str += "onclick=' addCart(" + book.id + ")' >Thêm giỏ hàng</a>";
+                    str += "</div>";
+                } else {
+                    str += "   <div class='price'>";
+                    str += "   <div><span class='price-old'></span>";
+                    str += "   </div>";
+                    str += " <div> <span class='price-new'>Hết hàng</span>";
+                    str += " </div>";
+                    str += " </div>";
+                    str += "  <div class='button'>";
+                    str += "<a></a>";
+                    str += " <a class='btn btn-default' href='/chi-tiet-san-pham?id=" + book.id + "'>Chi tiết sản phẩm</a>";
+                    str += " </div>";
+                }
                 str += " </div>";
                 str += " </div>";
                 str += " </div>";
@@ -273,17 +286,26 @@
             str += "  </div>";
             str += " <div class='col-md-5 col-sm-6 col-xs-12 clearfix'>";
             str += "    <h2>" + book.title + "</h2>";
-            str += " <div class='price'>";
-            str += "  <div>";
-            str += "<span class='price-old' style='color: #aaaaaa;text-decoration: line-through;padding: 0px 5px'>";
-            str += book.discount ? book.priceFormat : "" + "</span>"
-            str += "</div>";
-            str += "   <div><span class='price-new'>" + book.priceDiscount + "</span></div> ";
-            str += "  </div>";
-            str += "  <div class='button'>";
-            str += "  <a href='#' class='btn btn-primary btn-lg' style='width: 345px;font-size: 17px'><i class='glyphicon glyphicon-ok'></i>Mua ngay</a>";
-            str += "  <a class='btn btn-default btn-lg' style='width: 345px;font-size: 17px' onclick=' addCart(" + book.id + ")'><i class='glyphicon glyphicon-shopping-cart'></i>Thêm giỏ hàng</a>";
-            str += "   </div>";
+
+
+            if (book.quantity) {
+                str += " <div class='price'>";
+                str += "  <div>";
+                str += "<span class='price-old' style='color: #aaaaaa;text-decoration: line-through;padding: 0px 5px'>";
+                str += book.discount ? book.priceFormat : "" + "</span>"
+                str += "</div>";
+                str += "   <div><span class='price-new'>" + book.priceDiscount + "</span></div> ";
+                str += "  </div>";
+                str += "  <div class='button'>";
+                str += "  <a href='#' class='btn btn-primary btn-lg' style='width: 345px;font-size: 17px'><i class='glyphicon glyphicon-ok'></i>Mua ngay</a>";
+                str += "  <a class='btn btn-default btn-lg' style='width: 345px;font-size: 17px' onclick=' addCart(" + book.id + ")'><i class='glyphicon glyphicon-shopping-cart'></i>Thêm giỏ hàng</a>";
+                str += "   </div>";
+            } else {
+                str += " <div class='price'>";
+                str += "   <div><span class='price-new'>Hết hàng</span></div> ";
+                str += "  </div>";
+            }
+
             str += "   </div>";
             str += "  </div>";
             str += "  </div>";

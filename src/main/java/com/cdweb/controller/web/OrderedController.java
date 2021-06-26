@@ -42,7 +42,12 @@ public class OrderedController {
             total_price += total;
             OrderedItemDTO orderedItem = new OrderedItemDTO();
             orderedItem.setTotalPrice(total);
-            orderedItem.setQuantity(shoppingCartDTO.getQuantity());
+            if (shoppingCartDTO.getQuantity() > shoppingCartDTO.getBook().getQuantity()) {
+                orderedItem.setQuantity(shoppingCartDTO.getBook().getQuantity());
+            } else {
+                orderedItem.setQuantity(shoppingCartDTO.getQuantity());
+            }
+
             orderedItem.setBook(shoppingCartDTO.getBook());
             itemList.add(orderedItem);
             this.shoppingCartService.delete(shoppingCartDTO);
