@@ -144,7 +144,7 @@ function addCart(book_id) {
         }
     }).done(function (list) {
         if (list == null) {
-            window.location = "http://localhost:8080/dang-nhap";
+            window.location = "https://bookstorenlu2021.herokuapp.com/dang-nhap";
         } else {
             alert("Sản phẩm đã được thêm vào giỏ hàng!");
         }
@@ -182,9 +182,9 @@ function buyNow(book_id) {
         }
     }).done(function (list) {
         if (list == null) {
-            window.location = "http://localhost:8080/dang-nhap";
+            window.location = "https://bookstorenlu2021.herokuapp.com/dang-nhap";
         } else {
-            window.location = "http://localhost:8080/gio-hang";
+            window.location = "https://bookstorenlu2021.herokuapp.com/gio-hang";
         }
     });
 }

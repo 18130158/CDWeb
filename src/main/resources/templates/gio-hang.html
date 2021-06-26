@@ -260,25 +260,6 @@
         });
     }
 
-    function payment() {
-        var check = document.getElementsByName("check");
-        var list = new Array();
-        if (check[i].checked === true) {
-            list.push(check[i].value);
-        }
-        console.log(list);
-        $.ajax({
-            method: "post",
-            url:"thanh-toan",
-            dataType: 'json',
-            cache: 'false',
-            data:{
-                list:list
-            }
-        }).done(function () {
-            // window.location="http://localhost:8080/thanh-toan";
-        });
-    }
 
 </script>
 
