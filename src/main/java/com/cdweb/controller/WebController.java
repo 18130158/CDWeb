@@ -34,24 +34,31 @@ public class WebController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping(value = {"/", "/trang-chu", "/index"})
-    public ModelAndView indexPage(Principal principal) {
-
-
-        ModelAndView mav = new ModelAndView("index.html");
-        Pageable pageable = PageRequest.of(0, 8);
-        List<BookDTO> hotList = bookService.findByHot(pageable);
-
-        List<BookDTO> newList = bookService.findByNew(pageable);
-
-        List<BookDTO> discountList = bookService.findByDiscount(pageable);
-        mav.addObject("bannerlist", this.bannerService.findAll());
-        mav.addObject("discountlist", discountList);
-        mav.addObject("hotlist", hotList);
-        mav.addObject("newlist", newList);
-
-
-        return mav;
+//    @GetMapping(value = {"/", "/trang-chu", "/index"})
+//    public ModelAndView indexPage() {
+//
+//        ModelAndView mav = new ModelAndView("index.html");
+//        Pageable pageable = PageRequest.of(0, 8);
+//        List<BookDTO> hotList = bookService.findByHot(pageable);
+//
+//        List<BookDTO> newList = bookService.findByNew(pageable);
+//
+//        List<BookDTO> discountList = bookService.findByDiscount(pageable);
+//        mav.addObject("bannerlist", this.bannerService.findAll());
+//        mav.addObject("discountlist", discountList);
+//        mav.addObject("hotlist", hotList);
+//        mav.addObject("newlist", newList);
+//
+//
+//        return mav;
+//    }
+    @GetMapping("/")
+    public String hello(){
+        return "hello world";
+    }
+    @GetMapping("/index")
+    public ModelAndView helloWorld(){
+        return new ModelAndView("hello.html");
     }
 
 
