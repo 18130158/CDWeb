@@ -64,6 +64,10 @@ public class WebController {
     public ModelAndView dichvu() {
         return new ModelAndView("dich-vu.html");
     }
+    @GetMapping("/lien-he")
+    public ModelAndView lienhe() {
+        return new ModelAndView("lien-he.html");
+    }
 
     @GetMapping("/kiem-tra-don-hang")
     public ModelAndView checkOrder(Principal principal) {
