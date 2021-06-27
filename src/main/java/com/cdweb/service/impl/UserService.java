@@ -73,7 +73,7 @@ public class UserService implements IUserService {
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setFrom("bookstore@gmail.com");
             mailMessage.setText("To confirm your account, please click here : "
-                    + "http://localhost:8080/confirm-account?token=" + confirmationToken.getConfirmationToken());
+                    + "https://bookstorenlu2021.herokuapp.com/confirm-account?token=" + confirmationToken.getConfirmationToken());
 
             emailSenderService.sendEmail(mailMessage);
             return userConverter.toDTO(userEntity);
@@ -103,7 +103,7 @@ public class UserService implements IUserService {
         mailMessage.setSubject("Forget Password!");
         mailMessage.setFrom("bookstore@gmail.com");
         mailMessage.setText("To change your password, please click here : "
-                + "http://localhost:8080/forget-password?token=" + passwordResetToken.getToken());
+                + "https://bookstorenlu2021.herokuapp.com/forget-password?token=" + passwordResetToken.getToken());
         emailSenderService.sendEmail(mailMessage);
         return userConverter.toDTO(user);
     }
