@@ -71,7 +71,7 @@ public class UserService implements IUserService {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(user.getEmail());
             mailMessage.setSubject("Complete Registration!");
-            mailMessage.setFrom("bookstore@gmail.com");
+            mailMessage.setFrom("bookstorenlu2021@gmail.com");
             mailMessage.setText("To confirm your account, please click here : "
                     + "https://bookstorenlu2021.herokuapp.com/confirm-account?token=" + confirmationToken.getConfirmationToken());
 
@@ -101,7 +101,7 @@ public class UserService implements IUserService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(user.getEmail());
         mailMessage.setSubject("Forget Password!");
-        mailMessage.setFrom("bookstore@gmail.com");
+        mailMessage.setFrom("bookstorenlu2021@gmail.com");
         mailMessage.setText("To change your password, please click here : "
                 + "https://bookstorenlu2021.herokuapp.com/forget-password?token=" + passwordResetToken.getToken());
         emailSenderService.sendEmail(mailMessage);
