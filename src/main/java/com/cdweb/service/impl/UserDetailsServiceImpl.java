@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		UserEntity userEntity = this.userRepository.findByEmailAndIsEnabled(email,SystemConstant.ACTIVE_USER);
+		UserEntity userEntity = this.userRepository.findByEmailIgnoreCaseAndIsEnabled(email,SystemConstant.ACTIVE_USER);
 		if (userEntity == null) {
 			System.out.println("User not found! " + email);
 			throw new UsernameNotFoundException("email " +email + " was not found in the database or not active");

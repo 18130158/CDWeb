@@ -30,7 +30,7 @@ public class OrderedServiceImpl implements IOrderedService {
 
     @Override
     public List<OrderedDTO> findAllOrder(String email) {
-        UserEntity user = this.userRepository.findByEmailAndIsEnabled(email, true);
+        UserEntity user = this.userRepository.findByEmailIgnoreCaseAndIsEnabled(email, true);
         List<OrderedEntity> orderedList = this.orderedRepository.findAllByUser(user);
         List<OrderedDTO> listResult = new ArrayList<>();
         for (OrderedEntity entity : orderedList) {
