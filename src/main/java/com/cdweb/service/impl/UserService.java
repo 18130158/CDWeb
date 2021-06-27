@@ -44,7 +44,7 @@ public class UserService implements IUserService {
 
     @Override
     public UserDTO findByEmail(String email) {
-        UserEntity userEntity = this.userRepository.findByEmailAndIsEnabled(email, true);
+        UserEntity userEntity = this.userRepository.findByEmailIgnoreCaseAndIsEnabled(email, true);
         if (userEntity != null) {
             return this.userConverter.toDTO(userEntity);
         }
@@ -53,7 +53,7 @@ public class UserService implements IUserService {
 
     public UserDTO sendMail(UserDTO user) {
         UserEntity userEntity = new UserEntity();
-        UserEntity existingUser = userRepository.findByEmailIgnoreCase(user.getEmail());
+        UserEntity existingUser = userRepository.findByEmailIgnoreCaseAndIsEnabled(user.getEmail(), true);
         if (existingUser != null) {
             return null;
         } else {
@@ -120,7 +120,7 @@ public class UserService implements IUserService {
 
     @Override
     public UserDTO changePassword(UserDTO user) {
-        UserEntity userEntity = this.userRepository.findByEmailAndIsEnabled(user.getEmail(), true);
+        UserEntity userEntity = this.userRepository.findByEmailIgnoreCaseAndIsEnabled(user.getEmail(), true);
         UserDTO userDTO = this.userConverter.toDTO(userEntity);
 
         if (user.getFullName() != null) {

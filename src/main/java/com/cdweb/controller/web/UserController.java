@@ -24,7 +24,12 @@ public class UserController {
     public ModelAndView registerUser(@ModelAttribute("User") UserDTO user) {
         UserDTO userDTO = userService.sendMail(user);
         ModelAndView mav = new ModelAndView("dang-ki.html");
-        mav.addObject("message", "Mời bạn xác nhận tài khoản qua email: " + userDTO.getEmail());
+        if (userDTO!=null) {
+            mav.addObject("message", "Mời bạn xác nhận tài khoản qua email: " + userDTO.getEmail());
+        }else{
+            mav.addObject("message", "Email "+ userDTO.getEmail()+" đã được sử dụng! " );
+
+        }
         return mav;
     }
 
