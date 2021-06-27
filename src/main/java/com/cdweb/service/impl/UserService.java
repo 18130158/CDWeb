@@ -57,6 +57,10 @@ public class UserService implements IUserService {
         if (existingUser != null) {
             return null;
         } else {
+            UserEntity temp = userRepository.findByEmailIgnoreCaseAndIsEnabled(user.getEmail(), false);
+            if (temp != null) {
+                userRepository.delete(temp);
+            }
             user.setPassword(encoder.encode(user.getPassword()));
             List<RoleDTO> list = new ArrayList<>();
             RoleEntity role = roleRepository.findByName("ROLE_USER");
