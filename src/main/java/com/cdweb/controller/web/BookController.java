@@ -86,7 +86,7 @@ public class BookController {
 
     @GetMapping("/san-pham")
     public ModelAndView productPage(Principal principal) {
-        ModelAndView mav = new ModelAndView("/web/san-pham.html");
+        ModelAndView mav = new ModelAndView("web/san-pham.html");
         UserDTO userDTO;
         if (principal != null) {
             userDTO = this.userService.findByEmail(principal.getName());
@@ -100,7 +100,7 @@ public class BookController {
     @GetMapping("/chi-tiet-san-pham")
     public ModelAndView bookDetailPage(Principal principal)
     {
-        ModelAndView mav = new ModelAndView("/web/chi-tiet-san-pham.html");
+        ModelAndView mav = new ModelAndView("web/chi-tiet-san-pham.html");
         UserDTO userDTO;
         if (principal != null) {
             userDTO = this.userService.findByEmail(principal.getName());

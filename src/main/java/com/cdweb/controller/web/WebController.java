@@ -52,31 +52,31 @@ public class WebController {
 
     @GetMapping("/tin-tuc")
     public ModelAndView news() {
-        return new ModelAndView("/web/tin-tuc.html");
+        return new ModelAndView("web/tin-tuc.html");
     }
 
     @GetMapping("/gioi-thieu")
     public ModelAndView about() {
-        return new ModelAndView("/web/gioi-thieu.html");
+        return new ModelAndView("web/gioi-thieu.html");
     }
 
     @GetMapping("/dich-vu")
     public ModelAndView dichvu() {
-        return new ModelAndView("/web/dich-vu.html");
+        return new ModelAndView("web/dich-vu.html");
     }
     @GetMapping("/lien-he")
     public ModelAndView lienhe() {
-        return new ModelAndView("/web/lien-he.html");
+        return new ModelAndView("web/lien-he.html");
     }
 
     @GetMapping("/kiem-tra-don-hang")
     public ModelAndView checkOrder(Principal principal) {
-        return principal != null ? new ModelAndView("/web/kiem-tra-don-hang.html") : new ModelAndView("dang-nhap.html");
+        return principal != null ? new ModelAndView("web/kiem-tra-don-hang.html") : new ModelAndView("dang-nhap.html");
     }
 
     @GetMapping("/thong-tin-ca-nhan")
     public ModelAndView profile(Principal principal) {
-        return principal != null ? new ModelAndView("/web/thong-tin-ca-nhan.html") : new ModelAndView("dang-nhap.html");
+        return principal != null ? new ModelAndView("web/thong-tin-ca-nhan.html") : new ModelAndView("dang-nhap.html");
     }
 
 }
