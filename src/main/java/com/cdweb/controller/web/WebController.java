@@ -37,7 +37,7 @@ public class WebController {
     @GetMapping(value = {"/", "/trang-chu", "/index"})
     public ModelAndView indexPage() {
 
-        ModelAndView mav = new ModelAndView("/web/index.html");
+        ModelAndView mav = new ModelAndView("web/index.html");
         Pageable pageable = PageRequest.of(0, 8);
         List<BookDTO> hotList = bookService.findByHot(pageable);
         List<BookDTO> newList = bookService.findByNew(pageable);
