@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 28, 2021 lúc 01:04 PM
+-- Thời gian đã tạo: Th6 28, 2021 lúc 03:55 PM
 -- Phiên bản máy phục vụ: 10.4.19-MariaDB
 -- Phiên bản PHP: 8.0.6
 
@@ -51,10 +51,10 @@ CREATE TABLE `banner` (
 --
 
 INSERT INTO `banner` (`id`, `name`, `url`) VALUES
-(1, '1', 'CDweb/banner/8da743d575aecda9c96e190035d32f9e.jpg'),
-(2, '2', 'CDweb/banner/93f7db9464f68d979696a20a58d80be4.png'),
-(3, '3', 'CDweb/banner/muonkiepnhansinh_resize_920x420.jpg'),
-(4, '4', 'CDweb/banner/TGDQ920x420.jpg');
+(1, '1', 'web/CDweb/banner/8da743d575aecda9c96e190035d32f9e.jpg'),
+(2, '2', 'web/CDweb/banner/93f7db9464f68d979696a20a58d80be4.png'),
+(3, '3', 'web/CDweb/banner/muonkiepnhansinh_resize_920x420.jpg'),
+(4, '4', 'web/CDweb/banner/TGDQ920x420.jpg');
 
 -- --------------------------------------------------------
 
@@ -84,8 +84,8 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`id`, `active`, `description`, `discount`, `hot_book`, `new_book`, `page`, `price`, `publisher`, `quantity`, `short_description`, `title`, `author_id`, `category_id`) VALUES
-(16, b'1', 'Một lá thư thách đấu được gửi tới Kudo Shinichi - cậu thám tử học trò nổi tiếng với khả năng phá những vụ án phức tạp! Hung thủ viết: “Ta sẽ bắt cóc học sinh trong chuyến dã ngoại cuối năm của Trường trung học Teitan”. Cuộc chiến sinh tử giữa hung thủ và Shinichi đã bắt đầu!! ', 20, b'1', b'1', 221, 22000, 'NXB Kim đồng', 200, NULL, 'THÁM TỬ LỪNG DANH CONAN - LÁ THƯ THÁCH ĐẤU GỬI KUDO SHINICHI - (CÂU CHUYỆN TRƯỚC KHI CHIA TAY) (TÁI BẢN 2019)', NULL, 8),
-(15, b'1', 'Bộ sách là phiên bản tập hợp đầy đủ nhất các truyện ngắn Doraemon, trong đó đã bao gồm những truyện ngắn quen thuộc trong bộ 45 tập cùng những sáng tác chưa từng ra mắt của tác giả Fujiko F Fujio được đăng rải rác trên các tạp chí dành cho lứa tuổi Nhi Đồng tại Nhật Bản.', 0, b'1', b'0', 255, 70000, 'NXB Kim đồng', 18, NULL, 'FUJIKO F FUJIO ĐẠI TUYỂN TẬP - DORAEMON TRUYỆN NGẮN - TẬP 11', NULL, 8),
+(16, b'1', 'Một lá thư thách đấu được gửi tới Kudo Shinichi - cậu thám tử học trò nổi tiếng với khả năng phá những vụ án phức tạp! Hung thủ viết: “Ta sẽ bắt cóc học sinh trong chuyến dã ngoại cuối năm của Trường trung học Teitan”. Cuộc chiến sinh tử giữa hung thủ và Shinichi đã bắt đầu!! ', 20, b'1', b'1', 221, 22000, 'NXB Kim đồng', 26, NULL, 'THÁM TỬ LỪNG DANH CONAN - LÁ THƯ THÁCH ĐẤU GỬI KUDO SHINICHI - (CÂU CHUYỆN TRƯỚC KHI CHIA TAY) (TÁI BẢN 2019)', NULL, 8),
+(15, b'1', 'Bộ sách là phiên bản tập hợp đầy đủ nhất các truyện ngắn Doraemon, trong đó đã bao gồm những truyện ngắn quen thuộc trong bộ 45 tập cùng những sáng tác chưa từng ra mắt của tác giả Fujiko F Fujio được đăng rải rác trên các tạp chí dành cho lứa tuổi Nhi Đồng tại Nhật Bản.', 0, b'1', b'0', 255, 70000, 'NXB Kim đồng', 16, NULL, 'FUJIKO F FUJIO ĐẠI TUYỂN TẬP - DORAEMON TRUYỆN NGẮN - TẬP 11', NULL, 8),
 (13, b'1', 'Những Mảng Màu Du Lịch Việt Nam', 10, b'0', b'1', 233, 40000, 'NXB Kim đồng', 6, NULL, 'Những Mảng Màu Du Lịch Việt Nam', NULL, 1),
 (14, b'1', 'Bộ tranh truyện “Doraemon” có rất nhiều bí mật như bí mật về các nhân vật, bí mật về các bảo bối... Nội dung truyện chắc chắn đã giúp các bạn đi từ bí mật này đến bí mật khác, nhưng bạn còn có thể thâm nhập vào thế giới Doraemon sâu hơn nữa khi đọc phần “Giới thiệu nhân vật” và “Kho bảo bối bí mật”. Sở trường của Nobita là gì? Những bảo bối nào đã xuất hiện trong phim hoạt hình Doraemon?... Câu trả lời nằm trong bộ sách này, chúng ta cùng khám phá nhé!', 15, b'1', b'0', 122, 30000, 'NXB Kim đồng', 13, NULL, 'DORAEMON TUYỂN TẬP TRANH TRUYỆN MÀU KĨ THUẬT SỐ - TẬP 2 (TÁI BẢN 2018)', NULL, 8),
 (12, b'1', 'Bộ sách gồm 5 cuốn chứa các bài tập hỏi đáp bằng hình ảnh sinh động, đơn giản, ngắn gọn, dễ hiểu giúp rèn luyện trí thông minh và các hoạt động vui chơi kích thích trí não với các chủ đề dành cho trẻ 7 tuổi', 0, b'1', b'0', 46, 30000, 'NXB Kim đồng', 30, NULL, 'Phát Triển Trí Thông Minh: Dành Cho Trẻ Từ 4 Tuổi', NULL, 1),
@@ -186,14 +186,6 @@ CREATE TABLE `confirmation_token` (
   `user_id` bigint(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Đang đổ dữ liệu cho bảng `confirmation_token`
---
-
-INSERT INTO `confirmation_token` (`token_id`, `confirmation_token`, `created_date`, `user_id`) VALUES
-(1, '877b6330-4846-461e-820f-afcc455f8938', '2021-06-26 13:20:30', 2),
-(2, 'bd118d46-d2cd-49d7-9781-264e86f306a8', '2021-06-26 13:23:33', 3);
-
 -- --------------------------------------------------------
 
 --
@@ -209,7 +201,7 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(3);
+(1);
 
 -- --------------------------------------------------------
 
@@ -228,54 +220,54 @@ CREATE TABLE `media` (
 --
 
 INSERT INTO `media` (`id`, `path`, `book_id`) VALUES
-(18, 'CDweb/8/conan-34.jpg', 18),
-(17, 'CDweb/8/conan-74.jpg', 17),
-(16, 'CDweb/8/conan-la-thu-thach-dau.jpg', 16),
-(48, 'CDweb/8/doraemon-tap-8.jpg', 48),
-(14, 'CDweb/8/doraemon-tuyen-tap-truyen-mau-ky-thuat-so.jpg', 14),
-(15, 'CDweb/8/fujiko-doraemon-tap-11.jpg', 15),
-(36, 'CDweb/7/an-mang-tren-song-nile.jpg', 36),
-(38, 'CDweb/7/hoa-nguc.jpg', 38),
-(37, 'CDweb/7/Mat_ma_davinci.jpg', 37),
-(39, 'CDweb/7/mau_lanh.jpg', 39),
-(41, 'CDweb/7/sat-nhan-mang.jpg', 41),
-(40, 'CDweb/7/su-im-lang-cua-bay-cuu.jpg', 40),
-(12, 'CDweb/1/Phat-trien-thong-minh-4-tuoi.png', 12),
-(11, 'CDweb/1/Phat-trien-thong-minh-5-tuoi.png', 11),
-(10, 'CDweb/1/Phat-trien-thong-minh-6-tuoi.png', 10),
-(43, 'CDweb/2/150-bai-van-lop-12.jpg', 43),
-(2, 'CDweb/2/bo-sach-lop-6.jpg', 2),
-(20, 'CDweb/2/cong-nghe-10.jpg', 20),
-(19, 'CDweb/2/sinh-hoc-7.jpg', 19),
-(21, 'CDweb/2/tap-hat-1.jpg', 21),
-(3, 'CDweb/2/vat-li-9.jpg', 3),
-(9, 'CDweb/3/andecxen.png', 9),
-(22, 'CDweb/3/o-hien-gap-lanh.jpg', 22),
-(8, 'CDweb/3/rump.jpg', 8),
-(23, 'CDweb/3/su-tich-nui-vang.jpg', 23),
-(44, 'CDweb/3/than-thoai-the-gioi.jpg', 44),
-(7, 'CDweb/3/truyen-co-tich-vn-hay-nhat-tap-1.jpg', 7),
-(28, 'CDweb/4/lam-sao-de-song-hanh-phuc.jpg', 28),
-(24, 'CDweb/4/mot-con-dau-mang-ten-tram-cam.jpg', 24),
-(26, 'CDweb/4/nguoi-nhay-cam.jpg', 26),
-(27, 'CDweb/4/tai-sao-dan-ong-thich.jpg', 27),
-(25, 'CDweb/4/tam-li-hoc.jpg', 25),
-(45, 'CDweb/4/thuat-doc-tam.jpg', 45),
-(30, 'CDweb/5/cuoc-chien-luan-hoi.jpg', 30),
-(46, 'CDweb/5/gene_atlantis.jpg', 46),
-(31, 'CDweb/5/ke_trom_giac_mo.jpg', 31),
-(32, 'CDweb/5/nguoi-may-co-mo-ve-cuu-dien-khong.jpg', 32),
-(33, 'CDweb/5/nguoi-minh-hoa.jpg', 33),
-(29, 'CDweb/5/sach-hai-van-dam-duoi-day-bien-214x300.gif', 29),
-(47, 'CDweb/6/bo-lo-mot-nguoi.jpg', 47),
-(35, 'CDweb/6/don-phuong-anh-khong-thuong-em.jpg', 35),
-(4, 'CDweb/6/ho-ly-biet-yeu.jpg', 4),
-(6, 'CDweb/6/khu-vuon-ngon-tu.jpg', 6),
-(5, 'CDweb/6/mai-mai-la-bao-xa.jpg', 5),
-(34, 'CDweb/6/nghe-noi-anh-muon-chia-tay.jpg', 34),
-(42, 'CDweb/1/Khung-long-co-de-trung-khong.jpg', 42),
-(1, 'CDweb/1/Len-nui-cao.jpg', 1),
-(13, 'CDweb/1/Nhung-mang-mau-du-lich-vn.png', 13);
+(18, 'web/CDweb/8/conan-34.jpg', 18),
+(17, 'web/CDweb/8/conan-74.jpg', 17),
+(16, 'web/CDweb/8/conan-la-thu-thach-dau.jpg', 16),
+(48, 'web/CDweb/8/doraemon-tap-8.jpg', 48),
+(14, 'web/CDweb/8/doraemon-tuyen-tap-truyen-mau-ky-thuat-so.jpg', 14),
+(15, 'web/CDweb/8/fujiko-doraemon-tap-11.jpg', 15),
+(36, 'web/CDweb/7/an-mang-tren-song-nile.jpg', 36),
+(38, 'web/CDweb/7/hoa-nguc.jpg', 38),
+(37, 'web/CDweb/7/Mat_ma_davinci.jpg', 37),
+(39, 'web/CDweb/7/mau_lanh.jpg', 39),
+(41, 'web/CDweb/7/sat-nhan-mang.jpg', 41),
+(40, 'web/CDweb/7/su-im-lang-cua-bay-cuu.jpg', 40),
+(12, 'web/CDweb/1/Phat-trien-thong-minh-4-tuoi.png', 12),
+(11, 'web/CDweb/1/Phat-trien-thong-minh-5-tuoi.png', 11),
+(10, 'web/CDweb/1/Phat-trien-thong-minh-6-tuoi.png', 10),
+(43, 'web/CDweb/2/150-bai-van-lop-12.jpg', 43),
+(2, 'web/CDweb/2/bo-sach-lop-6.jpg', 2),
+(20, 'web/CDweb/2/cong-nghe-10.jpg', 20),
+(19, 'web/CDweb/2/sinh-hoc-7.jpg', 19),
+(21, 'web/CDweb/2/tap-hat-1.jpg', 21),
+(3, 'web/CDweb/2/vat-li-9.jpg', 3),
+(9, 'web/CDweb/3/andecxen.png', 9),
+(22, 'web/CDweb/3/o-hien-gap-lanh.jpg', 22),
+(8, 'web/CDweb/3/rump.jpg', 8),
+(23, 'web/CDweb/3/su-tich-nui-vang.jpg', 23),
+(44, 'web/CDweb/3/than-thoai-the-gioi.jpg', 44),
+(7, 'web/CDweb/3/truyen-co-tich-vn-hay-nhat-tap-1.jpg', 7),
+(28, 'web/CDweb/4/lam-sao-de-song-hanh-phuc.jpg', 28),
+(24, 'web/CDweb/4/mot-con-dau-mang-ten-tram-cam.jpg', 24),
+(26, 'web/CDweb/4/nguoi-nhay-cam.jpg', 26),
+(27, 'web/CDweb/4/tai-sao-dan-ong-thich.jpg', 27),
+(25, 'web/CDweb/4/tam-li-hoc.jpg', 25),
+(45, 'web/CDweb/4/thuat-doc-tam.jpg', 45),
+(30, 'web/CDweb/5/cuoc-chien-luan-hoi.jpg', 30),
+(46, 'web/CDweb/5/gene_atlantis.jpg', 46),
+(31, 'web/CDweb/5/ke_trom_giac_mo.jpg', 31),
+(32, 'web/CDweb/5/nguoi-may-co-mo-ve-cuu-dien-khong.jpg', 32),
+(33, 'web/CDweb/5/nguoi-minh-hoa.jpg', 33),
+(29, 'web/CDweb/5/sach-hai-van-dam-duoi-day-bien-214x300.gif', 29),
+(47, 'web/CDweb/6/bo-lo-mot-nguoi.jpg', 47),
+(35, 'web/CDweb/6/don-phuong-anh-khong-thuong-em.jpg', 35),
+(4, 'web/CDweb/6/ho-ly-biet-yeu.jpg', 4),
+(6, 'web/CDweb/6/khu-vuon-ngon-tu.jpg', 6),
+(5, 'web/CDweb/6/mai-mai-la-bao-xa.jpg', 5),
+(34, 'web/CDweb/6/nghe-noi-anh-muon-chia-tay.jpg', 34),
+(42, 'web/CDweb/1/Khung-long-co-de-trung-khong.jpg', 42),
+(1, 'web/CDweb/1/Len-nui-cao.jpg', 1),
+(13, 'web/CDweb/1/Nhung-mang-mau-du-lich-vn.png', 13);
 
 -- --------------------------------------------------------
 
@@ -349,14 +341,6 @@ CREATE TABLE `persistent_logins` (
   `username` varchar(255) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Đang đổ dữ liệu cho bảng `persistent_logins`
---
-
-INSERT INTO `persistent_logins` (`series`, `last_used`, `token`, `username`) VALUES
-('B0WexjA9Q28kYZjbjtyj+A==', '2021-06-25 02:00:21', 'sFs6wO7GfzKXOEkdqTzfZg==', 'thiensubanphuc000@gmail.com'),
-('MPNcMfxDB2RG5IF26kK+4Q==', '2021-06-28 17:35:31', 'X3BetEsUHpXzOCXglGdCMw==', 'thiensubanphuc000@gmail.com');
-
 -- --------------------------------------------------------
 
 --
@@ -410,7 +394,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `address`, `email`, `full_name`, `is_enabled`, `password`, `phone`) VALUES
-(1, '', 'thiensubanphuc000@gmail.com', 'Tô Thảo Nhả', b'1', '$2a$10$NSMrymaIjEIGjFHxbacqmu0LbPvv5VolQBhSJj8hB3tOwGTykiM0.', '');
+(1, '', 'thiensubanphuc000@gmail.com', 'Tô Thảo Nhả', b'1', '$2a$10$NSMrymaIjEIGjFHxbacqmu0LbPvv5VolQBhSJj8hB3tOwGTykiM0.', ''),
+(7, 'abc', '17130008@st.hcmuaf.edu.vn', 'nhu anh', b'1', '$2a$10$qGRUuBbVCZmCpjswzXOcQeUy3aoG755vy2dtLWY46S7al39mtcMJu', '0898450938'),
+(6, 'abc', 'jennyvu8202@gmail.com', 'nhu anh', b'0', '$2a$10$.wk/YHCjnuTEXwanA3d9T.2W56zYvQ6BpJdDIuxitLDEUvBiKhVF2', '0898450938');
 
 -- --------------------------------------------------------
 
@@ -429,6 +415,8 @@ CREATE TABLE `user_role` (
 
 INSERT INTO `user_role` (`user_id`, `role_id`) VALUES
 (1, 1),
+(6, 1),
+(7, 1),
 (1, 2);
 
 --
@@ -534,6 +522,20 @@ ALTER TABLE `shopping_cart`
   ADD KEY `FK254qp5akhuaaj9n5co4jww3fk` (`user_id`);
 
 --
+-- Chỉ mục cho bảng `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `USER_UK` (`email`);
+
+--
+-- Chỉ mục cho bảng `user_role`
+--
+ALTER TABLE `user_role`
+  ADD KEY `FKa68196081fvovjhkek5m97n3y` (`role_id`),
+  ADD KEY `FK859n2jvi8ivhui0rl0esws6o` (`user_id`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -602,6 +604,12 @@ ALTER TABLE `role`
 --
 ALTER TABLE `shopping_cart`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
