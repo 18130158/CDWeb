@@ -1,6 +1,7 @@
 package com.cdweb.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,10 +13,10 @@ public class OrderedEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "ordered_date")
-    private Date orderDate;
-    @Column(name = "received_date")
-    private Date receiveDate;
+    @Column
+    private Timestamp orderedDate;
+    @Column
+    private Timestamp receivedDate;
     @Column
     private double totalPrice;
     @Column
@@ -40,20 +41,20 @@ public class OrderedEntity {
         return id;
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    public Timestamp getOrderedDate() {
+        return orderedDate;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+    public void setOrderedDate(Timestamp orderedDate) {
+        this.orderedDate = orderedDate;
     }
 
-    public Date getReceiveDate() {
-        return receiveDate;
+    public Timestamp getReceivedDate() {
+        return receivedDate;
     }
 
-    public void setReceiveDate(Date receiveDate) {
-        this.receiveDate = receiveDate;
+    public void setReceivedDate(Timestamp receivedDate) {
+        this.receivedDate = receivedDate;
     }
 
     public double getTotalPrice() {

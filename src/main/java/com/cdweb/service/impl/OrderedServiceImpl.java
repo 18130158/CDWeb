@@ -24,7 +24,8 @@ public class OrderedServiceImpl implements IOrderedService {
 
     @Override
     public OrderedDTO save(OrderedDTO orderedDTO) {
-        OrderedEntity entity = this.orderedRepository.save(this.orderedConverter.toEntity(orderedDTO));
+        OrderedEntity entity=this.orderedConverter.toEntity(orderedDTO);
+       entity = this.orderedRepository.save(entity);
         return this.orderedConverter.toDTO(entity);
     }
 

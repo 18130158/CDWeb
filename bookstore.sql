@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 26, 2021 lúc 08:19 AM
+-- Thời gian đã tạo: Th6 28, 2021 lúc 01:04 PM
 -- Phiên bản máy phục vụ: 10.4.19-MariaDB
 -- Phiên bản PHP: 8.0.6
 
@@ -84,7 +84,7 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`id`, `active`, `description`, `discount`, `hot_book`, `new_book`, `page`, `price`, `publisher`, `quantity`, `short_description`, `title`, `author_id`, `category_id`) VALUES
-(16, b'1', 'Một lá thư thách đấu được gửi tới Kudo Shinichi - cậu thám tử học trò nổi tiếng với khả năng phá những vụ án phức tạp! Hung thủ viết: “Ta sẽ bắt cóc học sinh trong chuyến dã ngoại cuối năm của Trường trung học Teitan”. Cuộc chiến sinh tử giữa hung thủ và Shinichi đã bắt đầu!! ', 20, b'1', b'1', 221, 22000, 'NXB Kim đồng', 29, NULL, 'THÁM TỬ LỪNG DANH CONAN - LÁ THƯ THÁCH ĐẤU GỬI KUDO SHINICHI - (CÂU CHUYỆN TRƯỚC KHI CHIA TAY) (TÁI BẢN 2019)', NULL, 8),
+(16, b'1', 'Một lá thư thách đấu được gửi tới Kudo Shinichi - cậu thám tử học trò nổi tiếng với khả năng phá những vụ án phức tạp! Hung thủ viết: “Ta sẽ bắt cóc học sinh trong chuyến dã ngoại cuối năm của Trường trung học Teitan”. Cuộc chiến sinh tử giữa hung thủ và Shinichi đã bắt đầu!! ', 20, b'1', b'1', 221, 22000, 'NXB Kim đồng', 200, NULL, 'THÁM TỬ LỪNG DANH CONAN - LÁ THƯ THÁCH ĐẤU GỬI KUDO SHINICHI - (CÂU CHUYỆN TRƯỚC KHI CHIA TAY) (TÁI BẢN 2019)', NULL, 8),
 (15, b'1', 'Bộ sách là phiên bản tập hợp đầy đủ nhất các truyện ngắn Doraemon, trong đó đã bao gồm những truyện ngắn quen thuộc trong bộ 45 tập cùng những sáng tác chưa từng ra mắt của tác giả Fujiko F Fujio được đăng rải rác trên các tạp chí dành cho lứa tuổi Nhi Đồng tại Nhật Bản.', 0, b'1', b'0', 255, 70000, 'NXB Kim đồng', 18, NULL, 'FUJIKO F FUJIO ĐẠI TUYỂN TẬP - DORAEMON TRUYỆN NGẮN - TẬP 11', NULL, 8),
 (13, b'1', 'Những Mảng Màu Du Lịch Việt Nam', 10, b'0', b'1', 233, 40000, 'NXB Kim đồng', 6, NULL, 'Những Mảng Màu Du Lịch Việt Nam', NULL, 1),
 (14, b'1', 'Bộ tranh truyện “Doraemon” có rất nhiều bí mật như bí mật về các nhân vật, bí mật về các bảo bối... Nội dung truyện chắc chắn đã giúp các bạn đi từ bí mật này đến bí mật khác, nhưng bạn còn có thể thâm nhập vào thế giới Doraemon sâu hơn nữa khi đọc phần “Giới thiệu nhân vật” và “Kho bảo bối bí mật”. Sở trường của Nobita là gì? Những bảo bối nào đã xuất hiện trong phim hoạt hình Doraemon?... Câu trả lời nằm trong bộ sách này, chúng ta cùng khám phá nhé!', 15, b'1', b'0', 122, 30000, 'NXB Kim đồng', 13, NULL, 'DORAEMON TUYỂN TẬP TRANH TRUYỆN MÀU KĨ THUẬT SỐ - TẬP 2 (TÁI BẢN 2018)', NULL, 8),
@@ -186,6 +186,14 @@ CREATE TABLE `confirmation_token` (
   `user_id` bigint(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Đang đổ dữ liệu cho bảng `confirmation_token`
+--
+
+INSERT INTO `confirmation_token` (`token_id`, `confirmation_token`, `created_date`, `user_id`) VALUES
+(1, '877b6330-4846-461e-820f-afcc455f8938', '2021-06-26 13:20:30', 2),
+(2, 'bd118d46-d2cd-49d7-9781-264e86f306a8', '2021-06-26 13:23:33', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -201,7 +209,7 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(1);
+(3);
 
 -- --------------------------------------------------------
 
@@ -346,7 +354,8 @@ CREATE TABLE `persistent_logins` (
 --
 
 INSERT INTO `persistent_logins` (`series`, `last_used`, `token`, `username`) VALUES
-('B0WexjA9Q28kYZjbjtyj+A==', '2021-06-25 02:00:21', 'sFs6wO7GfzKXOEkdqTzfZg==', 'thiensubanphuc000@gmail.com');
+('B0WexjA9Q28kYZjbjtyj+A==', '2021-06-25 02:00:21', 'sFs6wO7GfzKXOEkdqTzfZg==', 'thiensubanphuc000@gmail.com'),
+('MPNcMfxDB2RG5IF26kK+4Q==', '2021-06-28 17:35:31', 'X3BetEsUHpXzOCXglGdCMw==', 'thiensubanphuc000@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -419,7 +428,8 @@ CREATE TABLE `user_role` (
 --
 
 INSERT INTO `user_role` (`user_id`, `role_id`) VALUES
-(1, 1);
+(1, 1),
+(1, 2);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -524,20 +534,6 @@ ALTER TABLE `shopping_cart`
   ADD KEY `FK254qp5akhuaaj9n5co4jww3fk` (`user_id`);
 
 --
--- Chỉ mục cho bảng `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `USER_UK` (`email`);
-
---
--- Chỉ mục cho bảng `user_role`
---
-ALTER TABLE `user_role`
-  ADD KEY `FKa68196081fvovjhkek5m97n3y` (`role_id`),
-  ADD KEY `FK859n2jvi8ivhui0rl0esws6o` (`user_id`);
-
---
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -606,12 +602,6 @@ ALTER TABLE `role`
 --
 ALTER TABLE `shopping_cart`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `user`
---
-ALTER TABLE `user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

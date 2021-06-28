@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,8 +54,8 @@ public class OrderedController {
             this.shoppingCartService.delete(shoppingCartDTO);
         }
         OrderedDTO orderedDTO = new OrderedDTO();
-        orderedDTO.setNowDate();
-        orderedDTO.setReceiveDate(null);
+        orderedDTO.setOrderedDate(new Timestamp(new Date().getTime()));
+        orderedDTO.setReceivedDate(null);
         orderedDTO.setStatus("ĐANG XỬ LÝ");
         orderedDTO.setTotalPrice(total_price + 25000);
         orderedDTO.setName(orderedInput.getName());

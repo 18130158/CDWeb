@@ -1,6 +1,7 @@
 package com.cdweb.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -13,7 +14,7 @@ public class CommentEntity {
     @Column
     private String review;
     @Column
-    private Date dateCreated;
+    private Timestamp dateCreated;
     //map
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -31,13 +32,10 @@ public class CommentEntity {
         this.id = id;
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(Timestamp dateCreated) {
         this.dateCreated = dateCreated;
     }
+
 
     public UserEntity getUser() {
         return user;

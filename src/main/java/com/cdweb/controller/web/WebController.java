@@ -1,4 +1,4 @@
-package com.cdweb.controller;
+package com.cdweb.controller.web;
 
 import com.cdweb.dto.BookDTO;
 import com.cdweb.dto.CategoryDTO;

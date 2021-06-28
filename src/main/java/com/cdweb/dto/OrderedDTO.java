@@ -1,6 +1,7 @@
 package com.cdweb.dto;
 
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,8 +11,8 @@ public class OrderedDTO {
     private Long id;
     private UserDTO user;
     private String status;
-    private Date orderedDate;
-    private Date receiveDate;
+    private Timestamp orderedDate;
+    private Timestamp receivedDate;
     private double totalPrice;
     private String name;
     private String phone;
@@ -22,10 +23,6 @@ public class OrderedDTO {
 
     }
 
-    public void setNowDate() {
-        Calendar calendar = Calendar.getInstance();
-        this.orderedDate = calendar.getTime();
-    }
 
     public String getName() {
         return name;
@@ -67,20 +64,20 @@ public class OrderedDTO {
         this.user = user;
     }
 
-    public Date getOrderedDate() {
+    public Timestamp getOrderedDate() {
         return orderedDate;
     }
 
-    public void setOrderedDate(Date orderedDate) {
+    public void setOrderedDate(Timestamp orderedDate) {
         this.orderedDate = orderedDate;
     }
 
-    public Date getReceiveDate() {
-        return receiveDate;
+    public Timestamp getReceivedDate() {
+        return receivedDate;
     }
 
-    public void setReceiveDate(Date receiveDate) {
-        this.receiveDate = receiveDate;
+    public void setReceivedDate(Timestamp receivedDate) {
+        this.receivedDate = receivedDate;
     }
 
     public double getTotalPrice() {
@@ -105,5 +102,12 @@ public class OrderedDTO {
 
     public void setOrderedItemList(List<OrderedItemDTO> orderedItemList) {
         this.orderedItemList = orderedItemList;
+    }
+
+    public String getOrderedDateString() {
+        return orderedDate.toString();
+    }
+    public String getReceivedDateString() {
+        return receivedDate.toString();
     }
 }
