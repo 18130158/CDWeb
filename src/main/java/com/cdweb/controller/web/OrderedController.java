@@ -72,13 +72,13 @@ public class OrderedController {
             book.setQuantity(book.getQuantity() - orderedItem.getQuantity());
             this.bookService.save(book);
         }
-        return new ModelAndView("dat-hang-thanh-cong.html");
+        return new ModelAndView("/web/dat-hang-thanh-cong.html");
     }
 
     @PostMapping("/thanh-toan")
     public ModelAndView getPayment(@ModelAttribute("orderedInput") OrderedInput orderedInput, Principal principal) {
         if (principal == null) {
-            return new ModelAndView("dang-nhap.html");
+            return new ModelAndView("/web/dang-nhap.html");
         }
         CartOutput cartOutput = new CartOutput();
         double total = 0;
@@ -88,7 +88,7 @@ public class OrderedController {
             cartOutput.getList().add(shoppingCartDTO);
         }
         cartOutput.setTotal(total);
-        ModelAndView mav = new ModelAndView("thanh-toan.html");
+        ModelAndView mav = new ModelAndView("/web/thanh-toan.html");
         mav.addObject("output", cartOutput);
         mav.addObject("user", this.userService.findByEmail(principal.getName()));
         return mav;

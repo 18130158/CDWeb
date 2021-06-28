@@ -23,7 +23,7 @@ public class UserController {
     @PostMapping(value = "/dang-ki")
     public ModelAndView registerUser(@ModelAttribute("User") UserDTO user) {
         UserDTO userDTO = userService.sendMail(user);
-        ModelAndView mav = new ModelAndView("dang-ki.html");
+        ModelAndView mav = new ModelAndView("/web/dang-ki.html");
         if (userDTO!=null) {
             mav.addObject("message", "Mời bạn xác nhận tài khoản qua email: " + userDTO.getEmail());
         }else{
@@ -36,7 +36,7 @@ public class UserController {
     @RequestMapping(value = "/confirm-account", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView confirmEmail(@RequestParam(name = "token") String confirmationToken, Model model) {
         UserDTO user = userService.confirmEmail(confirmationToken);
-        return new ModelAndView("dang-nhap.html");
+        return new ModelAndView("/web/dang-nhap.html");
     }
 
     @GetMapping("/check-mail")
@@ -47,7 +47,7 @@ public class UserController {
 
     @GetMapping("/dang-nhap")
     public ModelAndView loginPage(@RequestParam(name = "error", required = false, defaultValue = "false") boolean error) {
-        ModelAndView mav = new ModelAndView("dang-nhap.html");
+        ModelAndView mav = new ModelAndView("/web/dang-nhap.html");
         if (error) {
             mav.addObject("error", "Email hoặc mật khẩu không chính xác!");
             return mav;
@@ -58,7 +58,7 @@ public class UserController {
 
     @GetMapping("/dang-ki")
     public ModelAndView registorPage() {
-        ModelAndView mav = new ModelAndView("dang-ki.html");
+        ModelAndView mav = new ModelAndView("/web/dang-ki.html");
         mav.addObject("mesage");
         return mav;
     }
@@ -70,7 +70,7 @@ public class UserController {
 
     @GetMapping("/quen-mat-khau")
     public ModelAndView forgetPasswordPage() {
-        ModelAndView mav = new ModelAndView("quen-mat-khau.html");
+        ModelAndView mav = new ModelAndView("/web/quen-mat-khau.html");
         mav.addObject("message", false);
         return mav;
     }
@@ -78,7 +78,7 @@ public class UserController {
     @PostMapping("/send-mail-forget-password")
     public ModelAndView newPassword(@ModelAttribute("user") UserDTO user) {
         UserDTO userDTO = userService.sendMailForgetPassword(user.getEmail());
-        ModelAndView mav = new ModelAndView("quen-mat-khau.html");
+        ModelAndView mav = new ModelAndView("/web/quen-mat-khau.html");
         mav.addObject("message", true);
         return mav;
     }
@@ -86,7 +86,7 @@ public class UserController {
     @RequestMapping(value = "/forget-password", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView forgetPassword(@RequestParam(name = "token") String confirmationToken) {
         UserDTO user = userService.confirmEmailForgetPassword(confirmationToken);
-        ModelAndView mav = new ModelAndView("doi-mat-khau.html");
+        ModelAndView mav = new ModelAndView("/web/doi-mat-khau.html");
         mav.addObject("forget", true);
         mav.addObject("email", user.getEmail());
         return mav;
@@ -96,15 +96,15 @@ public class UserController {
     public ModelAndView changePassword(@ModelAttribute("user") UserDTO user, Principal principal) {
         UserDTO userDTO = userService.changePassword(user);
         if (principal == null) {
-            return new ModelAndView("dang-nhap.html");
+            return new ModelAndView("/web/dang-nhap.html");
         } else {
-            return new ModelAndView("thong-tin-ca-nhan.html");
+            return new ModelAndView("/web/thong-tin-ca-nhan.html");
         }
     }
 
     @GetMapping("/doi-mat-khau")
     public ModelAndView changePasswordPage(Principal principal) {
-        ModelAndView mav = new ModelAndView("doi-mat-khau.html");
+        ModelAndView mav = new ModelAndView("/web/doi-mat-khau.html");
         mav.addObject("forget", false);
         mav.addObject("email", principal.getName());
         return mav;

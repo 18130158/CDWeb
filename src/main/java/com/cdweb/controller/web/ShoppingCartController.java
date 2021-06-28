@@ -21,7 +21,7 @@ public class ShoppingCartController {
 
     @GetMapping("/gio-hang")
     public ModelAndView shoppingCart(Principal principal) {
-        return principal == null ? new ModelAndView("dang-nhap.html") : new ModelAndView("gio-hang.html");
+        return principal == null ? new ModelAndView("/web/dang-nhap.html") : new ModelAndView("gio-hang.html");
     }
 
     @GetMapping("/them-san-pham")

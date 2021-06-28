@@ -37,7 +37,7 @@ public class WebController {
     @GetMapping(value = {"/", "/trang-chu", "/index"})
     public ModelAndView indexPage() {
 
-        ModelAndView mav = new ModelAndView("index.html");
+        ModelAndView mav = new ModelAndView("/web/index.html");
         Pageable pageable = PageRequest.of(0, 8);
         List<BookDTO> hotList = bookService.findByHot(pageable);
         List<BookDTO> newList = bookService.findByNew(pageable);
@@ -52,31 +52,31 @@ public class WebController {
 
     @GetMapping("/tin-tuc")
     public ModelAndView news() {
-        return new ModelAndView("tin-tuc.html");
+        return new ModelAndView("/web/tin-tuc.html");
     }
 
     @GetMapping("/gioi-thieu")
     public ModelAndView about() {
-        return new ModelAndView("gioi-thieu.html");
+        return new ModelAndView("/web/gioi-thieu.html");
     }
 
     @GetMapping("/dich-vu")
     public ModelAndView dichvu() {
-        return new ModelAndView("dich-vu.html");
+        return new ModelAndView("/web/dich-vu.html");
     }
     @GetMapping("/lien-he")
     public ModelAndView lienhe() {
-        return new ModelAndView("lien-he.html");
+        return new ModelAndView("/web/lien-he.html");
     }
 
     @GetMapping("/kiem-tra-don-hang")
     public ModelAndView checkOrder(Principal principal) {
-        return principal != null ? new ModelAndView("kiem-tra-don-hang.html") : new ModelAndView("dang-nhap.html");
+        return principal != null ? new ModelAndView("/web/kiem-tra-don-hang.html") : new ModelAndView("dang-nhap.html");
     }
 
     @GetMapping("/thong-tin-ca-nhan")
     public ModelAndView profile(Principal principal) {
-        return principal != null ? new ModelAndView("thong-tin-ca-nhan.html") : new ModelAndView("dang-nhap.html");
+        return principal != null ? new ModelAndView("/web/thong-tin-ca-nhan.html") : new ModelAndView("dang-nhap.html");
     }
 
 }
