@@ -52,7 +52,6 @@
                                                 <label class="col-sm-2 control-label"> Hình ảnh:</label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px">
                                                     <input type="file" id="images" name="images"
-                                                           th:field="*{images}"
                                                            class="form-control-file"
                                                            accept="image/png, image/jpeg, image/jpg"
                                                            onchange="loadImg(event)">
@@ -62,17 +61,12 @@
                                                 </div>
                                                 <label class="col-sm-2 control-label"> Tên sách:</label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        th:field="*{title}"
+                                                        name="title"
                                                         class="form-control" required/></div>
-
-
                                                 <label class="col-sm-2 control-label"> Thể loại: </label>
-
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><select
-                                                        th:field="*{category}"
+                                                        name="category"
                                                         class="form-control" required>
-
-
                                                     <option th:each="category : ${listcategory}"
                                                             th:value="${category.code}"
                                                             th:text="${category.name}"></option>
@@ -80,38 +74,38 @@
                                                 </div>
                                                 <label class="col-sm-2 control-label"> Giá: </label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        th:field="*{price}"
+                                                        name="price"
                                                         class="form-control" required/>VND
                                                 </div>
                                                 <label class="col-sm-2 control-label">Sản phẩm Hot </label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        type="checkbox" th:field="*{hotBook}"
+                                                        type="checkbox" name="hotBook"
                                                         class="form-control"/></div>
                                                 <label class="col-sm-2 control-label">Sản phẩm Mới </label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        type="checkbox" th:field="*{newBook}"
+                                                        type="checkbox" name="newBook"
                                                         class="form-control"/></div>
                                                 <label class="col-sm-2 control-label"> Giảm giá: </label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        th:field="*{discount}"
+                                                        name="discount"
                                                         type="datetime" class="form-control"
                                                         required/>%
                                                 </div>
                                                 <label class="col-sm-2 control-label"> Nhà sản xuất:</label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        th:field="*{publisher}"
+                                                       name="publisher"
                                                         class="form-control" required/></div>
                                                 <label class="col-sm-2 control-label">Số trang:</label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        th:field="*{page}"
+                                                        name="page"
                                                         class="form-control" required/></div>
                                                 <label class="col-sm-2 control-label"> Số lượng: </label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        th:field="*{quantity}"
+                                                        name="quantity"
                                                         class="form-control" required/></div>
                                                 <label class="col-sm-2 control-label"> Mô tả:</label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><textarea
-                                                        th:field="*{description}" class="form-control"
+                                                        name="description" class="form-control"
                                                         required></textarea></div>
                                                 <br/> <br/>
                                                 <button type="submit">Lưu</button>

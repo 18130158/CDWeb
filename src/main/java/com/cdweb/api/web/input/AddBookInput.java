@@ -3,6 +3,7 @@ package com.cdweb.api.web.input;
 import org.springframework.web.multipart.MultipartFile;
 
 public class AddBookInput {
+    private long id;
     private String title;
     private String shortDescription;
     private String description;
@@ -15,7 +16,7 @@ public class AddBookInput {
     private String publisher;
     private String author;
     private String category;
-    private String images;
+    private MultipartFile images;
 
     public AddBookInput() {
     }
@@ -116,11 +117,19 @@ public class AddBookInput {
         this.category = category;
     }
 
-    public String getImages() {
+    public MultipartFile getImages() {
         return images;
     }
 
-    public void setImages(String images) {
+    public void setImages(MultipartFile images) {
         this.images = images;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -47,28 +47,32 @@
 
                                             <!-- <form action="" method="POST" modelAttribute="book> -->
                                             <form method="POST" th:object="${AddBookInput}"
-                                                  th:action="@{/admin-productEdit}" enctype="multipart/form-data">
+                                                  th:action="@{/admin-productAdd}" enctype="multipart/form-data">
+                                                <input type="hidden" name="id" th:value="${product.id}">
                                                 <label class="col-sm-2 control-label"> Hình ảnh:</label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px">
                                                     <input type="file" id="images" name="images"
-                                                           th:field="*{images}" th:value="${product.mediaList[0].path}"
                                                            class="form-control-file"
+                                                           th:value="${product.mediaList[0].path}"
                                                            accept="image/png, image/jpeg, image/jpg"
                                                            onchange="loadImg(event)">
                                                     <ul>
-                                                        <li id="img-list"></li>
+                                                        <li id="img-list">
+                                                            <img id="img" style="width: 250px"
+                                                                 th:src="${product.mediaList[0].path}" alt="">
+                                                        </li>
                                                     </ul>
                                                 </div>
                                                 <label class="col-sm-2 control-label"> Tên sách:</label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        th:field="*{title}" th:utext="${product.title}"
+                                                        name="title" th:value="${product.title}"
                                                         class="form-control" required/></div>
 
 
                                                 <label class="col-sm-2 control-label"> Thể loại: </label>
 
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><select
-                                                        th:field="*{category}"
+                                                        name="category"
                                                         class="form-control" required>
                                                     <th:block th:each="category : ${listcategory}">
                                                         <th:block th:if="product.category==catgory">
@@ -90,7 +94,7 @@
                                                 </div>
                                                 <label class="col-sm-2 control-label"> Giá: </label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        th:field="*{price}" th:utext="${product.price}"
+                                                        name="price" th:value="${product.price}"
                                                         class="form-control" required/>VND
                                                 </div>
                                                 <label class="col-sm-2 control-label">Sản phẩm Hot </label>
@@ -98,12 +102,12 @@
                                                 <th:block th:if="product.hotBook">
                                                     <div checked="checked" class="col-sm-10"
                                                          style="margin-bottom: 10px"><input
-                                                            type="checkbox" th:field="*{hotBook}"
+                                                            type="checkbox" name="hotBook"
                                                             class="form-control"/></div>
                                                 </th:block>
                                                 <th:block th:unless="product.hotBook">
                                                     <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                            type="checkbox" th:field="*{hotBook}"
+                                                            type="checkbox" name="hotBook"
                                                             class="form-control"/></div>
                                                 </th:block>
 
@@ -112,36 +116,37 @@
 
                                                 <th:block th:if="product.newBook">
                                                     <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                            checked="checked" type="checkbox" th:field="*{newBook}"
+                                                            checked="checked" type="checkbox" name="newBook"
                                                             class="form-control"/></div>
                                                 </th:block>
                                                 <th:block th:unless="product.newBook">
                                                     <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                            type="checkbox" th:field="*{newBook}"
+                                                            type="checkbox" name="newBook"
                                                             class="form-control"/></div>
                                                 </th:block>
 
                                                 <label class="col-sm-2 control-label"> Giảm giá: </label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        th:field="*{discount}" th:utext="${product.discount}"
+                                                        name="discount" th:value="${product.discount}"
                                                         type="datetime" class="form-control"
                                                         required/>%
                                                 </div>
                                                 <label class="col-sm-2 control-label"> Nhà sản xuất:</label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        th:field="*{publisher}" th:utext="${product.publisher}"
+                                                        name="publisher" th:value="${product.publisher}"
                                                         class="form-control" required/></div>
                                                 <label class="col-sm-2 control-label">Số trang:</label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        th:field="*{page}" th:utext="${product.page}"
+                                                        name="page" th:value="${product.page}"
                                                         class="form-control" required/></div>
                                                 <label class="col-sm-2 control-label"> Số lượng: </label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><input
-                                                        th:field="*{quantity}" th:utext="${product.quantity}"
+                                                        name="quantity" th:value="${product.quantity}"
                                                         class="form-control" required/></div>
                                                 <label class="col-sm-2 control-label"> Mô tả:</label>
                                                 <div class="col-sm-10" style="margin-bottom: 10px"><textarea
-                                                        th:field="*{description}" class="form-control"
+                                                        name="description" class="form-control"
+                                                        th:value="${product.description}"
                                                         th:utext="${product.description}"
                                                         required></textarea></div>
                                                 <br/> <br/>
@@ -160,21 +165,18 @@
     </div>
 </div>
 <script type="text/javascript">
-    function uploadFile() {
-        var preview = document.querySelector('img');
-        var file = document.querySelector('input[type=file]').files[0];
-        var reader = new FileReader();
-
-        reader.onloadend = function () {
-            preview.src = reader.result;
+    var loadImg = function (event) {
+        var images = document.getElementById('images').value;
+        for (let i = 0; i < images.length; i++) {
+            var img = document.createElement("img");
+            img.style.width = '250px';
+            img.src = URL.createObjectURL(event.target.files[i]);
+            var imglist = document.getElementById("img-list");
+            imglist.append(img);
+            document.getElementById('img').style.display = 'none';
         }
 
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            preview.src = "";
-        }
-    }
+    };
 </script>
 <!--FOOTER -->
 

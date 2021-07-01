@@ -33,5 +33,10 @@ public class CategoryServiceImpl implements ICategoryService {
         return this.categoryConverter.toDTO(categoryRepository.save(this.categoryConverter.toEntity(categoryDTO)));
     }
 
+    @Override
+    public CategoryDTO findCategory(String category) {
+        return  this.categoryConverter.toDTO(categoryRepository.findByCode(category));
+    }
+
 
 }

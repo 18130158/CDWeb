@@ -5,9 +5,11 @@ import com.cdweb.dto.BookDTO;
 import com.cdweb.entity.AuthorEntity;
 import com.cdweb.entity.BookEntity;
 import com.cdweb.entity.CategoryEntity;
+import com.cdweb.entity.MediaEntity;
 import com.cdweb.repository.AuthorRepository;
 import com.cdweb.repository.BookRepository;
 import com.cdweb.repository.CategoryRepository;
+import com.cdweb.repository.MediaRepository;
 import com.cdweb.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +26,8 @@ public class BookServiceImpl implements IBookService {
     private CategoryRepository categoryRepository;
     @Autowired
     private BookConverter bookConverter;
+    @Autowired
+    private MediaRepository mediaRepository;
 
     @Override
     public List<BookDTO> findAll() {
@@ -54,12 +58,13 @@ public class BookServiceImpl implements IBookService {
 //        }
         CategoryEntity category = this.categoryRepository.findCategoryById(bookDTO.getCategory().getId());
         bookEntity.setCategory(category);
-
         bookEntity = bookRepository.save(bookEntity);
-
-        return bookConverter.toDTO(bookEntity);
+        MediaEntity mediaEntity = new MediaEntity();
+        mediaEntity.setPath(bookEntity.getMediaList().get(0).getPath());
+        mediaEntity.setBook(bookEntity);
+        mediaRepository.save(mediaEntity);
+        return bookConverter.toDTO(this.bookRepository.findOneById(bookEntity.getId()));
     }
-
 
 
     @Override
@@ -173,8 +178,8 @@ public class BookServiceImpl implements IBookService {
     @Override
     public List<String> autoCompleteTitle(String title) {
         List<BookEntity> bookEntityList = this.bookRepository.findByActiveAndTitleContains(true, title);
-        List<String> list=new ArrayList<>();
-        for (BookEntity book:bookEntityList){
+        List<String> list = new ArrayList<>();
+        for (BookEntity book : bookEntityList) {
             list.add(book.getTitle());
         }
         return list;

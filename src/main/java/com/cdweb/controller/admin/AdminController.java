@@ -3,10 +3,8 @@ package com.cdweb.controller.admin;
 import com.cdweb.api.web.input.AddBookInput;
 import com.cdweb.api.web.input.UserInput;
 import com.cdweb.converter.RoleConverter;
-import com.cdweb.dto.BookDTO;
-import com.cdweb.dto.CategoryDTO;
-import com.cdweb.dto.RoleDTO;
-import com.cdweb.dto.UserDTO;
+import com.cdweb.dto.*;
+import com.cdweb.entity.BookEntity;
 import com.cdweb.entity.RoleEntity;
 import com.cdweb.repository.RoleRepository;
 import com.cdweb.service.IBookService;
@@ -17,14 +15,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 @RestController
 public class AdminController {
+    private static final Path CURRENT_FOLDER = Paths.get(System.getProperty("user.dir"));
     @Autowired
     private IBookService bookService;
     @Autowired
@@ -53,36 +59,80 @@ public class AdminController {
     @GetMapping("/admin-productAdd")
     public ModelAndView addProductPage(Principal principal) {
         ModelAndView mav = new ModelAndView("admin/product-add.html");
-        mav.addObject("AddBookInput", new AddBookInput());
         mav.addObject("listcategory", categoryService.findAll());
         mav.addObject("username", principal.getName());
         return mav;
     }
 
     @PostMapping("/admin-productAdd")
-    public String addProduct(@ModelAttribute("AddBookInput") AddBookInput bookInput, Principal principal) {
-        ModelAndView mav = new ModelAndView("admin/product-add.html");
-        mav.addObject("AddBookInput", new AddBookInput());
-        mav.addObject("listcategory", categoryService.findAll());
+    public ModelAndView addProduct(@ModelAttribute("AddBookInput") AddBookInput bookInput, Principal principal) {
+        Path staticPath = Paths.get("src/main/resources/static");
+        Path imagePath = Paths.get("admin/img/bookupload");
+        if (!Files.exists(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath))) {
+            try {
+                Files.createDirectories(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Path file = CURRENT_FOLDER.resolve(staticPath)
+                .resolve(imagePath).resolve(bookInput.getImages().getOriginalFilename());
+        try (OutputStream os = Files.newOutputStream(file)) {
+            os.write(bookInput.getImages().getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        BookDTO bookDTO = new BookDTO();
+        bookDTO.setId(bookInput.getId());
+        bookDTO.setTitle(bookInput.getTitle());
+        bookDTO.setShortDescription(bookInput.getShortDescription());
+        bookDTO.setDescription(bookInput.getDescription());
+        bookDTO.setDiscount(bookInput.getDiscount());
+        bookDTO.setPrice(bookInput.getPrice());
+        bookDTO.setQuantity(bookInput.getQuantity());
+        bookDTO.setPage(bookInput.getPage());
+        bookDTO.setNewBook(bookInput.isNewBook());
+        bookDTO.setHotBook(bookInput.isHotBook());
+        bookDTO.setPublisher(bookInput.getPublisher());
+        bookDTO.setActive(true);
+        bookDTO.setCategory(this.categoryService.findCategory(bookInput.getCategory()));
+        List<MediaDTO> medias = new ArrayList<>();
+        MediaDTO media = new MediaDTO();
+        StringTokenizer stringTokenizer = new StringTokenizer(imagePath.resolve(bookInput.getImages().getOriginalFilename()).toString(), "\\");
+        String s = "";
+        while (stringTokenizer.hasMoreTokens()) {
+            s += stringTokenizer.nextToken() + "/";
+        }
+        media.setPath(s.substring(0, s.length() - 1));
+        medias.add(media);
+        bookDTO.setMediaList(medias);
+
+        BookDTO book = bookService.save(bookDTO);
+
+        ModelAndView mav = new ModelAndView("admin/index.html");
+        mav.addObject("listbook", bookService.findAll());
         mav.addObject("username", principal.getName());
-        return "redirect:/admin";
+        return mav;
     }
 
-    @PostMapping("/admin-productEdit")
-    public String editProduct(@ModelAttribute("AddBookInput") AddBookInput bookInput, Principal principal) {
-        ModelAndView mav = new ModelAndView("admin/product-add.html");
-        mav.addObject("AddBookInput", new AddBookInput());
-        mav.addObject("listcategory", categoryService.findAll());
-        mav.addObject("username", principal.getName());
-        return "redirect:/admin";
-    }
 
     @GetMapping("/admin-productEdit")
     public ModelAndView editProductPage(@Param("id") long id, Principal principal) {
-        ModelAndView mav = new ModelAndView("admin/product-add.html");
-        mav.addObject("AddBookInput", new AddBookInput());
+        ModelAndView mav = new ModelAndView("admin/product-edit.html");
         mav.addObject("listcategory", categoryService.findAll());
         mav.addObject("product", bookService.findById(id));
+        mav.addObject("username", principal.getName());
+        return mav;
+    }
+
+    @GetMapping("/admin-productDelete")
+    public ModelAndView deleteProductPage(@Param("id") long id, Principal principal) {
+        ModelAndView mav = new ModelAndView("admin/index.html");
+        mav.addObject("listcategory", categoryService.findAll());
+        long[] ids = {id};
+        bookService.delete(ids);
+        mav.addObject("listbook", bookService.findAll());
         mav.addObject("username", principal.getName());
         return mav;
     }

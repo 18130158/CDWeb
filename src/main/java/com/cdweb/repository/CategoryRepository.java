@@ -10,8 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
-   @Query(value = "select c.* from category c where c.id=:id",nativeQuery = true)
+    @Query(value = "select c.* from category c where c.id=:id", nativeQuery = true)
     public CategoryEntity findCategoryById(@Param("id") Long id);
 
-   public Long findByCode(String code);
+
+    public CategoryEntity findByCode(String code);
 }

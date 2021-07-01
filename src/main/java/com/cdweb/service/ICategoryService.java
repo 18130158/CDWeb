@@ -9,4 +9,6 @@ public interface ICategoryService{
     List<CategoryDTO> findAll();
 
     CategoryDTO save(CategoryDTO categoryDTO);
+
+    CategoryDTO findCategory(String category);
 }
