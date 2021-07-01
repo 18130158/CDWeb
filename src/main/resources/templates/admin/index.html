@@ -33,6 +33,7 @@
                 <table>
 
                     <tr>
+                        <th>Id</th>
                         <th>Hình ảnh</th>
                         <th>Tên</th>
                         <th>Tác giả</th>
@@ -48,6 +49,7 @@
                     </tr>
                     <div th:each="book : ${listbook}">
                         <tr>
+                            <td><p th:text="${book.id}"></p></td>
                             <td><a href="#"
                                    class="single-banner-image-wrapper"> <img style="width: 1350px" alt=""
                                                                              th:src="@{${book.mediaList[0].path}}"/>
