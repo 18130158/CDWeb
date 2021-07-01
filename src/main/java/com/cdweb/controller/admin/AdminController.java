@@ -53,27 +53,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     public ModelAndView listProduct(Principal principal) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setEmail("user@gmail.com");
-        userDTO.setPassword(encoder.encode("123"));
-        userDTO.setEnabled(true);
-        RoleEntity role = this.roleRepository.findByName("ROLE_USER");
-        List<RoleDTO> roleDTOS = new ArrayList<>();
-        roleDTOS.add(roleConverter.toDTO(role));
-        userDTO.setRoleList(roleDTOS);
-        userService.save(userDTO);
-
-        RoleEntity roleAdmin = this.roleRepository.findByName("ROLE_ADMIN");
-        roleDTOS.add(roleConverter.toDTO(roleAdmin));
-        UserDTO userDTO1 = new UserDTO();
-        userDTO1.setEmail("admin@gmail.com");
-        userDTO1.setPassword(encoder.encode("123"));
-        userDTO1.setEnabled(true);
-        userDTO1.setRoleList(roleDTOS);
-        userService.save(userDTO1);
-
-
-        ModelAndView mav = new ModelAndView("admin/index.html");
+               ModelAndView mav = new ModelAndView("admin/index.html");
         mav.addObject("listbook", bookService.findAll());
         mav.addObject("username", principal.getName());
         return mav;
