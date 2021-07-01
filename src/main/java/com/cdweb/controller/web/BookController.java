@@ -88,8 +88,7 @@ public class BookController {
     }
 
     @GetMapping("/chi-tiet-san-pham")
-    public ModelAndView bookDetailPage(Principal principal)
-    {
+    public ModelAndView bookDetailPage(Principal principal) {
         ModelAndView mav = new ModelAndView("web/chi-tiet-san-pham.html");
         UserDTO userDTO;
         if (principal != null) {
@@ -114,10 +113,9 @@ public class BookController {
     }
 
 
-
     @GetMapping("/autocomplete")
-    public List<String> autoComplete(@RequestParam(name = "title") String title){
+    public List<String> autoComplete(@RequestParam(name = "title") String title) {
         return this.bookService.autoCompleteTitle(title);
     }
-    
+
 }
