@@ -14,6 +14,7 @@ import com.cdweb.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.parameters.P;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,6 +32,8 @@ import java.util.StringTokenizer;
 @RestController
 public class AdminController {
     private static final Path CURRENT_FOLDER = Paths.get(System.getProperty("user.dir"));
+    @Autowired
+    BCryptPasswordEncoder encoder;
     @Autowired
     private IBookService bookService;
     @Autowired
@@ -50,6 +53,26 @@ public class AdminController {
 
     @GetMapping("/admin")
     public ModelAndView listProduct(Principal principal) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setEmail("user@gmail.com");
+        userDTO.setPassword(encoder.encode("123"));
+        userDTO.setEnabled(true);
+        RoleEntity role = this.roleRepository.findByName("ROLE_USER");
+        List<RoleDTO> roleDTOS = new ArrayList<>();
+        roleDTOS.add(roleConverter.toDTO(role));
+        userDTO.setRoleList(roleDTOS);
+        userService.save(userDTO);
+
+        RoleEntity roleAdmin = this.roleRepository.findByName("ROLE_ADMIN");
+        roleDTOS.add(roleConverter.toDTO(roleAdmin));
+        UserDTO userDTO1 = new UserDTO();
+        userDTO1.setEmail("admin@gmail.com");
+        userDTO1.setPassword(encoder.encode("123"));
+        userDTO1.setEnabled(true);
+        userDTO1.setRoleList(roleDTOS);
+        userService.save(userDTO1);
+
+
         ModelAndView mav = new ModelAndView("admin/index.html");
         mav.addObject("listbook", bookService.findAll());
         mav.addObject("username", principal.getName());
