@@ -101,6 +101,13 @@
                 str += " </a>";
                 str += " </li>";
                 if (user) {
+                    for (let i of user.roleList){
+                        if(i.name=="ROLE_ADMIN"){
+                            str += "<li class='account-login'>";
+                            str += "  <a href='/admin'>Admin</a>";
+                            str += " </li>";
+                        }
+                    }
                     str += "<li class='account-login'>";
                     str += "  <a href='/thong-tin-ca-nhan'>Xin chào,<i>" + user.fullName + "</i></a>";
                     str += " </li>";
