@@ -13,6 +13,7 @@ import com.cdweb.repository.MediaRepository;
 import com.cdweb.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,9 +32,10 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     public List<BookDTO> findAll() {
-
+        Sort sort = null;
+        sort = Sort.by("id").descending();
         List<BookDTO> results = new ArrayList<>();
-        List<BookEntity> list = bookRepository.findAll();
+        List<BookEntity> list = bookRepository.findAll(sort);
 
         for (BookEntity book : list) {
             results.add(this.bookConverter.toDTO(book));
