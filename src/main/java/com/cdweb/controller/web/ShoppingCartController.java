@@ -21,12 +21,11 @@ public class ShoppingCartController {
 
     @GetMapping("/gio-hang")
     public ModelAndView shoppingCart(Principal principal) {
-        return principal == null ? new ModelAndView("web/dang-nhap.html") : new ModelAndView("gio-hang.html");
+        return principal == null ? new ModelAndView("web/dang-nhap.html") : new ModelAndView("web/gio-hang.html");
     }
 
     @GetMapping("/them-san-pham")
-    public List<ShoppingCartDTO> addProduct(@RequestParam(name = "book_id", required = false, defaultValue = "0") Long book_id, Principal principal) {
-        System.out.println(book_id);
+    public List<ShoppingCartDTO> addProduct(@RequestParam(name = "book_id", required = false, defaultValue = "0") long book_id, Principal principal) {
         if (principal == null) {
             return null;
         }
