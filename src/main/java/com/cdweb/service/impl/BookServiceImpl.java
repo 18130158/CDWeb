@@ -46,7 +46,7 @@ public class BookServiceImpl implements IBookService {
         BookEntity bookEntity = new BookEntity();
 
 
-        if (bookDTO.getId() != null) {
+        if (bookDTO.getId() != 0) {
             BookEntity oldBookEntity = bookRepository.findOneById(bookDTO.getId());
             bookEntity = bookConverter.toEntity(bookDTO, oldBookEntity);
         } else {
