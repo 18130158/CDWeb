@@ -24,8 +24,8 @@ public class OrderedServiceImpl implements IOrderedService {
 
     @Override
     public OrderedDTO save(OrderedDTO orderedDTO) {
-        OrderedEntity entity=this.orderedConverter.toEntity(orderedDTO);
-       entity = this.orderedRepository.save(entity);
+        OrderedEntity entity = this.orderedConverter.toEntity(orderedDTO);
+        entity = this.orderedRepository.save(entity);
         return this.orderedConverter.toDTO(entity);
     }
 
@@ -39,4 +39,22 @@ public class OrderedServiceImpl implements IOrderedService {
         }
         return listResult;
     }
+
+    @Override
+    public List<OrderedDTO> findAll() {
+        List<OrderedEntity> entityList = orderedRepository.findAll();
+        List<OrderedDTO> results = new ArrayList<>();
+        for (OrderedEntity entity : entityList) {
+            results.add(this.orderedConverter.toDTO(entity));
+        }
+        return results;
+    }
+
+    @Override
+    public OrderedDTO findOrder(long id) {
+        OrderedEntity entity = this.orderedRepository.getOne(id);
+        return this.orderedConverter.toDTO(entity);
+    }
+
+
 }

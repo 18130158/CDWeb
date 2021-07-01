@@ -51,6 +51,15 @@ public class UserService implements IUserService {
         return null;
     }
 
+    @Override
+    public UserDTO findEmail(String email) {
+        UserEntity userEntity = this.userRepository.findByEmailIgnoreCase(email);
+        if (userEntity != null) {
+            return this.userConverter.toDTO(userEntity);
+        }
+        return null;
+    }
+
     public UserDTO sendMail(UserDTO user) {
         UserEntity userEntity = new UserEntity();
         UserEntity existingUser = userRepository.findByEmailIgnoreCaseAndIsEnabled(user.getEmail(), true);
@@ -124,7 +133,7 @@ public class UserService implements IUserService {
 
     @Override
     public UserDTO changePassword(UserDTO user) {
-        UserEntity userEntity = this.userRepository.findByEmailIgnoreCaseAndIsEnabled(user.getEmail(), true);
+        UserEntity userEntity = this.userRepository.findByEmailIgnoreCase(user.getEmail());
         UserDTO userDTO = this.userConverter.toDTO(userEntity);
 
         if (user.getFullName() != null) {
@@ -136,12 +145,17 @@ public class UserService implements IUserService {
         if (user.getAddress() != null) {
             userDTO.setAddress(user.getAddress());
         }
-
-        if (user.getPassword() != null) {
+        if (user.isEnabled()) {
+            userDTO.setEnabled(true);
+        }
+        if (user.getPassword() != "") {
             userDTO.setPassword(encoder.encode(user.getPassword()));
         }
+        if (user.getRoleList() != null) {
+            userDTO.setRoleList(user.getRoleList());
+        }
         userEntity = this.userRepository.save(this.userConverter.toEntity(userDTO));
-        if (user.getPassword() != null) {
+        if (user.getPassword() != "") {
             if (userEntity != null) {
                 PasswordResetToken passwordResetToken = this.passwordTokenRepository.findByUser(userEntity);
                 this.passwordTokenRepository.delete(passwordResetToken);
@@ -154,6 +168,26 @@ public class UserService implements IUserService {
     public boolean checkPass(String password, String email) {
         UserEntity userEntity = this.userRepository.findByEmail(email);
         return encoder.matches(password, userEntity.getPassword());
+    }
+
+    @Override
+    public List<UserDTO> findAll() {
+        List<UserDTO> listUser = new ArrayList<>();
+        List<UserEntity> users = this.userRepository.findAll();
+        for (UserEntity user : users) {
+            listUser.add(this.userConverter.toDTO(user));
+        }
+        return listUser;
+    }
+
+    @Override
+    public UserDTO save(UserDTO user) {
+        return this.userConverter.toDTO(this.userRepository.save(this.userConverter.toEntity(user)));
+    }
+
+    @Override
+    public void delete(String email) {
+        this.userRepository.delete(this.userRepository.findByEmail(email));
     }
 
 

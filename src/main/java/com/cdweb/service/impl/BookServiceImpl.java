@@ -24,8 +24,6 @@ public class BookServiceImpl implements IBookService {
     private CategoryRepository categoryRepository;
     @Autowired
     private BookConverter bookConverter;
-    @Autowired
-    private AuthorRepository authorRepository;
 
     @Override
     public List<BookDTO> findAll() {

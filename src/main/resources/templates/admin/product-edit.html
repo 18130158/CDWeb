@@ -1,0 +1,185 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Product Edit | WRITER Admin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+
+<body>
+
+<!-- NƠI GẮN LINK VÀO -->
+<div th:insert="~{admin/linkAdm :: links_admin}"></div>
+
+<div class="all-content-wrapper">
+    <!-- Single pro tab start-->
+    <div class="single-product-tab-area mg-b-30">
+        <!-- Single pro tab review Start-->
+        <div class="single-pro-review-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="review-tab-pro-inner">
+                            <ul id="myTab3" class="tab-review-design">
+                                <li class="active"><a href="#description"><i
+                                        class="icon nalika-edit" aria-hidden="true"></i> Chỉnh sửa
+                                    sản phẩm</a></li>
+                            </ul>
+                            <div style="float: right;">
+                                <h4>
+                                    <a th:href="@{/admin}">Quay lại</a>
+                                </h4>
+                            </div>
+
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+
+
+                                <div class="product-tab-list tab-pane fade active in"
+                                     id="description">
+                                    <div class="row">
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                            <!-- <form action="" method="POST" modelAttribute="book> -->
+                                            <form method="POST" th:object="${AddBookInput}"
+                                                  th:action="@{/admin-productEdit}" enctype="multipart/form-data">
+                                                <label class="col-sm-2 control-label"> Hình ảnh:</label>
+                                                <div class="col-sm-10" style="margin-bottom: 10px">
+                                                    <input type="file" id="images" name="images"
+                                                           th:field="*{images}" th:value="${product.mediaList[0].path}"
+                                                           class="form-control-file"
+                                                           accept="image/png, image/jpeg, image/jpg"
+                                                           onchange="loadImg(event)">
+                                                    <ul>
+                                                        <li id="img-list"></li>
+                                                    </ul>
+                                                </div>
+                                                <label class="col-sm-2 control-label"> Tên sách:</label>
+                                                <div class="col-sm-10" style="margin-bottom: 10px"><input
+                                                        th:field="*{title}" th:utext="${product.title}"
+                                                        class="form-control" required/></div>
+
+
+                                                <label class="col-sm-2 control-label"> Thể loại: </label>
+
+                                                <div class="col-sm-10" style="margin-bottom: 10px"><select
+                                                        th:field="*{category}"
+                                                        class="form-control" required>
+                                                    <th:block th:each="category : ${listcategory}">
+                                                        <th:block th:if="product.category==catgory">
+                                                            <option selected="selected"
+                                                                    th:value="${category.code}"
+                                                                    th:text="${category.name}">
+                                                            </option>
+                                                        </th:block>
+                                                        <th:block th:unless="product.category==catgory">
+                                                            <option
+                                                                    th:value="${category.code}"
+                                                                    th:text="${category.name}">
+                                                            </option>
+                                                        </th:block>
+                                                    </th:block>
+
+
+                                                </select>
+                                                </div>
+                                                <label class="col-sm-2 control-label"> Giá: </label>
+                                                <div class="col-sm-10" style="margin-bottom: 10px"><input
+                                                        th:field="*{price}" th:utext="${product.price}"
+                                                        class="form-control" required/>VND
+                                                </div>
+                                                <label class="col-sm-2 control-label">Sản phẩm Hot </label>
+
+                                                <th:block th:if="product.hotBook">
+                                                    <div checked="checked" class="col-sm-10"
+                                                         style="margin-bottom: 10px"><input
+                                                            type="checkbox" th:field="*{hotBook}"
+                                                            class="form-control"/></div>
+                                                </th:block>
+                                                <th:block th:unless="product.hotBook">
+                                                    <div class="col-sm-10" style="margin-bottom: 10px"><input
+                                                            type="checkbox" th:field="*{hotBook}"
+                                                            class="form-control"/></div>
+                                                </th:block>
+
+
+                                                <label class="col-sm-2 control-label">Sản phẩm Mới </label>
+
+                                                <th:block th:if="product.newBook">
+                                                    <div class="col-sm-10" style="margin-bottom: 10px"><input
+                                                            checked="checked" type="checkbox" th:field="*{newBook}"
+                                                            class="form-control"/></div>
+                                                </th:block>
+                                                <th:block th:unless="product.newBook">
+                                                    <div class="col-sm-10" style="margin-bottom: 10px"><input
+                                                            type="checkbox" th:field="*{newBook}"
+                                                            class="form-control"/></div>
+                                                </th:block>
+
+                                                <label class="col-sm-2 control-label"> Giảm giá: </label>
+                                                <div class="col-sm-10" style="margin-bottom: 10px"><input
+                                                        th:field="*{discount}" th:utext="${product.discount}"
+                                                        type="datetime" class="form-control"
+                                                        required/>%
+                                                </div>
+                                                <label class="col-sm-2 control-label"> Nhà sản xuất:</label>
+                                                <div class="col-sm-10" style="margin-bottom: 10px"><input
+                                                        th:field="*{publisher}" th:utext="${product.publisher}"
+                                                        class="form-control" required/></div>
+                                                <label class="col-sm-2 control-label">Số trang:</label>
+                                                <div class="col-sm-10" style="margin-bottom: 10px"><input
+                                                        th:field="*{page}" th:utext="${product.page}"
+                                                        class="form-control" required/></div>
+                                                <label class="col-sm-2 control-label"> Số lượng: </label>
+                                                <div class="col-sm-10" style="margin-bottom: 10px"><input
+                                                        th:field="*{quantity}" th:utext="${product.quantity}"
+                                                        class="form-control" required/></div>
+                                                <label class="col-sm-2 control-label"> Mô tả:</label>
+                                                <div class="col-sm-10" style="margin-bottom: 10px"><textarea
+                                                        th:field="*{description}" class="form-control"
+                                                        th:utext="${product.description}"
+                                                        required></textarea></div>
+                                                <br/> <br/>
+                                                <button type="submit">Lưu</button>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function uploadFile() {
+        var preview = document.querySelector('img');
+        var file = document.querySelector('input[type=file]').files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+    }
+</script>
+<!--FOOTER -->
+
+<div th:insert="~{admin/footer :: footer_admin}"></div>
+
+</body>
+
+</html>

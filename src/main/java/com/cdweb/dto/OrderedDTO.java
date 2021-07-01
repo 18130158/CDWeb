@@ -2,6 +2,7 @@ package com.cdweb.dto;
 
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -104,10 +105,8 @@ public class OrderedDTO {
         this.orderedItemList = orderedItemList;
     }
 
-    public String getOrderedDateString() {
-        return orderedDate.toString();
-    }
-    public String getReceivedDateString() {
-        return receivedDate.toString();
+    public String getPriceFormat() {
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        return formatter.format(this.totalPrice) + " VND";
     }
 }
