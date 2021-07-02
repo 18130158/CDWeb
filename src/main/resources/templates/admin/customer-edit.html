@@ -52,6 +52,8 @@
                                             <form method="POST"
                                                   onsubmit="return vadidateForm()"
                                                   th:action="@{/admin-editUser}">
+                                                <input type="hidden" th:value="${user.id}"
+                                                       name="id">
                                                 * Email: <label th:utext="${user.email}"></label>
                                                 <input type="hidden" th:value="${user.email}"
                                                        name="email">

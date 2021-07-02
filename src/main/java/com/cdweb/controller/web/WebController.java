@@ -71,12 +71,12 @@ public class WebController {
 
     @GetMapping("/kiem-tra-don-hang")
     public ModelAndView checkOrder(Principal principal) {
-        return principal != null ? new ModelAndView("web/kiem-tra-don-hang.html") : new ModelAndView("dang-nhap.html");
+        return principal != null ? new ModelAndView("web/kiem-tra-don-hang.html") : new ModelAndView("web/dang-nhap.html");
     }
 
     @GetMapping("/thong-tin-ca-nhan")
     public ModelAndView profile(Principal principal) {
-        return principal != null ? new ModelAndView("web/thong-tin-ca-nhan.html") : new ModelAndView("dang-nhap.html");
+        return principal != null ? new ModelAndView("web/thong-tin-ca-nhan.html") : new ModelAndView("web/dang-nhap.html");
     }
 
 }

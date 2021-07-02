@@ -97,9 +97,9 @@ public class UserService implements IUserService {
     public UserDTO confirmEmail(String confirmationToken) {
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
         if (token != null) {
-            UserDTO user = userConverter.toDTO(userRepository.findByEmailIgnoreCase(token.getUser().getEmail()));
+            UserEntity user = userRepository.findByEmailIgnoreCase(token.getUser().getEmail());
             user.setEnabled(true);
-            UserEntity userEntity = userRepository.save(userConverter.toEntity(user));
+            UserEntity userEntity = userRepository.save(user);
             return userConverter.toDTO(userEntity);
         } else {
             return null;
@@ -134,31 +134,33 @@ public class UserService implements IUserService {
     @Override
     public UserDTO changePassword(UserDTO user) {
         UserEntity userEntity = this.userRepository.findByEmailIgnoreCase(user.getEmail());
-        UserDTO userDTO = this.userConverter.toDTO(userEntity);
+
 
         if (user.getFullName() != null) {
-            userDTO.setFullName(user.getFullName());
+            userEntity.setFullName(user.getFullName());
         }
         if (user.getPhone() != null) {
-            userDTO.setPhone(user.getPhone());
+            userEntity.setPhone(user.getPhone());
         }
         if (user.getAddress() != null) {
-            userDTO.setAddress(user.getAddress());
+            userEntity.setAddress(user.getAddress());
         }
         if (user.isEnabled()) {
-            userDTO.setEnabled(true);
+            userEntity.setEnabled(true);
         }
-        if (user.getPassword() != "") {
-            userDTO.setPassword(encoder.encode(user.getPassword()));
+        if (user.getPassword() != "" && user.getPassword() != null) {
+            userEntity.setPassword(encoder.encode(user.getPassword()));
         }
         if (user.getRoleList() != null) {
-            userDTO.setRoleList(user.getRoleList());
+            userEntity.setRoleList(userEntity.getRoleList());
         }
-        userEntity = this.userRepository.save(this.userConverter.toEntity(userDTO));
-        if (user.getPassword() != "") {
+        userEntity = this.userRepository.save(userEntity);
+        if (user.getPassword() != "" && user.getPassword() != null) {
             if (userEntity != null) {
                 PasswordResetToken passwordResetToken = this.passwordTokenRepository.findByUser(userEntity);
-                this.passwordTokenRepository.delete(passwordResetToken);
+                if (passwordResetToken != null) {
+                    this.passwordTokenRepository.delete(passwordResetToken);
+                }
             }
         }
         return this.userConverter.toDTO(userEntity);

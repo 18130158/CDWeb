@@ -53,7 +53,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     public ModelAndView listProduct(Principal principal) {
-               ModelAndView mav = new ModelAndView("admin/index.html");
+        ModelAndView mav = new ModelAndView("admin/index.html");
         mav.addObject("listbook", bookService.findAll());
         mav.addObject("username", principal.getName());
         return mav;
@@ -258,6 +258,7 @@ public class AdminController {
         for (String s : userinput.getRole()) {
             roleDTO.add(this.roleConverter.toDTO(this.roleRepository.findByName(s)));
         }
+        user.setId(userinput.getId());
         user.setEmail(userinput.getEmail());
         user.setPassword(userinput.getPassword());
         user.setFullName(userinput.getFullName());
