@@ -49,17 +49,18 @@
                                             <!-- 	<form method="post" action="" modelAttribute="category"> -->
                                             <form action="" method="POST" th:object="${category}"
                                                   th:action="@{/admin-addType}">
-                                                <input type="hidden" th:field="*{id}" name="id"
+                                                <input type="hidden" th:value="*{id}" name="id"
                                                        th:value="${category.id}"/>
                                                 <div class="review-content-section">
                                                     <div class="input-group mg-b-pro-edt">
 															<span class="input-group-addon"> <i
                                                                     class="icon nalika-edit" aria-hidden="true"> </i>
-																</span> <input type="text" th:field="*{code}"
+																</span> <input type="text" th:value="${category.code}"
                                                                                name="code"
                                                                                class="form-control"
                                                                                placeholder="Mã sách">
-                                                        </span> <input type="text" th:field="*{name}" name="name"
+                                                        </span> <input type="text" th:field="${category.name}"
+                                                                       name="name"
                                                                        class="form-control"
                                                                        placeholder="Tên loại sản phẩm">
                                                     </div>

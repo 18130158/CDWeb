@@ -56,5 +56,12 @@ public class OrderedServiceImpl implements IOrderedService {
         return this.orderedConverter.toDTO(entity);
     }
 
+    @Override
+    public OrderedDTO edit(OrderedDTO orderedDTO) {
+        OrderedEntity orderedEntity = this.orderedRepository.findId(orderedDTO.getId());
+        orderedEntity.setStatus(orderedDTO.getStatus());
+        return this.orderedConverter.toDTO(this.orderedRepository.save(orderedEntity));
+    }
+
 
 }

@@ -152,6 +152,24 @@ public class AdminController {
         return mav;
     }
 
+    @GetMapping("/admin-editType")
+    public ModelAndView editCategoryPage(@Param("id") long id, Principal principal) {
+        ModelAndView mav = new ModelAndView("admin/productType-edit.html");
+        mav.addObject("username", principal.getName());
+        return mav;
+    }
+
+    @PostMapping("/admin-editType")
+    public ModelAndView editCategory(@ModelAttribute("category") CategoryDTO category, Principal principal) {
+
+        categoryService.edit(category);
+
+        ModelAndView mav = new ModelAndView("admin/productType.html");
+        mav.addObject("listcategory", categoryService.findAll());
+        mav.addObject("username", principal.getName());
+        return mav;
+    }
+
     @GetMapping("/admin-addType")
     public ModelAndView addCategory(Principal principal) {
         ModelAndView mav = new ModelAndView("admin/productType-add.html");
@@ -169,26 +187,51 @@ public class AdminController {
         return mav;
     }
 
+    @GetMapping(value = "/admin-deleteType")
+    public ModelAndView deleteCategory(@Param("id") long id, Principal principal) {
+
+        this.categoryService.delete(id);
+        ModelAndView mav = new ModelAndView("admin/productType.html");
+        mav.addObject("listcategory", categoryService.findAll());
+        mav.addObject("username", principal.getName());
+        return mav;
+    }
     //    CATEGORY    //
 
     //    ORDER  //
 
     @GetMapping("/admin-listOrder")
     public ModelAndView listOrder(Principal principal) {
-        ModelAndView mav = new ModelAndView("admin/cart");
+        ModelAndView mav = new ModelAndView("admin/cart.html");
         mav.addObject("listOrders", orderedService.findAll());
         mav.addObject("username", principal.getName());
         return mav;
     }
 
     @GetMapping("/admin-orderDetail")
-    public ModelAndView orderDetail(@PathVariable("id") long id, Principal principal) {
+    public ModelAndView orderDetail(@Param("id") long id, Principal principal) {
         ModelAndView mav = new ModelAndView("admin/cart-detail.html");
         mav.addObject("order", orderedService.findOrder(id));
         mav.addObject("username", principal.getName());
         return mav;
     }
 
+    @GetMapping("/admin-editOrder")
+    public ModelAndView orderEditPage(@Param("id") long id, Principal principal) {
+        ModelAndView mav = new ModelAndView("admin/cart-edit.html");
+        mav.addObject("order", orderedService.findOrder(id));
+        mav.addObject("username", principal.getName());
+        return mav;
+    }
+
+    @PostMapping("/admin-editOrder")
+    public ModelAndView orderEdit(@ModelAttribute("order") OrderedDTO ordered, Principal principal) {
+        this.orderedService.edit(ordered);
+        ModelAndView mav = new ModelAndView("admin/cart.html");
+        mav.addObject("listOrders", orderedService.findAll());
+        mav.addObject("username", principal.getName());
+        return mav;
+    }
 
     // CUSTOMER//
 

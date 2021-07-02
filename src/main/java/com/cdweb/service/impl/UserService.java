@@ -116,8 +116,8 @@ public class UserService implements IUserService {
         mailMessage.setSubject("Forget Password!");
         mailMessage.setFrom("bookstorenlu2021@gmail.com");
         mailMessage.setText("To change your password, please click here : "
-//                + "https://bookstorenlu2021.herokuapp.com/forget-password?token=" + passwordResetToken.getToken());
-                + "http://localhost:8080/forget-password?token=" + passwordResetToken.getToken());
+                + "https://bookstorenlu2021.herokuapp.com/forget-password?token=" + passwordResetToken.getToken());
+//                + "http://localhost:8080/forget-password?token=" + passwordResetToken.getToken());
 
         emailSenderService.sendEmail(mailMessage);
         return userConverter.toDTO(user);

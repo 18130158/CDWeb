@@ -10,4 +10,5 @@ public interface IOrderedService {
 
     List<OrderedDTO> findAll();
     public OrderedDTO findOrder(long id);
+    public OrderedDTO edit(OrderedDTO orderedDTO);
 }

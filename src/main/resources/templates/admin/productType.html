@@ -47,13 +47,13 @@
                             <td><a
                                     th:href="@{/admin/listProductType(id=${category.id})}"><p
                                     th:text="${category.name}"></p></a></td>
-                            <td><a th:href="@{/admin/editType(id=${category.id})}">
+                            <td><a th:href="@{/admin-editType(id=${category.id})}">
                                 <button data-toggle="tooltip" title="Edit"
                                         class="pd-setting-ed">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
                                 </button>
                             </a> <a onclick="return confirm('Bạn có chắc muốn xóa')"
-                                    th:href="@{/admin/deleteType(id=${category.id})}">
+                                    th:href="@{/admin-deleteType(id=${category.id})}">
                                 <button data-toggle="tooltip" title="Trash"
                                         class="pd-setting-ed">
                                     <i class="fa fa-trash-o" aria-hidden="true"> </i>

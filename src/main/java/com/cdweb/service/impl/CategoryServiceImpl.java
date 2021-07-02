@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements ICategoryService {
         List<CategoryDTO> categoryList = new ArrayList<>();
         List<CategoryEntity> list = categoryRepository.findAll();
         for (CategoryEntity category : list) {
-                categoryList.add(this.categoryConverter.toDTO(category));
+            categoryList.add(this.categoryConverter.toDTO(category));
         }
         return categoryList;
     }
@@ -35,7 +35,20 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public CategoryDTO findCategory(String category) {
-        return  this.categoryConverter.toDTO(categoryRepository.findByCode(category));
+        return this.categoryConverter.toDTO(categoryRepository.findByCode(category));
+    }
+
+    @Override
+    public void delete(long id) {
+        this.categoryRepository.deleteById(id);
+    }
+
+    @Override
+    public CategoryDTO edit(CategoryDTO category) {
+        CategoryEntity categoryEntity=this.categoryRepository.findCategoryById(category.getId());
+        categoryEntity.setCode(category.getCode());
+        categoryEntity.setName(category.getName());
+       return this.categoryConverter.toDTO(this.categoryRepository.save(categoryEntity));
     }
 
 

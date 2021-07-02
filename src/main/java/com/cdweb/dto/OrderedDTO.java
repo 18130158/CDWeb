@@ -69,6 +69,10 @@ public class OrderedDTO {
         return orderedDate;
     }
 
+    public String getOrderedDateString() {
+        return orderedDate.toString();
+    }
+
     public void setOrderedDate(Timestamp orderedDate) {
         this.orderedDate = orderedDate;
     }

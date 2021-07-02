@@ -48,14 +48,13 @@
     <script th:src="@{web/app/directives/paging.js}"></script>
     <link th:href="@{web/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{web/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
-
+    <script th:src="@{web/Scripts/myJS/ajax-san-pham.js}"></script>
 </head>
 <body ng-app="appMain" style="">
 
 
 <div class="wrapper">
     <div th:insert="~{web/_header :: header}"></div>
-
 
 
     <div class="main">
@@ -136,7 +135,7 @@
                 str += "    <table class='table product-list'>";
                 str += "      <tr>";
                 str += "       <td>Thông tin đơn hàng</td>";
-                str += "    <td>Ngày đặt hàng: " + ordered.orderedDate + "</td>";
+                str += "    <td>Ngày đặt hàng: " + ordered.orderedDateString + "</td>";
                 str += "   <td>Trạng thái: " + ordered.status + "</td>";
                 str += "  </tr>";
                 str += "      <tr>";

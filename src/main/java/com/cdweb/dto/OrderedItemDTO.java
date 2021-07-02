@@ -1,6 +1,8 @@
 package com.cdweb.dto;
 
-public class OrderedItemDTO   {
+import java.text.DecimalFormat;
+
+public class OrderedItemDTO {
     private Long id;
     private OrderedDTO ordered;
     private BookDTO book;
@@ -48,5 +50,10 @@ public class OrderedItemDTO   {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getPriceFormat() {
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        return formatter.format(this.totalPrice) + " VND";
     }
 }
