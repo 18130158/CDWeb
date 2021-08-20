@@ -90,16 +90,14 @@
                         <div class="contact-block clearfix">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <a href="index.html">
-                                        <img class="img-responsive" src="notfoundf7bf.html"/>
-                                    </a>
+
                                 </div>
                                 <div class="col-md-9">
                                     <div class="contact-info">
-                                        <div class="docs"><b class="name">{{shop.Name}}</b></div>
+                                        <div class="docs"><b class="name">Memo Book</b></div>
                                         <div class="docs">
                                             <i class="fa fa-map-marker"></i>
-                                            <b>HCM: </b> {{shop.Address}}
+                                            <b>HCM: </b>  33 Phan Tây Hồ, P.7, Q.Phú Nhuận, Tp.HCM
                                         </div>
                                         <div class="docs">
                                             <i class="fa fa-map-marker"></i>
@@ -108,260 +106,30 @@
 
                                         <div class="docs">
                                             <i class="fa fa-mobile"></i>
-                                            <b>Hotline</b> {{shop.Hotline}}
+                                            <b>Hotline</b> 0989.250 270
                                         </div>
                                         <div class="docs">
                                             <i class="fa fa-envelope"></i>
-                                            <a href="mailto:{{shop.Email}}">{{shop.Email}}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class=""/>
-                            <h3 class="title">Gửi thông tin liên hệ</h3>
-                            <div class="description">
-                                Xin vui lòng điền các yêu cầu vào mẫu dưới đây và gửi cho chúng tôi. Chúng tôi
-                                sẽ trả lời bạn ngay sau khi nhận được. Xin chân thành cảm ơn!
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12 col-xs-12">
-                                    <div class="contact-feedback">
-                                        <form ng-submit="sendContact()">
-                                            <div class="form-group input-group">
-                                                <span class="input-group-addon"><i
-                                                        class="glyphicon glyphicon glyphicon-user"></i></span>
-                                                <input type="text" placeholder="Họ tên" ng-model="Name"
-                                                       class="form-control" required/>
-                                            </div>
-                                            <div class="form-group input-group">
-                                                <span class="input-group-addon"><i
-                                                        class="glyphicon glyphicon-map-marker"></i></span>
-                                                <input type="text" placeholder="Địa chỉ" ng-model="Address"
-                                                       class="form-control"/>
-                                            </div>
-                                            <div class="form-group input-group">
-                                                <span class="input-group-addon"><i
-                                                        class="glyphicon glyphicon-envelope"></i></span>
-                                                <input type="email" placeholder="Email" ng-model="Email"
-                                                       class="form-control" required/>
-                                            </div>
-                                            <div class="form-group input-group">
-                                                <span class="input-group-addon"><i
-                                                        class="glyphicon glyphicon-earphone"></i></span>
-                                                <input type="text" placeholder="Điện thoại" ng-model="Phone"
-                                                       class="form-control" required/>
-                                            </div>
-                                            <div class="form-group input-group">
-                                                <span class="input-group-addon"><i
-                                                        class="glyphicon glyphicon-list-alt"></i></span>
-                                                <input type="text" placeholder="Tiêu đề" ng-model="Title"
-                                                       class="form-control" required/>
-                                            </div>
-                                            <div class="form-group">
-                                                <textarea placeholder="Nội dung" class="form-control" rows="3"
-                                                          ng-model="Content" required></textarea>
-                                            </div>
-                                            <button class="btn btn-default" type="submit">Gửi</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12 col-xs-12">
-                                    <div class="map clearfix">
-                                        <div class="map-canvas" id="map_canvas"></div>
-                                        <div class="map-information" ng-if="Maps.length>1">
-                                            <ul class="clearfix">
-                                                <li ng-repeat="item in Maps">
-                                                    <div>
-                                                        <a onclick="moveToMaker({{item.Id}}); return false;"
-                                                           href="javascript:void(0)">
-                                                            {{item.Name}}
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                            <a href="#">mailto:Memobook@gmail.com</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <script type="text/javascript">
-                        var map;
-                        var infowindow;
-                        var marker = new Array();
-                        var old_id = 0;
-                        var infoWindowArray = new Array();
-                        var infowindow_array = new Array();
-
-                        function initialize() {
-                            var defaultLatLng = new google.maps.LatLng(10.845064529472292, 106.636744831799320);
-
-                            var myOptions = {
-                                zoom: 16,
-                                center: defaultLatLng,
-                                scrollwheel: true,
-                                mapTypeId: google.maps.MapTypeId.ROADMAP
-                            };
-                            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-                            map.setCenter(defaultLatLng);
-
-                            if (Maps.length <= 0) {
-                                var arrLatLng = new google.maps.LatLng(10.845064529472292, 106.636744831799320);
-                                var myHtml = "<div class='map-description'> <strong>" + firstMap.Name + "</strong><br/>Địa chỉ: <span>" + firstMap.Address + "</span><br/>Điện thoại: <span>" + firstMap.Phone + "</span><br/></div>";
-                                infoWindowArray[firstMap.Id] = myHtml;
-                                loadMarker(arrLatLng, infoWindowArray[firstMap.Id], firstMap.Id);
-                            }
-
-                            $.each(Maps, function (index, it) {
-                                var arrLatLng = new google.maps.LatLng(it.PosX, it.PosY);
-                                var myHtml = "<div class='map-description'> <strong>" + it.Name + "</strong><br/>Địa chỉ: <span>" + it.Address + "</span><br/>Điện thoại: <span>" + it.Phone + "</span><br/></div>";
-                                infoWindowArray[it.Id] = myHtml;
-                                loadMarker(arrLatLng, infoWindowArray[it.Id], it.Id);
-                            });
-
-
-                            moveToMaker(firstMap.Id);
-                        }
-
-                        function loadMarker(myLocation, myInfoWindow, id) {
-                            marker[id] = new google.maps.Marker({position: myLocation, map: map, visible: true});
-                            var popup = myInfoWindow;
-                            infowindow_array[id] = new google.maps.InfoWindow({content: popup});
-                            google.maps.event.addListener(marker[id], 'click', function () {
-                                if (id == old_id) return;
-                                if (old_id > 0)
-                                    infowindow_array[old_id].close();
-                                infowindow_array[id].open(map, marker[id]);
-                                old_id = id;
-                            });
-                            google.maps.event.addListener(infowindow_array[id], 'closeclick', function () {
-                                old_id = 0;
-                            });
-                        }
-
-                        function moveToMaker(id) {
-                            var location = marker[id].position;
-                            map.setCenter(location);
-                            if (old_id > 0)
-                                infowindow_array[old_id].close();
-                            infowindow_array[id].open(map, marker[id]);
-                            old_id = id;
-                        }
-                    </script>
                     <!--End-->
-                    <script type="text/javascript">
-                        var firstMap = {
-                            "Id": 35,
-                            "ShopId": 292,
-                            "Name": "Đà Lạt Flower",
-                            "Address": "33 Phan Tây Hồ, P.7, Q.Phú Nhuận, Tp.HCM",
-                            "Phone": "",
-                            "PosX": 10.826899037002041,
-                            "PosY": 106.628150939941400,
-                            "Index": 0,
-                            "Inactive": false
-                        };
-                        var Maps = [{
-                            "Id": 35,
-                            "ShopId": 292,
-                            "Name": "Đà Lạt Flower",
-                            "Address": "33 Phan Tây Hồ, P.7, Q.Phú Nhuận, Tp.HCM",
-                            "Phone": "",
-                            "PosX": 10.826899037002041,
-                            "PosY": 106.628150939941400,
-                            "Index": 0,
-                            "Inactive": false
-                        }];
-                        window.Maps = Maps;
-                        window.Shop = {
-                            "Name": "Đà Lạt Flower",
-                            "Email": "info@runtime.vn",
-                            "Phone": "0989.250 270",
-                            "Logo": "/Uploads/shop292/images/logo%20a.png",
-                            "Fax": null,
-                            "Website": "http://www.runtime.vn",
-                            "Hotline": "0989.250 270",
-                            "Address": "33 Phan Tây Hồ, P.7, Q.Phú Nhuận, Tp.HCM",
-                            "Fanpage": "https://www.facebook.com/runtime.vn",
-                            "Google": null,
-                            "Facebook": "https://www.facebook.com/runtime.vn",
-                            "Youtube": null,
-                            "Twitter": null,
-                            "IsBanner": true,
-                            "IsFixed": true,
-                            "BannerImage": "/Uploads/shop292/images/DLF.jpg"
-                        };
-                        $(document).ready(function () {
-                            initialize();
-                        });
-                    </script>
                 </div>
                 <div class="col-md-3">
-
-
                     <!--Begin-->
-                    <div class="box-support-online" ng-controller="moduleController"
-                         ng-init="initSupportOnlineController('Shop','SupportOnlines')">
+                    <div class="box-support-online">
                         <h3><span>Hỗ trợ trực tuyến</span></h3>
                         <div class="support-online-block">
                             <div class="support-hotline">
-                                HOTLINE<br><span>{{shop.Hotline}}</span>
-                            </div>
-                            <div class="support-item" ng-repeat="item in SupportOnlines">
-                                <div class="name">
-                                    {{item.FullName}} <b>{{item.Phone}}</b>
-                                </div>
-                                <ul>
-                                    <li ng-if="item.Skype!=''&&item.Skype!=null">
-                                        <a ng-href="skype:{{item.Skype}}?chat" title="{{item.FullName}}">
-                                            <img width="70"
-                                                 src="../www.skypeassets.com/i/scom/images/skype-buttons/chatbutton_32px.png">
-                                        </a>
-                                    </li>
-                                    <li ng-if="item.Viber!=''&&item.Viber!=null" class="social">
-                                        <a href="tel:{{item.Viber}}" title="{{item.FullName}}" target="_blank"> <img
-                                                src="../../../staticweb/Images/icon-viber.png" alt="Viber"></a>
-                                        <span class="phone"><a href="tel:{{item.Viber}}" title="{{item.FullName}}"
-                                                               target="_blank">{{item.Viber}} </a></span>
-                                    </li>
-                                    <li ng-if="item.Zalo!=''&&item.Zalo!=null" class="social">
-                                        <a href="tel:{{item.Zalo}}" title="{{item.FullName}}" target="_blank"> <img
-                                                src="../../../staticweb/Images/icon-zalo.png" alt="Zalo"></a>
-                                        <span class="phone"><a href="tel:{{item.Zalo}}" title="{{item.FullName}}"
-                                                               target="_blank">{{item.Zalo}} </a></span>
-                                    </li>
-                                    <li ng-if="item.Facebook!=''&&item.Facebook!=null" class="social">
-                                        <a href="notfounda963.html" title="{{item.FullName}}" target="_blank"> <img
-                                                src="../../../staticweb/Images/icon-facebook.png" alt="Facebook"></a>
-                                        <span class="phone"><a href="notfounda963.html" title="{{item.FullName}}"
-                                                               target="_blank">{{item.FullName}} </a></span>
-                                    </li>
-                                </ul>
+                                HOTLINE<br><span>0989.250 270</span>
                             </div>
                         </div>
                     </div>
                     <!--End-->
-                    <script type="text/javascript">
-                        window.Shop = {
-                            "Name": "Đà Lạt Flower",
-                            "Email": "info@runtime.vn",
-                            "Phone": "0989.250 270",
-                            "Logo": "/shop292/images/logo%20a.png",
-                            "Fax": null,
-                            "Website": "http://www.runtime.vn",
-                            "Hotline": "0989.250 270",
-                            "Address": "33 Phan Tây Hồ, P.7, Q.Phú Nhuận, Tp.HCM",
-                            "Fanpage": "https://www.facebook.com/runtime.vn",
-                            "Google": null,
-                            "Facebook": "https://www.facebook.com/runtime.vn",
-                            "Youtube": null,
-                            "Twitter": null,
-                            "IsBanner": true,
-                            "IsFixed": true,
-                            "BannerImage": "/Uploads/shop292/images/DLF.jpg"
-                        };
-                        window.SupportOnlines = [];
-                    </script>
                 </div>
             </div>
         </div>

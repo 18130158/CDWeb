@@ -165,6 +165,17 @@ function search_title() {
         });
     });
 }
+function search_title_product() {
+    var keySearch = document.getElementById("search").value;
+    $.ajax({
+        method: 'get',
+        url: '/danh-sach-san-pham?title=' + keySearch,
+        dataType: 'json',
+        cache: 'false',
+    }).done(function (list) {
+        show(list)
+    });
+}
 
 function formatPrice(price) {
     price = price.toLocaleString('it-IT', {style: 'currency', currency: 'VND'});
