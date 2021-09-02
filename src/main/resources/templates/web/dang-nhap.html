@@ -49,7 +49,6 @@
     <script th:src="@{web/app/directives/paging.js}"></script>
     <link th:href="@{web/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{web/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" th:src="@{web/Scripts/myJS/check.js}"></script>
 </head>
 <body ng-app="appMain" style="">
 
@@ -128,7 +127,7 @@
                                         <div style="float: left"><a th:href="@{/quen-mat-khau}" style="color: #0000cc">
                                             Quên mật khẩu?</a>
                                         </div>
-                                        <div style="float: right"><a th:href="@{/dang-ki}"  >Đăng
+                                        <div style="float: right"><a th:href="@{/dang-ki}">Đăng
                                             kí</a></div>
                                     </div>
                                 </div>
@@ -178,5 +177,26 @@
             threshold: 200
         });
     });
+
+
+    function checkMail() {
+        var email = document.getElementById("email").value;
+        var result;
+        if (email.length == 0) {
+            document.getElementById("emailError").innerHTML = "Bạn không thể để trống dữ liệu này!";
+            document.getElementById("emailError").style.display = "block";
+            return false;
+        } else {
+            var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            if (email.match(mailformat)) {
+                document.getElementById("emailError").innerHTML = "";
+                document.getElementById("emailError").style.display = "none";
+            } else {
+                document.getElementById("emailError").innerHTML = "Email không hợp lệ!";
+                document.getElementById("emailError").style.display = "block";
+                return false
+            }
+        }
+    }
 </script>
 
