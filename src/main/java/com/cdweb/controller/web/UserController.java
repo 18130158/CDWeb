@@ -82,9 +82,9 @@ public class UserController {
         return mav;
     }
 
-    @PostMapping("/send-mail-forget-password")
-    public ModelAndView newPassword(@ModelAttribute("user") UserDTO user) {
-        UserDTO userDTO = userService.sendMailForgetPassword(user.getEmail());
+    @GetMapping("/send-mail-forget-password")
+    public ModelAndView newPassword(@RequestParam(name = "email", required = false, defaultValue = "false") String email) {
+        UserDTO userDTO = userService.sendMailForgetPassword(email);
         ModelAndView mav = new ModelAndView("web/quen-mat-khau.html");
         mav.addObject("message", true);
         return mav;
