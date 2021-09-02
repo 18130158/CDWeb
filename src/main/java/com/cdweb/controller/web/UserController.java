@@ -24,10 +24,10 @@ public class UserController {
     public ModelAndView registerUser(@ModelAttribute("User") UserDTO user) {
         UserDTO userDTO = userService.sendMail(user);
         ModelAndView mav = new ModelAndView("web/dang-ki.html");
-        if (userDTO!=null) {
+        if (userDTO != null) {
             mav.addObject("message", "Mời bạn xác nhận tài khoản qua email: " + userDTO.getEmail());
-        }else{
-            mav.addObject("message", "Email "+ userDTO.getEmail()+" đã được sử dụng! " );
+        } else {
+            mav.addObject("message", "Email " + userDTO.getEmail() + " đã được sử dụng! ");
 
         }
         return mav;
@@ -42,6 +42,7 @@ public class UserController {
     @GetMapping("/check-mail")
     public UserDTO checkMail(@RequestParam(name = "email") String email) {
         UserDTO user = userService.findByEmail(email);
+        user.setPassword("");
         return user;
     }
 
@@ -57,15 +58,21 @@ public class UserController {
     }
 
     @GetMapping("/dang-ki")
-    public ModelAndView registorPage() {
+    public ModelAndView registerPage() {
         ModelAndView mav = new ModelAndView("web/dang-ki.html");
-        mav.addObject("mesage");
+        mav.addObject("message");
         return mav;
     }
 
     @GetMapping("/user")
     public UserDTO user(Principal principal) {
-        return principal != null ? this.userService.findByEmail(principal.getName()) : null;
+        if (principal != null) {
+            UserDTO user = this.userService.findByEmail(principal.getName());
+            user.setPassword("");
+            return user;
+        }else{
+            return null;
+        }
     }
 
     @GetMapping("/quen-mat-khau")

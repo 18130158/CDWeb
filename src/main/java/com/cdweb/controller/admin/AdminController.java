@@ -100,6 +100,7 @@ public class AdminController {
         bookDTO.setPublisher(bookInput.getPublisher());
         bookDTO.setActive(true);
         bookDTO.setCategory(this.categoryService.findCategory(bookInput.getCategory()));
+
         List<MediaDTO> medias = new ArrayList<>();
         MediaDTO media = new MediaDTO();
         StringTokenizer stringTokenizer = new StringTokenizer(imagePath.resolve(bookInput.getImages().getOriginalFilename()).toString(), "\\");

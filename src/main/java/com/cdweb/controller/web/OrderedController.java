@@ -2,10 +2,7 @@ package com.cdweb.controller.web;
 
 import com.cdweb.api.web.input.OrderedInput;
 import com.cdweb.api.web.output.CartOutput;
-import com.cdweb.dto.BookDTO;
-import com.cdweb.dto.OrderedDTO;
-import com.cdweb.dto.OrderedItemDTO;
-import com.cdweb.dto.ShoppingCartDTO;
+import com.cdweb.dto.*;
 import com.cdweb.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -90,7 +87,9 @@ public class OrderedController {
         cartOutput.setTotal(total);
         ModelAndView mav = new ModelAndView("web/thanh-toan.html");
         mav.addObject("output", cartOutput);
-        mav.addObject("user", this.userService.findByEmail(principal.getName()));
+        UserDTO user=this.userService.findByEmail(principal.getName());
+        user.setPassword("");
+        mav.addObject("user", user);
         return mav;
     }
 
