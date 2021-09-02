@@ -70,7 +70,7 @@ public class UserController {
             UserDTO user = this.userService.findByEmail(principal.getName());
             user.setPassword("");
             return user;
-        }else{
+        } else {
             return null;
         }
     }
@@ -78,15 +78,21 @@ public class UserController {
     @GetMapping("/quen-mat-khau")
     public ModelAndView forgetPasswordPage() {
         ModelAndView mav = new ModelAndView("web/quen-mat-khau.html");
-        mav.addObject("message", false);
+        mav.addObject("message", "Điền vào email của bạn để yêu cầu một mật khẩu mới. Một Email sẽ được gửi đến địa chỉ\n" +
+                "                                này để xác minh địa chỉ Email của bạn.");
         return mav;
     }
 
     @GetMapping("/send-mail-forget-password")
     public ModelAndView newPassword(@RequestParam(name = "email", required = false, defaultValue = "false") String email) {
+        System.out.println(email);
         UserDTO userDTO = userService.sendMailForgetPassword(email);
         ModelAndView mav = new ModelAndView("web/quen-mat-khau.html");
-        mav.addObject("message", true);
+        if (userDTO == null) {
+            mav.addObject("message", "Tài khoản không tồn tại!");
+        } else {
+            mav.addObject("message", "Vui lòng check email để hoàn thành quá trình lấy lại mật khẩu!");
+        }
         return mav;
     }
 

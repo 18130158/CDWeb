@@ -109,6 +109,7 @@ public class UserService implements IUserService {
     @Override
     public UserDTO sendMailForgetPassword(String email) {
         UserEntity user = this.userRepository.findByEmail(email);
+        if(user==null) return null;
         PasswordResetToken passwordResetToken = new PasswordResetToken(user);
         this.passwordTokenRepository.save(passwordResetToken);
         SimpleMailMessage mailMessage = new SimpleMailMessage();

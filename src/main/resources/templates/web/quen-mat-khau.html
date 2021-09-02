@@ -48,7 +48,6 @@
     <script th:src="@{web/app/directives/paging.js}"></script>
     <link th:href="@{web/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{web/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
-    <script th:src="@{web/Scripts/myJS/check.js}"></script>
 </head>
 <body ng-app="appMain" style="">
 
@@ -83,27 +82,23 @@
                     </div>
                     <div class="foget-password-content clearfix">
                         <h1 class="title"><span>Quên mật khẩu</span></h1>
-                        <th:block th:if="${message}">
-                            <div class="alert alert-success fade in">
+                        <th:block>
+                            <div class="alert alert-info fade in" th:utext="${message}">
                                 <i class="fa-fw fa fa-check"></i>
-                                <strong>Success!</strong> Vui lòng check email để hoàn thành quá trình lấy lại mật khẩu.
-                            </div>
-                        </th:block>
-                        <th:block th:unless="${message}">
-                            <div class="alert alert-info fade in">
-                                <i class="fa-fw fa fa-check"></i>
-                                Điền vào email của bạn để yêu cầu một mật khẩu mới. Một Email sẽ được gửi đến địa chỉ
-                                này để
-                                xác minh địa chỉ Email của bạn.
                             </div>
                         </th:block>
                         <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
-                            <form class="form-horizontal" th:action="@{/send-mail-forget-password}" method="get"
+                            <form onsubmit="return checkMail()" class="form-horizontal"
+                                  th:action="@{/send-mail-forget-password}" method="get"
                                   th:object="${user}">
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Email:</label>
                                     <div class="col-sm-8">
-                                        <input type="email" name="email" class="form-control">
+                                        <input name="email" type="email" class="form-control" id="email"
+                                               onblur="checkMail()" onkeyup="checkMail()"/>
+                                    </div>
+                                    <div class="col-sm-8" id="emailError" style="display: none;color: red;float: right">
+                                        Error
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -156,5 +151,26 @@
             threshold: 200
         });
     });
+
+
+    function checkMail() {
+        var email = document.getElementById("email").value;
+        var result;
+        if (email.length == 0) {
+            document.getElementById("emailError").innerHTML = "Bạn không thể để trống dữ liệu này!";
+            document.getElementById("emailError").style.display = "block";
+            return false;
+        } else {
+            var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            if (email.match(mailformat)) {
+                document.getElementById("emailError").innerHTML = "";
+                document.getElementById("emailError").style.display = "none";
+            } else {
+                document.getElementById("emailError").innerHTML = "Email không hợp lệ!";
+                document.getElementById("emailError").style.display = "block";
+                return false
+            }
+        }
+    }
 </script>
 
