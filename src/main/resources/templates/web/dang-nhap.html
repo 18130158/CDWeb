@@ -94,7 +94,7 @@
                             <strong th:utext="${error}"></strong>
                         </div>
                         <div class="col-md-6 col-md-offset-3 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
-                            <form method="post" th:action="@{/j_spring_security_check}" class="form-horizontal">
+                            <form onsubmit="return checkMail()" method="post" th:action="@{/j_spring_security_check}" class="form-horizontal">
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Email</label>
                                     <div class="col-sm-8">
