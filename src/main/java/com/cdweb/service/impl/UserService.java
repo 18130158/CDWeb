@@ -13,12 +13,13 @@ import com.cdweb.repository.PasswordResetTokenRepository;
 import com.cdweb.repository.RoleRepository;
 import com.cdweb.repository.UserRepository;
 import com.cdweb.service.IUserService;
-import com.cdweb.utils.EncrytedPasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class UserService implements IUserService {
         return null;
     }
 
-    public UserDTO sendMail(UserDTO user) {
+    public UserDTO sendMail(UserDTO user, HttpServletRequest request) {
         UserEntity userEntity = new UserEntity();
         UserEntity existingUser = userRepository.findByEmailIgnoreCaseAndIsEnabled(user.getEmail(), true);
         if (existingUser != null) {
@@ -81,12 +82,18 @@ public class UserService implements IUserService {
 
             confirmationTokenRepository.save(confirmationToken);
 
+
+            String baseUrl = ServletUriComponentsBuilder.fromRequestUri(request)
+                    .replacePath(null)
+                    .build()
+                    .toUriString();
+
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(user.getEmail());
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setFrom("bookstorenlu2021@gmail.com");
             mailMessage.setText("To confirm your account, please click here : "
-                    + "https://bookstorenlu2021.herokuapp.com/confirm-account?token=" + confirmationToken.getConfirmationToken());
+                    + baseUrl + "/confirm-account?token=" + confirmationToken.getConfirmationToken());
 
             emailSenderService.sendEmail(mailMessage);
             return userConverter.toDTO(userEntity);
@@ -107,9 +114,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserDTO sendMailForgetPassword(String email) {
+    public UserDTO sendMailForgetPassword(String email, HttpServletRequest request) {
+        String baseUrl = ServletUriComponentsBuilder.fromRequestUri(request)
+                .replacePath(null)
+                .build()
+                .toUriString();
         UserEntity user = this.userRepository.findByEmail(email);
-        if(user==null) return null;
+        if (user == null) return null;
         PasswordResetToken passwordResetToken = new PasswordResetToken(user);
         this.passwordTokenRepository.save(passwordResetToken);
         SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -117,7 +128,7 @@ public class UserService implements IUserService {
         mailMessage.setSubject("Forget Password!");
         mailMessage.setFrom("bookstorenlu2021@gmail.com");
         mailMessage.setText("To change your password, please click here : "
-                + "https://bookstorenlu2021.herokuapp.com/forget-password?token=" + passwordResetToken.getToken());
+                + baseUrl + "/forget-password?token=" + passwordResetToken.getToken());
 //                + "http://localhost:8080/forget-password?token=" + passwordResetToken.getToken());
 
         emailSenderService.sendEmail(mailMessage);

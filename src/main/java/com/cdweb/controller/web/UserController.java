@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 @RestController
@@ -21,8 +22,8 @@ public class UserController {
 
 
     @PostMapping(value = "/dang-ki")
-    public ModelAndView registerUser(@ModelAttribute("User") UserDTO user) {
-        UserDTO userDTO = userService.sendMail(user);
+    public ModelAndView registerUser(@ModelAttribute("User") UserDTO user, HttpServletRequest request) {
+        UserDTO userDTO = userService.sendMail(user, request);
         ModelAndView mav = new ModelAndView("web/dang-ki.html");
         if (userDTO != null) {
             mav.addObject("message", "Mời bạn xác nhận tài khoản qua email: " + userDTO.getEmail());
@@ -42,7 +43,7 @@ public class UserController {
     @GetMapping("/check-mail")
     public UserDTO checkMail(@RequestParam(name = "email") String email) {
         UserDTO user = userService.findByEmail(email);
-        user.setPassword("");
+        if (user != null) user.setPassword("");
         return user;
     }
 
@@ -84,9 +85,9 @@ public class UserController {
     }
 
     @GetMapping("/send-mail-forget-password")
-    public ModelAndView newPassword(@RequestParam(name = "email", required = false, defaultValue = "false") String email) {
+    public ModelAndView newPassword(@RequestParam(name = "email", required = false, defaultValue = "false") String email, HttpServletRequest request) {
         System.out.println(email);
-        UserDTO userDTO = userService.sendMailForgetPassword(email);
+        UserDTO userDTO = userService.sendMailForgetPassword(email, request);
         ModelAndView mav = new ModelAndView("web/quen-mat-khau.html");
         if (userDTO == null) {
             mav.addObject("message", "Tài khoản không tồn tại!");
