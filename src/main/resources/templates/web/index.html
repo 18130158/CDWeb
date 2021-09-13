@@ -35,15 +35,6 @@
 
     <script th:src="@{web/Scripts/lazyLoad/jquery.lazyload.min.js}" type="text/javascript"></script>
 
-    <script th:src="@{web/Scripts/angularJS/angular.min.js}"></script>
-    <script th:src="@{web/Scripts/angularJS/angular-sanitize.min.js}"></script>
-    <script type="text/javascript" th:src="@{web/Scripts/angular-loading-spinner/spin.min.js}"></script>
-    <script type="text/javascript" th:src="@{web/Scripts/angular-loading-spinner/angular-spinner.min.js}"></script>
-    <script type="text/javascript" th:src="@{web/Scripts/angular-loading-spinner/angular-loading-spinner.js}"></script>
-    <script th:src="@{web/app/appMain.js}"></script>
-    <script th:src="@{web/app/directives/directive.js}"></script>
-    <script th:src="@{web/app/directives/angular-summernote.js}"></script>
-    <script th:src="@{web/app/directives/paging.js}"></script>
     <link th:href="@{web/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{web/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
     <script th:src="@{web/Scripts/myJS/ajax-san-pham.js}"></script>
@@ -107,7 +98,7 @@
                         <div class="col-sm-5">
                             <form class="search" th:action="@{/san-pham}" method="get">
                                 <input type="text" placeholder="Search.." name="title" id="search"
-                                      onkeyup="search_title()">
+                                       onkeyup="search_title()">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -152,7 +143,7 @@
                                                         </div>
                                                         <div class="button">
                                                             <a class="btn btn-default "
-                                                               th:onclick="'buyNow('+${book.id}+')'">Mua ngay</a>
+                                                               th:href="@{/thanh-toan(id=${book.id})}">Mua ngay</a>
                                                         </div>
                                                     </th:block>
                                                     <th:block th:unless="${book.quantity}">
@@ -244,7 +235,7 @@
                                                 </div>
                                                 <div class="button">
                                                     <a class="btn btn-default "
-                                                       th:onclick="'buyNow('+${book.id}+')'">Mua ngay</a>
+                                                       th:href="@{/thanh-toan(id=${book.id})}">Mua ngay</a>
                                                     <a class="btn btn-default "
                                                        th:onclick=" 'addCart('+${book.id}+')' ">Thêm giỏ hàng</a>
                                                 </div>
@@ -309,7 +300,7 @@
                                                 </div>
                                                 <div class="button">
                                                     <a class="btn btn-default "
-                                                       th:onclick="'buyNow('+${book.id}+')'">Mua ngay</a>
+                                                       th:href="@{/thanh-toan(id=${book.id})}">Mua ngay</a>
                                                     <a class="btn btn-default "
                                                        th:onclick=" 'addCart('+${book.id}+')' ">Thêm giỏ hàng</a>
                                                 </div>

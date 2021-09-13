@@ -51,7 +51,7 @@ function showProduct(list) {
             str += "</div>";
             str += "</div>";
             str += "  <div class='button'>";
-            str += " <a class='btn btn-default' onclick='buyNow(" + book.id + ")'>Mua ngay</a>";
+            str += " <a class='btn btn-default' href='/thanh-toan?id=" + book.id + "'>Mua ngay</a>";
             str += "  <a class='btn btn-default'";
             str += "onclick=' addCart(" + book.id + ")' >Thêm giỏ hàng</a>";
             str += "</div>";
@@ -144,7 +144,7 @@ function addCart(book_id) {
         }
     }).done(function (list) {
         if (list == null) {
-            window.location = "https://bookstorenlu2021.herokuapp.com/dang-nhap";
+            window.location = "/dang-nhap";
         } else {
             alert("Sản phẩm đã được thêm vào giỏ hàng!");
         }
@@ -165,6 +165,7 @@ function search_title() {
         });
     });
 }
+
 function search_title_product() {
     var keySearch = document.getElementById("search").value;
     $.ajax({
@@ -182,20 +183,4 @@ function formatPrice(price) {
     return price;
 }
 
-function buyNow(book_id) {
-    $.ajax({
-        method: 'get',
-        url: 'them-san-pham',
-        dataType: 'json',
-        cache: 'false',
-        data: {
-            book_id: book_id
-        }
-    }).done(function (list) {
-        if (list == null) {
-            window.location = "https://bookstorenlu2021.herokuapp.com/dang-nhap";
-        } else {
-            window.location = "https://bookstorenlu2021.herokuapp.com/gio-hang";
-        }
-    });
-}
+

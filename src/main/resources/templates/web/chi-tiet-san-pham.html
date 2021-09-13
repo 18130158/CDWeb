@@ -37,17 +37,10 @@
 
     <script th:src="@{web/Scripts/lazyLoad/jquery.lazyload.min.js}" type="text/javascript"></script>
 
-    <script th:src="@{web/Scripts/angularJS/angular.min.js}"></script>
-    <script th:src="@{web/Scripts/angularJS/angular-sanitize.min.js}"></script>
-    <script type="text/javascript" th:src="@{web/Scripts/angular-loading-spinner/spin.min.js}"></script>
-    <script type="text/javascript" th:src="@{web/Scripts/angular-loading-spinner/angular-spinner.min.js}"></script>
-    <script type="text/javascript" th:src="@{web/Scripts/angular-loading-spinner/angular-loading-spinner.js}"></script>
-    <script th:src="@{web/app/appMain.js}"></script>
-    <script th:src="@{web/app/directives/directive.js}"></script>
-    <script th:src="@{web/app/directives/angular-summernote.js}"></script>
-    <script th:src="@{web/app/directives/paging.js}"></script>
     <link th:href="@{web/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{web/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{web/Scripts/myJS/ajax-san-pham.js}"></script>
+
 </head>
 <body ng-app="appMain" style="">
 
@@ -186,7 +179,7 @@
                 str += "    <img class='img-responsive' style='height: 152px' src='" + book.mediaList[0].path + "'/>";
                 str += "  </a>";
                 str += "<span class='hot'>";
-                str += book.discount ? book.discountFormat :"Hot" +"</span>";
+                str += book.discount ? book.discountFormat : "Hot" + "</span>";
                 str += "   </div>";
                 str += " <div class='right-block'>";
                 str += "  <h2 class='name'>";
@@ -208,7 +201,7 @@
                     str += "</div>";
                     str += "</div>";
                     str += "  <div class='button'>";
-                    str += " <a class='btn btn-default' onclick='buyNow(" + book.id + ")'>Mua ngay</a>";
+                    str += " <a class='btn btn-default' href='/thanh-toan?id=" + book.id + "'>Mua ngay</a>";
                     str += "  <a class='btn btn-default'";
                     str += "onclick=' addCart(" + book.id + ")' >Thêm giỏ hàng</a>";
                     str += "</div>";
@@ -293,7 +286,7 @@
                 str += "   <div><span class='price-new'>" + book.priceDiscount + "</span></div> ";
                 str += "  </div>";
                 str += "  <div class='button'>";
-                str += "  <a href='#' class='btn btn-primary btn-lg' style='width: 345px;font-size: 17px'><i class='glyphicon glyphicon-ok'></i>Mua ngay</a>";
+                str += "  <a class='btn btn-primary btn-lg' style='width: 345px;font-size: 17px' href='/thanh-toan?id=" + book.id + "'><i class='glyphicon glyphicon-ok'></i>Mua ngay</a>";
                 str += "  <a class='btn btn-default btn-lg' style='width: 345px;font-size: 17px' onclick=' addCart(" + book.id + ")'><i class='glyphicon glyphicon-shopping-cart'></i>Thêm giỏ hàng</a>";
                 str += "   </div>";
             } else {

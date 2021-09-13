@@ -25,7 +25,7 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/them-san-pham")
-    public List<ShoppingCartDTO> addProduct(@RequestParam(name = "book_id", required = false, defaultValue = "0") long book_id, Principal principal) {
+    public ShoppingCartDTO addProduct(@RequestParam(name = "book_id", required = false, defaultValue = "0") long book_id, Principal principal) {
         if (principal == null) {
             return null;
         }

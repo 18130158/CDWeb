@@ -5,10 +5,7 @@ import com.cdweb.api.web.output.CartOutput;
 import com.cdweb.dto.*;
 import com.cdweb.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -73,7 +70,7 @@ public class OrderedController {
     }
 
     @PostMapping("/thanh-toan")
-    public ModelAndView getPayment(@ModelAttribute("orderedInput") OrderedInput orderedInput, Principal principal) {
+    public ModelAndView postPayment(@ModelAttribute("orderedInput") OrderedInput orderedInput, Principal principal) {
         if (principal == null) {
             return new ModelAndView("web/dang-nhap.html");
         }
@@ -87,7 +84,7 @@ public class OrderedController {
         cartOutput.setTotal(total);
         ModelAndView mav = new ModelAndView("web/thanh-toan.html");
         mav.addObject("output", cartOutput);
-        UserDTO user=this.userService.findByEmail(principal.getName());
+        UserDTO user = this.userService.findByEmail(principal.getName());
         user.setPassword("");
         mav.addObject("user", user);
         return mav;
@@ -97,4 +94,25 @@ public class OrderedController {
     public List<OrderedDTO> getOrdered(Principal principal) {
         return this.orderedService.findAllOrder(principal.getName());
     }
+
+    @GetMapping("/thanh-toan")
+    public ModelAndView getPayment(@RequestParam(name = "id", required = false, defaultValue = "null") Long id, Principal principal) {
+        if (principal == null) {
+            return new ModelAndView("web/dang-nhap.html");
+        } else {
+            ShoppingCartDTO temp = this.shoppingCartService.addProduct(id, principal.getName());
+            this.shoppingCartService.updateQuantity(temp.getBook().getId(), 1, principal.getName());
+            ShoppingCartDTO dto = this.shoppingCartService.getId(temp.getId());
+            CartOutput cartOutput = new CartOutput();
+            cartOutput.getList().add(dto);
+            cartOutput.setTotal(dto.getBook().getPrice() * (1 - dto.getBook().getDiscount() / 100));
+            ModelAndView mav = new ModelAndView("web/thanh-toan.html");
+            mav.addObject("output", cartOutput);
+            UserDTO user = this.userService.findByEmail(principal.getName());
+            user.setPassword("");
+            mav.addObject("user", user);
+            return mav;
+        }
+    }
+
 }
