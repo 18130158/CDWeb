@@ -157,6 +157,7 @@ public class AdminController {
     public ModelAndView editCategoryPage(@Param("id") long id, Principal principal) {
         ModelAndView mav = new ModelAndView("admin/productType-edit.html");
         mav.addObject("username", principal.getName());
+        mav.addObject("category", categoryService.findById(id));
         return mav;
     }
 
@@ -166,7 +167,7 @@ public class AdminController {
         categoryService.edit(category);
 
         ModelAndView mav = new ModelAndView("admin/productType.html");
-        mav.addObject("listcategory", categoryService.findAll());
+        mav.addObject("listcategory", categoryService.findCategory(category.getCode()));
         mav.addObject("username", principal.getName());
         return mav;
     }
