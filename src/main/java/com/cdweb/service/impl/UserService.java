@@ -107,6 +107,7 @@ public class UserService implements IUserService {
             UserEntity user = userRepository.findByEmailIgnoreCase(token.getUser().getEmail());
             user.setEnabled(true);
             UserEntity userEntity = userRepository.save(user);
+            confirmationTokenRepository.delete(token);
             return userConverter.toDTO(userEntity);
         } else {
             return null;

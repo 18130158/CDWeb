@@ -186,16 +186,6 @@ CREATE TABLE `confirmation_token` (
   `user_id` bigint(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `confirmation_token`
---
-
-INSERT INTO `confirmation_token` (`token_id`, `confirmation_token`, `created_date`, `user_id`) VALUES
-(11, 'db55eb3c-5ee6-40b7-82f0-7a4729b23193', '2021-09-13 19:03:16', 8),
-(12, '80797544-5c70-4e24-bf28-85e031bf6bbf', '2021-09-13 21:00:47', 11),
-(13, '88c1c452-f491-4209-b234-c8a49468f352', '2021-09-13 21:00:52', 12),
-(14, 'f1fcfa70-7920-4567-a26a-477e9c1da5df', '2021-09-13 21:03:00', 13),
-(15, '578d3397-6293-4bba-a6c0-b7089e7e0df4', '2021-09-13 21:03:04', 14);
 
 -- --------------------------------------------------------
 
@@ -356,8 +346,6 @@ CREATE TABLE `persistent_logins` (
 -- Đang đổ dữ liệu cho bảng `persistent_logins`
 --
 
-INSERT INTO `persistent_logins` (`series`, `last_used`, `token`, `username`) VALUES
-('RtYN5xQMODBHmGXVKyXovA==', '2021-09-02 22:39:59', 'y88nuLLCMVxkAkg+tZxAYA==', 'thiensubanphuc000@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -412,8 +400,6 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `address`, `email`, `full_name`, `is_enabled`, `password`, `phone`) VALUES
-(1, '', 'thiensubanphuc000@gmail.com', 'Tô Thảo Nhả', b'1', '$2a$10$Zoz9RYxrMGWcMVGZvG9Wp.3jIRNt3IbAASxTStYNHoJbpc7K7Dcqq', ''),
-(7, 'abc', '17130008@st.hcmuaf.edu.vn', 'nhu anh', b'1', '$2a$10$qGRUuBbVCZmCpjswzXOcQeUy3aoG755vy2dtLWY46S7al39mtcMJu', '0898450938'),
 (2, NULL, 'user@gmail.com', NULL, b'1', '$2a$10$8MSUsc44.uAYSwPiyX/6geQetaE1MV622dc3armSbi0zZxScY3wN.', NULL),
 (3, NULL, 'admin@gmail.com', NULL, b'1', '$2a$10$VOGvnFz4xsGfk1Jy72tqy.QqbSN8OpLTq0JBjjOpvy3kK62UrRzpa', NULL);
 
@@ -433,12 +419,10 @@ CREATE TABLE `user_role` (
 --
 
 INSERT INTO `user_role` (`user_id`, `role_id`) VALUES
-(1, 1),
 (3, 2),
-(1, 2),
 (3, 1),
-(2, 1),
-(2, 2);
+(2, 1)
+
 
 --
 -- Chỉ mục cho các bảng đã đổ
