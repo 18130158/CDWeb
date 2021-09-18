@@ -107,7 +107,11 @@ public class UserService implements IUserService {
             UserEntity user = userRepository.findByEmailIgnoreCase(token.getUser().getEmail());
             user.setEnabled(true);
             UserEntity userEntity = userRepository.save(user);
-            confirmationTokenRepository.delete(token);
+            List<ConfirmationToken> confirmationTokens = confirmationTokenRepository.findByUserId(token.getUser().getId());
+            for (ConfirmationToken confirmToken : confirmationTokens) {
+                confirmationTokenRepository.delete(confirmToken);
+            }
+
             return userConverter.toDTO(userEntity);
         } else {
             return null;
@@ -172,9 +176,12 @@ public class UserService implements IUserService {
         userEntity = this.userRepository.save(userEntity);
         if (user.getPassword() != "" && user.getPassword() != null) {
             if (userEntity != null) {
-                PasswordResetToken passwordResetToken = this.passwordTokenRepository.findByUser(userEntity);
-                if (passwordResetToken != null) {
-                    this.passwordTokenRepository.delete(passwordResetToken);
+                List<PasswordResetToken> passwordResetTokens = this.passwordTokenRepository.findByUser(userEntity);
+                if (passwordResetTokens.size() > 0) {
+                    for (PasswordResetToken passwordResetToken : passwordResetTokens) {
+                        this.passwordTokenRepository.delete(passwordResetToken);
+                    }
+
                 }
             }
         }
