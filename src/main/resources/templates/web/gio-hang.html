@@ -220,20 +220,21 @@
         }
         if (quantity <= 0) {
             $('#quantity' + id).val(1);
-        } else {
-            $.ajax({
-                method: "get",
-                url: "update-quantity",
-                dataType: 'json',
-                cache: 'false',
-                data: {
-                    id: id,
-                    quantity: quantity
-                }
-            }).done(function (rs) {
-                showCart(rs);
-            });
+            quantity = document.getElementById("quantity" + id).value;
         }
+        $.ajax({
+            method: "get",
+            url: "update-quantity",
+            dataType: 'json',
+            cache: 'false',
+            data: {
+                id: id,
+                quantity: quantity
+            }
+        }).done(function (rs) {
+            showCart(rs);
+        });
+
     }
 
     function deleteItem(id) {
